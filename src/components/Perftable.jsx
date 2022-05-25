@@ -32,6 +32,7 @@ function PerfTable({aircrafts}) {
     const momBag2 = Math.ceil(aircraft.arm.baggageArea2 * baggageWeight2)
     const ZFW = parseInt(aircraft.basicWeight) + parseInt(seatWeight) + parseInt(baggageWeight1) + parseInt(baggageWeight2)
     const momentZFW = (+momBW + +momSeat + +momBag1 + +momBag2)
+    const armZFW = momentZFW/ZFW
 
 
     
@@ -103,7 +104,7 @@ function PerfTable({aircrafts}) {
         {/* <!-- row 5 --> */}
         <tr className="hover">
             <th>ZERO FUEL WEIGHT</th>
-            <td></td>
+            <td>{Number(armZFW).toFixed(2)}</td>
             <td>{ZFW.toLocaleString('en-US')}</td>
             <td>{momentZFW.toLocaleString('en-US')}    </td>
         </tr>
