@@ -1,19 +1,38 @@
 import {useState} from 'react'
 
 function PerfTable({aircrafts}) {
-    // update calculation in real time THIS DONT WORK
-    const bgWeight = document.getElementById('bg2')
-    console.log(bgWeight)
+    
+    // Create hooks
+    const [seatWeight, setSeatWeight] = useState(0)
+    const handleSeatWeightChange = (e) => {
+        setSeatWeight(e.target.value)}
+
+    const [baggageWeight1, setBaggageWeight1] = useState(0)
+    const handleBaggageWeight1Change = (e) => {
+        setBaggageWeight1(e.target.value)}
 
 
-    //
+    const [baggageWeight2, setBaggageWeight2] = useState(0)
+    const handleBaggageWeight2Change = (e) => {
+        setBaggageWeight2(e.target.value)
+    }
 
+    // Bring in aircraft data
     if(!aircrafts || aircrafts.length===0){
         return <p>No aircrafts initialized in database</p>
     }
 
     const aircraft = aircrafts.filter((aircraft) => aircraft.active===true)[0]
-    // console.log(aircraft)
+
+    //  Create helper variables
+    // zero fuel weight
+    const momBW = Math.ceil(aircraft.arm.bw * aircraft.basicWeight)
+    const momSeat = Math.ceil(aircraft.arm.seat12 * seatWeight)
+    const momBag1 = Math.ceil(aircraft.arm.baggageArea1 * baggageWeight1)
+    const momBag2 = Math.ceil(aircraft.arm.baggageArea2 * baggageWeight2)
+    const ZFW = parseInt(aircraft.basicWeight) + parseInt(seatWeight) + parseInt(baggageWeight1) + parseInt(baggageWeight2)
+    const momentZFW = (+momBW + +momSeat + +momBag1 + +momBag2)
+
 
     
 
@@ -38,22 +57,34 @@ function PerfTable({aircrafts}) {
         <tr className="hover">
             <th>BASIC WEIGHT</th>
             <td>{aircraft.arm.bw}</td>
-            <td>{aircraft.basicWeight}</td>
-            <td>{Math.ceil(aircraft.arm.bw * aircraft.basicWeight)}</td>
+            <td>{aircraft.basicWeight.toLocaleString('en-US')}</td>
+            <td>{momBW.toLocaleString('en-US')}</td>
         </tr>
         {/* <!-- row 2 --> */}
         <tr className="hover">
             <th>SEATS 1 & 2</th>
             <td>{aircraft.arm.seat12}</td>
-            <td></td>
-            <td></td>
+            <td><input 
+                type="text" 
+                placeholder="type"
+                onChange={handleSeatWeightChange}
+                value = {Number(seatWeight).toLocaleString('en-US')}
+                className="input input-ghost w-full max-w-xs"
+                /></td>
+            <td>{momSeat.toLocaleString('en-US')}</td>
         </tr>
         {/* <!-- row 3 --> */}
         <tr className="hover">
             <th>BAGGAGE AREA 1</th>
             <td>{aircraft.arm.baggageArea1}</td>
-            <td></td>
-            <td>    </td>
+            <td><input 
+                type="text" 
+                placeholder="type"
+                onChange={handleBaggageWeight1Change}
+                value = {Number(baggageWeight1).toLocaleString('en-US')}
+                className="input input-ghost w-full max-w-xs"
+                /></td>
+            <td>{momBag1.toLocaleString('en-US')}</td>
         </tr>
        {/* <!-- row 4 --> */}
        <tr className="hover">
@@ -61,19 +92,20 @@ function PerfTable({aircrafts}) {
             <td>{aircraft.arm.baggageArea2}</td>
             <td><input 
                 type="text" 
-                placeholder="0"
-                id="bg2" 
+                placeholder="type"
+                onChange={handleBaggageWeight2Change}
+                value = {Number(baggageWeight2).toLocaleString('en-US')}
                 className="input input-ghost w-full max-w-xs"
                 />
             </td>
-            <td>    </td>
+            <td> {momBag2.toLocaleString('en-US')}</td>
         </tr>
         {/* <!-- row 5 --> */}
         <tr className="hover">
             <th>ZERO FUEL WEIGHT</th>
             <td></td>
-            <td></td>
-            <td>    </td>
+            <td>{ZFW.toLocaleString('en-US')}</td>
+            <td>{momentZFW.toLocaleString('en-US')}    </td>
         </tr>
         {/* <!-- row 3 --> */}
         <tr className="hover">
@@ -126,5 +158,6 @@ function PerfTable({aircrafts}) {
   )
 
 }
+
 
 export default PerfTable
