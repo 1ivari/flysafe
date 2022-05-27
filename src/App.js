@@ -16,17 +16,9 @@ function App() {
     <>
       <Router>
         <Navbar />
-        <div className='flex flex-row'>
-          <div className='basis-1/3'>
-            <Routes>
-              <Route
-                exact
-                path='/'
-                element={<PerfTable aircrafts={aircrafts} />}
-              />
-            </Routes>
-          </div>
-        </div>
+        <Routes>
+          <Route exact path='/' element={<PerfTable aircrafts={aircrafts} />} />
+        </Routes>
         <Routes>
           <Route path='/about' element={<AboutPage />} />
         </Routes>
