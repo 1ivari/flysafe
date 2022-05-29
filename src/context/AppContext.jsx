@@ -4,7 +4,13 @@ import aircraftBasicInfo from '../data/aircraftBasicInfo'
 const AppContext = createContext()
 
 export const AppContextProvider = ({ children }) => {
-  const [aircrafts, createAircraft] = useState(aircraftBasicInfo)
+  const [aircrafts, newAircraft] = useState(aircraftBasicInfo)
+
+  const [aircraftId, setAircraftId] = useState(1)
+  const handleAircraftChange = (e) => {
+    setAircraftId(e.target.value)
+    console.log('aircraft set')
+  }
 
   const [seatWeight, setSeatWeight] = useState(0)
   const handleSeatWeightChange = (e) => {
@@ -30,6 +36,8 @@ export const AppContextProvider = ({ children }) => {
     <AppContext.Provider
       value={{
         aircrafts,
+        aircraftId,
+        handleAircraftChange,
         seatWeight,
         handleSeatWeightChange,
         baggageWeight1,

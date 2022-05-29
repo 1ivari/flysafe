@@ -11,13 +11,13 @@ function AboutPage() {
 
   return (
     <div className='flex justify-center content-center'>
-      <div class='card w-96 bg-base-100 shadow-xl'>
-        <div class='card-body'>
-          <h2 class='card-title'>About flySafe</h2>
+      <div className='card w-96 bg-base-100 shadow-xl'>
+        <div className='card-body'>
+          <h2 className='card-title'>About flySafe</h2>
           <p>flySafe is a flight planning Web application built on React</p>
           <p>Version 1.0.0</p>
-          <div class='card-actions justify-end'>
-            <button onClick={onClick} class='btn btn-primary'>
+          <div className='card-actions justify-end'>
+            <button onClick={onClick} className='btn btn-primary'>
               Back to Home
             </button>
           </div>

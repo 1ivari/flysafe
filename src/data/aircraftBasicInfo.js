@@ -20,11 +20,16 @@ const aircraftBasicInfo = [
     id: 2,
     type: 'C152',
     name: 'CIS',
-    // basic weight arm (in)
-    arm: 30.73,
+    // arm (in)
+    arm: {
+      bw: 37,
+      seat12: 45,
+      baggageArea1: 68,
+      baggageArea2: 83,
+      fuel: 49,
+    },
     // basic weight lbs
-    basicWeight: 1211.4,
-    active: false,
+    basicWeight: 1244.0,
   },
 ]
 

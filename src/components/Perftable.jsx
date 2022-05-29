@@ -4,6 +4,7 @@ import AppContext from '../context/AppContext.jsx'
 function PerfTable() {
   const {
     aircrafts,
+    aircraftId,
     seatWeight,
     handleSeatWeightChange,
     baggageWeight1,
@@ -19,7 +20,13 @@ function PerfTable() {
     return <p>No aircrafts initialized in database</p>
   }
 
-  const aircraft = aircrafts.filter((aircraft) => aircraft.active === true)[0]
+  const aircraft = aircrafts.filter(
+    (aircraft) => Number(aircraft.id) === Number(aircraftId)
+  )[0]
+  console.log(aircraftId)
+  console.log(
+    aircrafts.filter((aircraft) => Number(aircraft.id) === Number(aircraftId))
+  )
 
   //  Create helper variables
   // zero fuel weight
@@ -48,20 +55,20 @@ function PerfTable() {
 
   return (
     <>
-      <div class='drawer drawer-mobile'>
-        <input id='my-drawer-2' type='checkbox' class='drawer-toggle' />
-        <div class='drawer-content flex flex-col items-center justify-center'>
+      <div className='drawer drawer-mobile'>
+        <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
+        <div className='drawer-content flex flex-col items-center justify-center'>
           {/* Page content here */}
           <label
-            for='my-drawer-2'
-            class='btn btn-primary drawer-button lg:hidden'
+            htmlFor='my-drawer-2'
+            className='btn btn-primary drawer-button lg:hidden'
           >
             Open drawer
           </label>
         </div>
-        <div class='drawer-side'>
-          <label for='my-drawer-2' class='drawer-overlay'></label>
-          <div class='menu p-4 overflow-y-auto w-auto bg-base-100 text-base-content'>
+        <div className='drawer-side'>
+          <label htmlFor='my-drawer-2' className='drawer-overlay'></label>
+          <div className='menu p-4 overflow-y-auto w-auto bg-base-100 text-base-content'>
             {/* <div className='container-md '> */}
             <div className='overflow-x-auto'>
               <table className='table text-xs'>
