@@ -8,8 +8,8 @@ function Navbar({ title }) {
       <div className='container mx-auto'>
         <div className='flex-none px-2 mx-2'>
           <Link to='/' className='btn normal-case text-xl'>
-            <FaPlaneDeparture />
-            {title}
+            <FaPlaneDeparture className='mr-2 inline' />
+            <div className='font-bold'>{title}</div>
           </Link>
         </div>
         <div className='flex-1 px-2 mx-2'>

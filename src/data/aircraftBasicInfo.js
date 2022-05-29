@@ -10,6 +10,7 @@ const aircraftBasicInfo = [
       seat12: 41,
       baggageArea1: 64,
       baggageArea2: 84,
+      fuel: 42,
     },
     // basic weight lbs
     basicWeight: 1217.0,

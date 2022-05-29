@@ -17,6 +17,11 @@ function PerfTable({ aircrafts }) {
     setBaggageWeight2(e.target.value)
   }
 
+  const [fuelWeight, setfuelWeight] = useState(0)
+  const handlefuelWeightChange = (e) => {
+    setfuelWeight(e.target.value)
+  }
+
   // Bring in aircraft data
   if (!aircrafts || aircrafts.length === 0) {
     return <p>No aircrafts initialized in database</p>
@@ -37,6 +42,17 @@ function PerfTable({ aircrafts }) {
     parseInt(baggageWeight2)
   const momentZFW = +momBW + +momSeat + +momBag1 + +momBag2
   const armZFW = momentZFW / ZFW
+
+  const momFuel = Math.ceil(aircraft.arm.fuel * fuelWeight)
+
+  const rampWeight = +ZFW + +fuelWeight
+  const rampMom = +momentZFW + +momFuel
+  const rampArm = rampMom / rampWeight
+
+  const taxiFuel = 5
+  const toWeight = rampWeight - taxiFuel
+  const toMom = rampMom - aircraft.arm.fuel * taxiFuel
+  const toArm = toMom / toWeight
 
   return (
     <>
@@ -126,30 +142,37 @@ function PerfTable({ aircrafts }) {
                   {/* <!-- row 3 --> */}
                   <tr className='hover'>
                     <th>FUEL</th>
-                    <td></td>
-                    <td></td>
-                    <td> </td>
+                    <td>{aircraft.arm.fuel}</td>
+                    <td>
+                      <input
+                        type='number'
+                        onChange={handlefuelWeightChange}
+                        value={Number(fuelWeight)}
+                        className='input input-xs input-ghost w-full max-w-xs w-14'
+                      />
+                    </td>
+                    <td>{momFuel}</td>
                   </tr>
                   {/* <!-- row 3 --> */}
                   <tr className='hover'>
                     <th>RAMP WEIGHT</th>
-                    <td></td>
-                    <td></td>
-                    <td> </td>
+                    <td>{rampArm.toFixed(2)}</td>
+                    <td>{rampWeight}</td>
+                    <td>{rampMom} </td>
                   </tr>
                   {/* <!-- row 3 --> */}
                   <tr className='hover'>
                     <th>TAXI FUEL</th>
-                    <td></td>
-                    <td></td>
-                    <td> </td>
+                    <td>{aircraft.arm.fuel}</td>
+                    <td>{taxiFuel}</td>
+                    <td>{aircraft.arm.fuel * taxiFuel}</td>
                   </tr>
                   {/* <!-- row 3 --> */}
                   <tr className='hover'>
                     <th>T/O WEIGHT</th>
-                    <td></td>
-                    <td></td>
-                    <td> </td>
+                    <td>{toArm.toFixed(2)}</td>
+                    <td>{toWeight}</td>
+                    <td>{toMom} </td>
                   </tr>
                   {/* <!-- row 3 --> */}
                   <tr className='hover'>
