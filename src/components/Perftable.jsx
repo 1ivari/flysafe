@@ -1,6 +1,10 @@
 import { useContext } from 'react'
 import AppContext from '../context/AppContext.jsx'
 
+// TODO:
+// - tallenna taulukon arvot jsoniin flightplan.json
+//
+
 function PerfTable() {
   const {
     aircrafts,
@@ -55,142 +59,127 @@ function PerfTable() {
 
   return (
     <>
-      <div className='drawer drawer-mobile'>
-        <input id='my-drawer-2' type='checkbox' className='drawer-toggle' />
-        <div className='drawer-content flex flex-col items-center justify-center'>
-          {/* Page content here */}
-          <label
-            htmlFor='my-drawer-2'
-            className='btn btn-primary drawer-button lg:hidden'
-          >
-            Open drawer
-          </label>
-        </div>
-        <div className='drawer-side'>
-          <label htmlFor='my-drawer-2' className='drawer-overlay'></label>
-          <div className='menu p-4 overflow-y-auto w-auto bg-base-100 text-base-content'>
-            {/* <div className='container-md '> */}
-            <div className='overflow-x-auto'>
-              <table className='table text-xs'>
-                {/* <!-- head --> */}
-                <thead>
-                  <tr>
-                    <th>Item</th>
-                    <th>Arm (in)</th>
-                    <th>Weight (lbs)</th>
-                    <th>Moment lbs in</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {/* <!-- row 1 --> */}
-                  <tr className='hover'>
-                    <th>BASIC WEIGHT</th>
-                    <td>{aircraft.arm.bw}</td>
-                    <td>{aircraft.basicWeight}</td>
-                    <td>{momBW}</td>
-                  </tr>
-                  {/* <!-- row 2 --> */}
-                  <tr className='hover'>
-                    <th>SEATS 1 & 2</th>
-                    <td>{aircraft.arm.seat12}</td>
-                    <td>
-                      <input
-                        type='number'
-                        onChange={handleSeatWeightChange}
-                        value={Number(seatWeight)}
-                        className='input input-xs input-ghost w-full max-w-xs w-14'
-                      />
-                    </td>
-                    <td>{momSeat}</td>
-                  </tr>
-                  {/* <!-- row 3 --> */}
-                  <tr className='hover'>
-                    <th>BAGGAGE AREA 1</th>
-                    <td>{aircraft.arm.baggageArea1}</td>
-                    <td>
-                      <input
-                        type='number'
-                        onChange={handleBaggageWeight1Change}
-                        value={Number(baggageWeight1)}
-                        className='input input-xs input-ghost w-full max-w-xs w-14'
-                      />
-                    </td>
-                    <td>{momBag1}</td>
-                  </tr>
-                  {/* <!-- row 4 --> */}
-                  <tr className='hover'>
-                    <th>BAGGAGE AREA 2</th>
-                    <td>{aircraft.arm.baggageArea2}</td>
-                    <td>
-                      <input
-                        type='number'
-                        onChange={handleBaggageWeight2Change}
-                        value={Number(baggageWeight2)}
-                        className='input input-xs input-ghost w-full max-w-xs w-14'
-                      />
-                    </td>
-                    <td> {momBag2}</td>
-                  </tr>
-                  {/* <!-- row 5 --> */}
-                  <tr className='hover'>
-                    <th>ZERO FUEL WEIGHT</th>
-                    <td>{Number(armZFW).toFixed(2)}</td>
-                    <td>{ZFW}</td>
-                    <td>{momentZFW}</td>
-                  </tr>
-                  {/* <!-- row 3 --> */}
-                  <tr className='hover'>
-                    <th>FUEL</th>
-                    <td>{aircraft.arm.fuel}</td>
-                    <td>
-                      <input
-                        type='number'
-                        onChange={handlefuelWeightChange}
-                        value={Number(fuelWeight)}
-                        className='input input-xs input-ghost w-full max-w-xs w-14'
-                      />
-                    </td>
-                    <td>{momFuel}</td>
-                  </tr>
-                  {/* <!-- row 3 --> */}
-                  <tr className='hover'>
-                    <th>RAMP WEIGHT</th>
-                    <td>{rampArm.toFixed(2)}</td>
-                    <td>{rampWeight}</td>
-                    <td>{rampMom} </td>
-                  </tr>
-                  {/* <!-- row 3 --> */}
-                  <tr className='hover'>
-                    <th>TAXI FUEL</th>
-                    <td>{aircraft.arm.fuel}</td>
-                    <td>{taxiFuel}</td>
-                    <td>{aircraft.arm.fuel * taxiFuel}</td>
-                  </tr>
-                  {/* <!-- row 3 --> */}
-                  <tr className='hover'>
-                    <th>T/O WEIGHT</th>
-                    <td>{toArm.toFixed(2)}</td>
-                    <td>{toWeight}</td>
-                    <td>{toMom} </td>
-                  </tr>
-                  {/* <!-- row 3 --> */}
-                  <tr className='hover'>
-                    <th>TRIP FUEL</th>
-                    <td></td>
-                    <td></td>
-                    <td> </td>
-                  </tr>
-                  {/* <!-- row 3 --> */}
-                  <tr className='hover'>
-                    <th>LDG WEIGHT DEST</th>
-                    <td></td>
-                    <td></td>
-                    <td> </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            {/* </div> */}
+      <div className='card shadow-md compact side bg-base-100'>
+        <div className='flex-row items-center space-x-4 card-body'>
+          <div className='overflow-x-auto'>
+            <table className='table text-xs'>
+              {/* <!-- head --> */}
+              <thead>
+                <tr>
+                  <th>Item</th>
+                  <th>Arm (in)</th>
+                  <th>Weight (lbs)</th>
+                  <th>Moment lbs in</th>
+                </tr>
+              </thead>
+              <tbody>
+                {/* <!-- row 1 --> */}
+                <tr className='hover'>
+                  <th>BASIC WEIGHT</th>
+                  <td>{aircraft.arm.bw}</td>
+                  <td>{aircraft.basicWeight}</td>
+                  <td>{momBW}</td>
+                </tr>
+                {/* <!-- row 2 --> */}
+                <tr className='hover'>
+                  <th>SEATS 1 & 2</th>
+                  <td>{aircraft.arm.seat12}</td>
+                  <td>
+                    <input
+                      type='number'
+                      onChange={handleSeatWeightChange}
+                      value={Number(seatWeight)}
+                      className='input input-xs input-ghost w-full max-w-xs w-14'
+                    />
+                  </td>
+                  <td>{momSeat}</td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr className='hover'>
+                  <th>BAGGAGE AREA 1</th>
+                  <td>{aircraft.arm.baggageArea1}</td>
+                  <td>
+                    <input
+                      type='number'
+                      onChange={handleBaggageWeight1Change}
+                      value={Number(baggageWeight1)}
+                      className='input input-xs input-ghost w-full max-w-xs w-14'
+                    />
+                  </td>
+                  <td>{momBag1}</td>
+                </tr>
+                {/* <!-- row 4 --> */}
+                <tr className='hover'>
+                  <th>BAGGAGE AREA 2</th>
+                  <td>{aircraft.arm.baggageArea2}</td>
+                  <td>
+                    <input
+                      type='number'
+                      onChange={handleBaggageWeight2Change}
+                      value={Number(baggageWeight2)}
+                      className='input input-xs input-ghost w-full max-w-xs w-14'
+                    />
+                  </td>
+                  <td> {momBag2}</td>
+                </tr>
+                {/* <!-- row 5 --> */}
+                <tr className='hover'>
+                  <th>ZERO FUEL WEIGHT</th>
+                  <td>{Number(armZFW).toFixed(2)}</td>
+                  <td>{ZFW}</td>
+                  <td>{momentZFW}</td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr className='hover'>
+                  <th>FUEL</th>
+                  <td>{aircraft.arm.fuel}</td>
+                  <td>
+                    <input
+                      type='number'
+                      onChange={handlefuelWeightChange}
+                      value={Number(fuelWeight)}
+                      className='input input-xs input-ghost w-full max-w-xs w-14'
+                    />
+                  </td>
+                  <td>{momFuel}</td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr className='hover'>
+                  <th>RAMP WEIGHT</th>
+                  <td>{rampArm.toFixed(2)}</td>
+                  <td>{rampWeight}</td>
+                  <td>{rampMom} </td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr className='hover'>
+                  <th>TAXI FUEL</th>
+                  <td>{aircraft.arm.fuel}</td>
+                  <td>{taxiFuel}</td>
+                  <td>{aircraft.arm.fuel * taxiFuel}</td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr className='hover'>
+                  <th>T/O WEIGHT</th>
+                  <td>{toArm.toFixed(2)}</td>
+                  <td>{toWeight}</td>
+                  <td>{toMom} </td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr className='hover'>
+                  <th>TRIP FUEL</th>
+                  <td></td>
+                  <td></td>
+                  <td> </td>
+                </tr>
+                {/* <!-- row 3 --> */}
+                <tr className='hover'>
+                  <th>LDG WEIGHT DEST</th>
+                  <td></td>
+                  <td></td>
+                  <td> </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
