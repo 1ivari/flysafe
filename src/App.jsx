@@ -2,10 +2,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Home from './components/pages/Home'
 import AboutPage from './components/pages/AboutPage'
-import PerfTable from './components/PerfTable'
-// import aircraftBasicInfo from './data/aircraftBasicInfo'
-import { AppContextProvider } from './context/AppContext'
 import WeightAndBalance from './components/pages/WeightAndBalance'
+import { AppContextProvider } from './context/AppContext'
 
 function App() {
   // TODO:
@@ -18,7 +16,6 @@ function App() {
       <Router>
         <Navbar />
         <div className='flex flex-row m-20'>
-          {/* <main className='container mx-auto px-3 pb-12'> */}
           <div className='basis-1/4'></div>
           <div className='basis-1/2 justify-center align-center'>
             <Routes>
@@ -28,7 +25,6 @@ function App() {
             </Routes>
           </div>
           <div className='basis-1/4'></div>
-          {/* </main> */}
         </div>
       </Router>
     </AppContextProvider>
