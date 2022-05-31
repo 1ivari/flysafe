@@ -6,7 +6,6 @@ const AppContext = createContext()
 export const AppContextProvider = ({ children }) => {
   const [aircrafts, newAircraft] = useState(aircraftBasicInfo)
 
-  const [activePage, setActivePage] = useState(0)
 
   const [aircraftId, setAircraftId] = useState(1)
   const handleAircraftChange = (e) => {
@@ -37,8 +36,6 @@ export const AppContextProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        activePage,
-        setActivePage,
         aircrafts,
         aircraftId,
         handleAircraftChange,

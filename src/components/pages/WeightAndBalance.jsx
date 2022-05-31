@@ -1,18 +1,15 @@
-import { Navigate, useNavigate } from 'react-router-dom'
 import PerfTable from '../PerfTable'
 import ProgressSteps from '../ProgressSteps'
-import { useContext } from 'react'
-import AppContext from '../../context/AppContext.jsx'
+import PreviousNextBtn from '../PreviousNextBtn'
 
 function WeightAndBalance() {
-  const { setActivePage } = useContext(AppContext)
-  setActivePage(2)
-  return (
-    <>
-      <ProgressSteps />
-      <PerfTable />
-    </>
-  )
+	return (
+		<>
+			<ProgressSteps activePage={2} />
+			<PerfTable />
+			<PreviousNextBtn previousPage='/basicdata' nextPage='/ofp' />
+		</>
+	)
 }
 
 export default WeightAndBalance
