@@ -6,7 +6,7 @@ function OperationalFlightPlan() {
 		<>
 			<ProgressSteps activePage={3} />
 			<div>OFP here</div>
-			<PreviousNextBtn previousPage='/wnb' nextPage='/' />
+			<PreviousNextBtn previousPage='/weather' nextPage='/wnb' />
 		</>
 	)
 }

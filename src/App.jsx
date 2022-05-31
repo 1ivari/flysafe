@@ -6,6 +6,7 @@ import WeightAndBalance from './components/pages/WeightAndBalance'
 import OperationalFlightPlan from './components/pages/OperationalFlightPlan'
 import { AppContextProvider } from './context/AppContext'
 import BasicData from './components/pages/BasicData'
+import Weather from './components/pages/Weather'
 
 function App() {
 	// TODO:
@@ -18,17 +19,18 @@ function App() {
 			<Router>
 				<Navbar />
 				<div className='flex flex-row m-20'>
-					<div className='basis-1/4'></div>
-					<div className='basis-1/2 justify-center align-center'>
+					<div className=''></div>
+					<div className=' justify-center align-center'>
 						<Routes>
 							<Route exact path='/' element={<Home />} />
 							<Route path='/basicdata' element={<BasicData />} />
+							<Route path='/weather' element={<Weather />} />
 							<Route path='/wnb' element={<WeightAndBalance />} />
 							<Route path='/ofp' element={<OperationalFlightPlan />} />
 							<Route path='/about' element={<AboutPage />} />
 						</Routes>
 					</div>
-					<div className='basis-1/4'></div>
+					<div className=''></div>
 				</div>
 			</Router>
 		</AppContextProvider>

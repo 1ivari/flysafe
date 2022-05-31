@@ -5,9 +5,9 @@ import PreviousNextBtn from '../PreviousNextBtn'
 function WeightAndBalance() {
 	return (
 		<>
-			<ProgressSteps activePage={2} />
+			<ProgressSteps activePage={4} />
 			<PerfTable />
-			<PreviousNextBtn previousPage='/basicdata' nextPage='/ofp' />
+			<PreviousNextBtn previousPage='/ofp' nextPage='/' />
 		</>
 	)
 }
