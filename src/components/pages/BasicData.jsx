@@ -1,8 +1,16 @@
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
 import AircraftSelector from '../AircraftSelector'
+import AppContext from '../../context/AppContext.jsx'
+import { useContext } from 'react'
 
 function BasicData() {
+	const { plan, setPlan } = useContext(AppContext)
+
+	const handleChange = (e) => {
+		setPlan({ ...plan, [e.target.name]: e.target.value })
+	}
+
 	return (
 		<>
 			<ProgressSteps activePage={1} />
@@ -17,12 +25,10 @@ function BasicData() {
 								</label>
 								<div className='mt-1'>
 									<input
-										id='date'
 										name='date'
 										type='date'
-										autocomplete=''
 										required
-										className=''
+										onChange={handleChange}
 									/>
 								</div>
 							</div>
@@ -33,12 +39,10 @@ function BasicData() {
 								</label>
 								<div className='mt-1'>
 									<input
-										id='pob'
 										name='pob'
 										type='number'
-										autocomplete=''
 										required
-										className=''
+										onChange={handleChange}
 									/>
 								</div>
 							</div>
@@ -55,14 +59,7 @@ function BasicData() {
 									Crew
 								</label>
 								<div className='mt-1'>
-									<input
-										id='crew'
-										name='crew'
-										type='text'
-										autocomplete=''
-										required
-										className=''
-									/>
+									<input name='crew' type='text' onChange={handleChange} />
 								</div>
 							</div>
 
@@ -71,7 +68,7 @@ function BasicData() {
 									Rules
 								</label>
 								<div className='mt-1'>
-									<select name='rules' id='rules' className=''>
+									<select name='rules' className='' onChange={handleChange}>
 										<option value='vfr'>VFR</option>
 										<option value='ifr'>IFR</option>
 									</select>
