@@ -1,10 +1,9 @@
 import FetchMetar from '../FetchMetar'
 import icao from '../../data/icao.json'
-import FetchNavAid from '../FetchNavAid'
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
 
-function Weather() {
+function WeatherPage() {
 	return (
 		<>
 			<ProgressSteps activePage={2} />
@@ -25,4 +24,4 @@ function Weather() {
 	)
 }
 
-export default Weather
+export default WeatherPage

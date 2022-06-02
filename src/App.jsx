@@ -1,12 +1,14 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
-import Home from './components/pages/Home'
+
+// Import pages
+import HomePage from './components/pages/HomePage'
 import AboutPage from './components/pages/AboutPage'
-import WeightAndBalance from './components/pages/WeightAndBalance'
-import OperationalFlightPlan from './components/pages/OperationalFlightPlan'
+import WeightAndBalancePage from './components/pages/WeightAndBalancePage'
+import OperationalFlightPlanPage from './components/pages/OperationalFlightPlanPage'
 import { AppContextProvider } from './context/AppContext'
-import BasicData from './components/pages/BasicData'
-import Weather from './components/pages/Weather'
+import BasicDataPage from './components/pages/BasicDataPage'
+import WeatherPage from './components/pages/WeatherPage'
 
 function App() {
 	// TODO:
@@ -22,11 +24,11 @@ function App() {
 					<div className=''></div>
 					<div className=' justify-center align-center'>
 						<Routes>
-							<Route exact path='/' element={<Home />} />
-							<Route path='/basicdata' element={<BasicData />} />
-							<Route path='/weather' element={<Weather />} />
-							<Route path='/wnb' element={<WeightAndBalance />} />
-							<Route path='/ofp' element={<OperationalFlightPlan />} />
+							<Route exact path='/' element={<HomePage />} />
+							<Route path='/basicdata' element={<BasicDataPage />} />
+							<Route path='/weather' element={<WeatherPage />} />
+							<Route path='/wnb' element={<WeightAndBalancePage />} />
+							<Route path='/ofp' element={<OperationalFlightPlanPage />} />
 							<Route path='/about' element={<AboutPage />} />
 						</Routes>
 					</div>
