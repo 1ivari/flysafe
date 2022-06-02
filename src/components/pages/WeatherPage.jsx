@@ -7,6 +7,7 @@ function WeatherPage() {
 	return (
 		<>
 			<ProgressSteps activePage={3} />
+			<PreviousNextBtn previousPage='/route' nextPage='/ofp' />
 			<div>Weather</div>
 
 			<FetchMetar />
@@ -19,7 +20,6 @@ function WeatherPage() {
 					}
 				})}
 			</div>
-			<PreviousNextBtn previousPage='/route' nextPage='/ofp' />
 		</>
 	)
 }

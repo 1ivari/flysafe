@@ -1,12 +1,13 @@
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
+import AirfieldSearch from '../AirfieldSearch'
 
 function RoutePage() {
 	return (
 		<>
 			<ProgressSteps activePage={2} />
-			<div>Routepage</div>
 			<PreviousNextBtn previousPage='/basicdata' nextPage='/Weather' />
+			<AirfieldSearch />
 		</>
 	)
 }

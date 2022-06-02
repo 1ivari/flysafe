@@ -5,8 +5,8 @@ function OperationalFlightPlanPage() {
 	return (
 		<>
 			<ProgressSteps activePage={4} />
-			<div>OFP here</div>
 			<PreviousNextBtn previousPage='/weather' nextPage='/wnb' />
+			<div>OFP here</div>
 		</>
 	)
 }

@@ -6,8 +6,8 @@ function WeightAndBalancePage() {
 	return (
 		<>
 			<ProgressSteps activePage={5} />
-			<PerfTable />
 			<PreviousNextBtn previousPage='/ofp' nextPage='/' />
+			<PerfTable />
 		</>
 	)
 }

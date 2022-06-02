@@ -14,6 +14,7 @@ function BasicDataPage() {
 	return (
 		<>
 			<ProgressSteps activePage={1} />
+			<PreviousNextBtn previousPage='/' nextPage='/route' />
 
 			<div className='flex flex-col justify-center py-12 px-6 lg:px-8'>
 				<div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
@@ -78,8 +79,6 @@ function BasicDataPage() {
 					</div>
 				</div>
 			</div>
-
-			<PreviousNextBtn previousPage='/' nextPage='/route' />
 		</>
 	)
 }
