@@ -6,7 +6,7 @@ import ProgressSteps from '../ProgressSteps'
 function WeatherPage() {
 	return (
 		<>
-			<ProgressSteps activePage={2} />
+			<ProgressSteps activePage={3} />
 			<div>Weather</div>
 
 			<FetchMetar />
@@ -19,7 +19,7 @@ function WeatherPage() {
 					}
 				})}
 			</div>
-			<PreviousNextBtn previousPage='/basicdata' nextPage='/ofp' />
+			<PreviousNextBtn previousPage='/route' nextPage='/ofp' />
 		</>
 	)
 }

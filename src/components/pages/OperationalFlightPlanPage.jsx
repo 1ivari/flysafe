@@ -1,14 +1,14 @@
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
 
-function OperationalFlightPlan() {
+function OperationalFlightPlanPage() {
 	return (
 		<>
-			<ProgressSteps activePage={3} />
+			<ProgressSteps activePage={4} />
 			<div>OFP here</div>
 			<PreviousNextBtn previousPage='/weather' nextPage='/wnb' />
 		</>
 	)
 }
 
-export default OperationalFlightPlan
+export default OperationalFlightPlanPage

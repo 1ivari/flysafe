@@ -4,7 +4,7 @@ import AircraftSelector from '../AircraftSelector'
 import AppContext from '../../context/AppContext.jsx'
 import { useContext } from 'react'
 
-function BasicData() {
+function BasicDataPage() {
 	const { basicData, setBasicData } = useContext(AppContext)
 
 	const handleChange = (e) => {
@@ -79,9 +79,9 @@ function BasicData() {
 				</div>
 			</div>
 
-			<PreviousNextBtn previousPage='/' nextPage='/weather' />
+			<PreviousNextBtn previousPage='/' nextPage='/route' />
 		</>
 	)
 }
 
-export default BasicData
+export default BasicDataPage

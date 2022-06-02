@@ -9,6 +9,7 @@ import OperationalFlightPlanPage from './components/pages/OperationalFlightPlanP
 import { AppContextProvider } from './context/AppContext'
 import BasicDataPage from './components/pages/BasicDataPage'
 import WeatherPage from './components/pages/WeatherPage'
+import RoutePage from './components/pages/RoutePage'
 
 function App() {
 	// TODO:
@@ -26,6 +27,7 @@ function App() {
 						<Routes>
 							<Route exact path='/' element={<HomePage />} />
 							<Route path='/basicdata' element={<BasicDataPage />} />
+							<Route path='/route' element={<RoutePage />} />
 							<Route path='/weather' element={<WeatherPage />} />
 							<Route path='/wnb' element={<WeightAndBalancePage />} />
 							<Route path='/ofp' element={<OperationalFlightPlanPage />} />

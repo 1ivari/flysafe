@@ -2,14 +2,14 @@ import PerfTable from '../PerfTable'
 import ProgressSteps from '../ProgressSteps'
 import PreviousNextBtn from '../PreviousNextBtn'
 
-function WeightAndBalance() {
+function WeightAndBalancePage() {
 	return (
 		<>
-			<ProgressSteps activePage={4} />
+			<ProgressSteps activePage={5} />
 			<PerfTable />
 			<PreviousNextBtn previousPage='/ofp' nextPage='/' />
 		</>
 	)
 }
 
-export default WeightAndBalance
+export default WeightAndBalancePage
