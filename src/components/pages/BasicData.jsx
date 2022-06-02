@@ -12,9 +12,7 @@ function BasicData() {
 					<div className='bg-white py-8 px-6 shadow rounded-lg sm:px-10'>
 						<form className='mb-0 space-y-6' action='#' method='POST'>
 							<div>
-								<label
-									for='date'
-									className='block text-sm font-medium text-gray-700'>
+								<label className='block text-sm font-medium text-gray-700'>
 									Date
 								</label>
 								<div className='mt-1'>
@@ -30,9 +28,7 @@ function BasicData() {
 							</div>
 
 							<div>
-								<label
-									for='date'
-									className='block text-sm font-medium text-gray-700'>
+								<label className='block text-sm font-medium text-gray-700'>
 									Persons on Board
 								</label>
 								<div className='mt-1'>
@@ -48,18 +44,14 @@ function BasicData() {
 							</div>
 
 							<div>
-								<label
-									for='aircraft'
-									className='block text-sm font-medium text-gray-700'>
+								<label className='block text-sm font-medium text-gray-700'>
 									Aircraft
 								</label>
 								<AircraftSelector />
 							</div>
 
 							<div>
-								<label
-									for='crew'
-									className='block text-sm font-medium text-gray-700'>
+								<label className='block text-sm font-medium text-gray-700'>
 									Crew
 								</label>
 								<div className='mt-1'>
@@ -75,9 +67,7 @@ function BasicData() {
 							</div>
 
 							<div>
-								<label
-									for='rules'
-									className='block text-sm font-medium text-gray-700'>
+								<label className='block text-sm font-medium text-gray-700'>
 									Rules
 								</label>
 								<div className='mt-1'>

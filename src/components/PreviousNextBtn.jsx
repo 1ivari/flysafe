@@ -14,11 +14,11 @@ function PreviousNextBtn({ previousPage, nextPage }) {
 
 	return (
 		<>
-			<div class='btn-group grid grid-cols-2'>
-				<button onClick={onPrev} class='btn btn-outline'>
+			<div className='btn-group grid grid-cols-2'>
+				<button onClick={onPrev} className='btn btn-outline'>
 					Previous page
 				</button>
-				<button onClick={onNext} class='btn btn-outline'>
+				<button onClick={onNext} className='btn btn-outline'>
 					Next
 				</button>
 			</div>
