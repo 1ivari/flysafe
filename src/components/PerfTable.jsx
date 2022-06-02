@@ -6,49 +6,39 @@ import AppContext from '../context/AppContext.jsx'
 //
 
 function PerfTable() {
-	const {
-		aircrafts,
-		aircraftId,
-		seatWeight,
-		handleSeatWeightChange,
-		baggageWeight1,
-		handleBaggageWeight1Change,
-		baggageWeight2,
-		handleBaggageWeight2Change,
-		fuelWeight,
-		handlefuelWeightChange,
-	} = useContext(AppContext)
+	const { aircrafts, aircraftId, wnb, setWnb } = useContext(AppContext)
 
 	// Bring in aircraft data
 	if (!aircrafts || aircrafts.length === 0) {
 		return <p>No aircrafts initialized in database</p>
 	}
-
 	const aircraft = aircrafts.filter(
 		(aircraft) => Number(aircraft.id) === Number(aircraftId)
 	)[0]
-	console.log(aircraftId)
-	console.log(
-		aircrafts.filter((aircraft) => Number(aircraft.id) === Number(aircraftId))
-	)
+
+	// Handle change of input
+	const handleChange = (e) => {
+		setWnb({ ...wnb, [e.target.name]: e.target.value })
+		console.log(wnb)
+	}
 
 	//  Create helper variables
 	// zero fuel weight
 	const momBW = Math.ceil(aircraft.arm.bw * aircraft.basicWeight)
-	const momSeat = Math.ceil(aircraft.arm.seat12 * seatWeight)
-	const momBag1 = Math.ceil(aircraft.arm.baggageArea1 * baggageWeight1)
-	const momBag2 = Math.ceil(aircraft.arm.baggageArea2 * baggageWeight2)
+	const momSeat = Math.ceil(aircraft.arm.seat12 * wnb.seatWeight)
+	const momBag1 = Math.ceil(aircraft.arm.baggageArea1 * wnb.baggageWeight1)
+	const momBag2 = Math.ceil(aircraft.arm.baggageArea2 * wnb.baggageWeight2)
 	const ZFW =
 		parseInt(aircraft.basicWeight) +
-		parseInt(seatWeight) +
-		parseInt(baggageWeight1) +
-		parseInt(baggageWeight2)
+		parseInt(wnb.seatWeight) +
+		parseInt(wnb.baggageWeight1) +
+		parseInt(wnb.baggageWeight2)
 	const momentZFW = +momBW + +momSeat + +momBag1 + +momBag2
 	const armZFW = momentZFW / ZFW
 
-	const momFuel = Math.ceil(aircraft.arm.fuel * fuelWeight)
+	const momFuel = Math.ceil(aircraft.arm.fuel * wnb.fuelWeight)
 
-	const rampWeight = +ZFW + +fuelWeight
+	const rampWeight = +ZFW + +wnb.fuelWeight
 	const rampMom = +momentZFW + +momFuel
 	const rampArm = rampMom / rampWeight
 
@@ -87,8 +77,9 @@ function PerfTable() {
 									<td>
 										<input
 											type='number'
-											onChange={handleSeatWeightChange}
-											value={Number(seatWeight)}
+											name='seatWeight'
+											onChange={handleChange}
+											value={Number(wnb.seatWeight)}
 											className='input input-xs input-ghost w-full max-w-xs w-14'
 										/>
 									</td>
@@ -101,8 +92,9 @@ function PerfTable() {
 									<td>
 										<input
 											type='number'
-											onChange={handleBaggageWeight1Change}
-											value={Number(baggageWeight1)}
+											name='baggageWeight1'
+											onChange={handleChange}
+											value={Number(wnb.baggageWeight1)}
 											className='input input-xs input-ghost w-full max-w-xs w-14'
 										/>
 									</td>
@@ -115,8 +107,9 @@ function PerfTable() {
 									<td>
 										<input
 											type='number'
-											onChange={handleBaggageWeight2Change}
-											value={Number(baggageWeight2)}
+											name='baggageWeight2'
+											onChange={handleChange}
+											value={Number(wnb.baggageWeight2)}
 											className='input input-xs input-ghost w-full max-w-xs w-14'
 										/>
 									</td>
@@ -136,8 +129,9 @@ function PerfTable() {
 									<td>
 										<input
 											type='number'
-											onChange={handlefuelWeightChange}
-											value={Number(fuelWeight)}
+											name='fuelWeight'
+											onChange={handleChange}
+											value={Number(wnb.fuelWeight)}
 											className='input input-xs input-ghost w-full max-w-xs w-14'
 										/>
 									</td>

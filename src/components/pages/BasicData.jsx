@@ -5,10 +5,10 @@ import AppContext from '../../context/AppContext.jsx'
 import { useContext } from 'react'
 
 function BasicData() {
-	const { plan, setPlan } = useContext(AppContext)
+	const { basicData, setBasicData } = useContext(AppContext)
 
 	const handleChange = (e) => {
-		setPlan({ ...plan, [e.target.name]: e.target.value })
+		setBasicData({ ...basicData, [e.target.name]: e.target.value })
 	}
 
 	return (

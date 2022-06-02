@@ -10,7 +10,6 @@ function ProgressSteps({ activePage }) {
 				<li className={activePage > 1 ? 'step step-primary' : 'step'}>
 					Weather
 				</li>
-
 				<li className={activePage > 2 ? 'step step-primary' : 'step'}>
 					Operational Flight Plan
 				</li>
