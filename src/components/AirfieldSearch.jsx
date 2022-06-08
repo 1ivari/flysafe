@@ -44,10 +44,13 @@ function AirfieldSearch() {
           </div>
         </form>
       </div>
-
       <div>
         <button className='btn btn-ghost btn-lg'>Clear</button>
       </div>
+      moroo:
+      {route.map((ap) => {
+        return <div key={ap[0].ident}>{ap[0].name}</div>
+      })}
     </div>
   )
 }
