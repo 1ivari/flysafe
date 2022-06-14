@@ -3,12 +3,12 @@ import AppContext from '../context/AppContext'
 
 function FetchMetar() {
   // const path = 'https://api.met.no/weatherapi/tafmetar/1.0/metar.xml?icao=EFPO'
-  const { route, setRoute } = useContext(AppContext)
+  const { route, setRoute, metarData, setMetarData } = useContext(AppContext)
 
   const path =
     'https://opendata.fmi.fi/wfs?request=GetFeature&storedquery_id=GetDataSetById&datasetid=1000578'
 
-  const [metarData, setMetarData] = useState([])
+  // const [metarData, setMetarData] = useState([])
 
   useEffect(() => {
     fetchMet()
