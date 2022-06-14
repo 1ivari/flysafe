@@ -12,33 +12,27 @@ import WeatherPage from './components/pages/WeatherPage'
 import RoutePage from './components/pages/RoutePage'
 
 function App() {
-	// TODO:
-	// Add routes. Välilehdille hyvä käyttää NavLink, tällä saa esim aktiivisen välilehden helposti highlightattua CSS tyyleillä
-	// routesissa myös useNavigate jos pitää ensin suorittaa joku funktio ja sen jälkeen osoittaa uudelle sivulle.ks. lec 29
-	// const [aircrafts, createAircraft] = useState(aircraftBasicInfo)
+  // TODO:
+  // Add routes. Välilehdille hyvä käyttää NavLink, tällä saa esim aktiivisen välilehden helposti highlightattua CSS tyyleillä
+  // routesissa myös useNavigate jos pitää ensin suorittaa joku funktio ja sen jälkeen osoittaa uudelle sivulle.ks. lec 29
+  // const [aircrafts, createAircraft] = useState(aircraftBasicInfo)
 
-	return (
-		<AppContextProvider>
-			<Router>
-				<Navbar />
-				<div className='flex flex-row m-20'>
-					<div className=''></div>
-					<div className=' justify-center align-center'>
-						<Routes>
-							<Route exact path='/' element={<HomePage />} />
-							<Route path='/basicdata' element={<BasicDataPage />} />
-							<Route path='/route' element={<RoutePage />} />
-							<Route path='/weather' element={<WeatherPage />} />
-							<Route path='/wnb' element={<WeightAndBalancePage />} />
-							<Route path='/ofp' element={<OperationalFlightPlanPage />} />
-							<Route path='/about' element={<AboutPage />} />
-						</Routes>
-					</div>
-					<div className=''></div>
-				</div>
-			</Router>
-		</AppContextProvider>
-	)
+  return (
+    <AppContextProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path='/' element={<HomePage />} />
+          <Route path='/basicdata' element={<BasicDataPage />} />
+          <Route path='/route' element={<RoutePage />} />
+          <Route path='/weather' element={<WeatherPage />} />
+          <Route path='/wnb' element={<WeightAndBalancePage />} />
+          <Route path='/ofp' element={<OperationalFlightPlanPage />} />
+          <Route path='/about' element={<AboutPage />} />
+        </Routes>
+      </Router>
+    </AppContextProvider>
+  )
 }
 
 export default App
