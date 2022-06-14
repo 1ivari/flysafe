@@ -4,24 +4,21 @@ import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
 
 function WeatherPage() {
-	return (
-		<>
-			<ProgressSteps activePage={3} />
-			<PreviousNextBtn previousPage='/route' nextPage='/ofp' />
-			<div>Weather</div>
+  return (
+    <>
+      <div className='grid grid-cols-3'>
+        <div className='col-span-3'>
+          <ProgressSteps activePage={2} />
+        </div>
+        <div className='col-span-3'>
+          <PreviousNextBtn previousPage='/route' nextPage='/ofp' />
+        </div>
+        <div>Weather</div>
 
-			<FetchMetar />
-
-			<div>
-				moikk
-				{icao.forEach((item) => {
-					if (item.ident === 'EFPO') {
-						console.log(item.municipality)
-					}
-				})}
-			</div>
-		</>
-	)
+        <FetchMetar />
+      </div>
+    </>
+  )
 }
 
 export default WeatherPage
