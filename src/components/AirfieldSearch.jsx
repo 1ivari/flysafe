@@ -10,8 +10,6 @@ function AirfieldSearch() {
   const handleSearch = (e) => {
     e.preventDefault()
     setRoute([...route, ap])
-    console.log(`route set to ${ap}`)
-    console.log(`route looks now like this ${route}`)
   }
 
   const handleChange = (e) => {
@@ -20,7 +18,6 @@ function AirfieldSearch() {
       ap.ident.includes(e.target.value.toUpperCase())
     )
     searchList.push(res.slice(0, 5))
-    console.log(searchList)
     setAp(res[0])
   }
 

@@ -8,7 +8,7 @@ function FetchMetar() {
   const path =
     'https://opendata.fmi.fi/wfs?request=GetFeature&storedquery_id=GetDataSetById&datasetid=1000578'
 
-  const [xmlData, setXmlData] = useState([])
+  const [metarData, setMetarData] = useState([])
 
   useEffect(() => {
     fetchMet()
@@ -21,21 +21,39 @@ function FetchMetar() {
     const xmlDoc = parser.parseFromString(data, 'text/xml')
 
     const arr = []
+    const weather_array = []
 
     const airfields = xmlDoc.querySelectorAll('input')
     airfields.forEach((field) => {
       arr.push(field.textContent)
     })
 
-    // XML has two recent metars. To get the latest, let's just use the latter half of the array.
-    setXmlData(arr.slice(22, 44))
+    // XML has two recent metars. To get the latest, let's just use the latter half of the array. slice(22,44)
+    route.forEach((ap) => {
+      arr.slice(22, 44).forEach((metar, idx) => {
+        if (metar.slice(6, 10) === ap.ident) {
+          weather_array.push(metar)
+        }
+      })
+    })
+
+    setMetarData(weather_array)
   }
 
   return (
     <>
-      {xmlData.map((item) => {
-        return <div key={item.slice(6, 10)}>{item}</div>
-      })}
+      <ul>
+        {metarData.map((item) => {
+          return (
+            <li
+              key={item.slice(6, 10)}
+              className='text-slate-600 text-white p-2'
+            >
+              {item}
+            </li>
+          )
+        })}
+      </ul>
     </>
   )
 }

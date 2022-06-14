@@ -8,13 +8,12 @@ function WeatherPage() {
     <>
       <div className='grid grid-cols-3'>
         <div className='col-span-3'>
-          <ProgressSteps activePage={2} />
+          <ProgressSteps activePage={3} />
         </div>
         <div className='col-span-3'>
           <PreviousNextBtn previousPage='/route' nextPage='/ofp' />
         </div>
-        <div>Weather</div>
-
+        {/* returns ul */}
         <FetchMetar />
       </div>
     </>
