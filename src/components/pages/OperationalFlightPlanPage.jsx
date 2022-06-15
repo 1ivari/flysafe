@@ -3,18 +3,7 @@ import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
 
 function OperationalFlightPlanPage() {
-  // const createRow = () => {
-  //   const rowArr = []
-  //   for (let i = 1; i < 24; i++) {
-  //     let row = React.createElement('div', {}, i)
-  //     rowArr.push(row)
-  //   }
-  //   console.log(rowArr)
-  //   console.log('moi')
-  //   ReactDOM.render(rowArr, document.getElementById('global'))
-  // }
-
-  // createRow()
+  // TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
 
   return (
     <>
