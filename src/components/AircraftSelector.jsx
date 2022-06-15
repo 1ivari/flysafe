@@ -7,7 +7,7 @@ function AircraftSelector() {
     <>
       <select
         onChange={handleAircraftChange}
-        className='mt-1 bg-gray-200 rounded'
+        className='mt-1 	bg-gray-200 rounded'
       >
         {aircrafts.map((aircraft) => {
           return <option value={aircraft.id}>{aircraft.name}</option>
