@@ -1,5 +1,6 @@
 import React from 'react'
-import { useState } from 'react'
+import { useContext } from 'react'
+import AppContext from '../../context/AppContext'
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
 
@@ -7,7 +8,7 @@ function OperationalFlightPlanPage() {
   // TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
   // TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react/
 
-  // const [ofpData, setOfpData] = useState()
+  const { ofpState, addDescription } = useContext(AppContext)
 
   const initOFP = [
     {
@@ -32,26 +33,20 @@ function OperationalFlightPlanPage() {
     },
   ]
 
-  console.log(initOFP.length)
-
-  const reducer = (state, action) => {
-    switch (action.type) {
-      default:
-        return state
-    }
-  }
-
   return (
     <>
       <ProgressSteps activePage={4} />
       <PreviousNextBtn previousPage='/weather' nextPage='/wnb' />
       <h1>Operational Flight Plan</h1>
+      <button className='btn' onClick={addDescription}>
+        päivitä state
+      </button>
       <div className='flex flex-col justify-center p-6'>
         <table className='table'>
           <thead>
             <tr>
               <th>Route</th>
-              <th>Description</th>
+              <th>{ofpState.description}</th>
               <th>Min Alt</th>
               <th>Plan Alt</th>
               <th>TAS</th>

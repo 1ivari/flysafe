@@ -1,5 +1,6 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useReducer } from 'react'
 import aircraftBasicInfo from '../data/aircraftBasicInfo'
+import ofpReducer from './ofpReducer'
 
 const AppContext = createContext()
 
@@ -31,6 +32,29 @@ export const AppContextProvider = ({ children }) => {
     console.log('aircraft set')
   }
 
+  // Reducer functions
+  const initialState = [
+    {
+      id: 0,
+      poi: {},
+      description: '',
+      minAlt: '',
+      planAlt: '',
+      tas: '',
+      wind: '',
+      windSpeed: '',
+    },
+  ]
+
+  const [ofpState, dispatch] = useReducer(ofpReducer, initialState)
+
+  const addDescription = () => {
+    dispatch({
+      type: 'ADD_DESCRIPTION',
+      payload: 'kuvaus välitetty reducerilla',
+    })
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -45,6 +69,8 @@ export const AppContextProvider = ({ children }) => {
         aircrafts,
         aircraftId,
         handleAircraftChange,
+        ofpState,
+        addDescription,
       }}
     >
       {children}
