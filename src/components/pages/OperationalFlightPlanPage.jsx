@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import AppContext from '../../context/AppContext'
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
@@ -8,39 +8,31 @@ function OperationalFlightPlanPage() {
 	// TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
 	// TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react/
 
-	const { ofpState, addDescription, addOfpRow } = useContext(AppContext)
+	const { route, ofpState, addOfpRow, clearOfp, addPoi } =
+		useContext(AppContext)
 
-	const initOFP = [
-		{
-			id: 1,
-			route: 'EFPO',
-			description: 'Pori airport',
-			minAlt: 500,
-			planAlt: 1000,
-			tas: 110,
-			wind: 250,
-			windSpeed: 25,
-		},
-		{
-			id: 2,
-			route: 'EFHK',
-			description: 'Hesa airport',
-			minAlt: 500,
-			planAlt: 1200,
-			tas: 125,
-			wind: 130,
-			windSpeed: 12,
-		},
-	]
+	useEffect(() => {
+		clearOfp()
+		constructOfp(route)
+		route.map((poi, idx) => {
+			console.log(poi.ident)
+			addPoi(poi, idx)
+		})
+		// addPoi(route[0])
+	}, [])
+
+	const constructOfp = (route) => {
+		for (let i = 0; i < route.length - 1; i++) {
+			addOfpRow()
+		}
+	}
 
 	return (
 		<>
 			<ProgressSteps activePage={4} />
 			<PreviousNextBtn previousPage='/weather' nextPage='/wnb' />
 			<h1>Operational Flight Plan</h1>
-			<button className='btn' onClick={addOfpRow}>
-				päivitä state
-			</button>
+
 			<div className='flex flex-col justify-center p-6'>
 				<table className='table'>
 					<thead>
@@ -75,8 +67,8 @@ function OperationalFlightPlanPage() {
 						{ofpState.map((row) => {
 							return (
 								<tr>
-									<td>{row.id}</td>
-									<td>{row.description}</td>
+									<td>{row.poi.ident}</td>
+									<td>{row.poi.name}</td>
 									<td>{row.minAlt}</td>
 									<td>{row.planAlt}</td>
 									<td>{row.tas}</td>
