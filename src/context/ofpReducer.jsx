@@ -1,5 +1,5 @@
 let OfpRow = {
-	id: new Date().valueOf(),
+	id: 0,
 	poi: {},
 	description: '',
 	minAlt: '',
@@ -7,6 +7,21 @@ let OfpRow = {
 	tas: '',
 	wind: '',
 	windSpeed: '',
+	wca: '',
+	th: '',
+	var: '',
+	mh: '',
+	dev: '',
+	ch: '',
+	distInt: '',
+	distAcc: '',
+	gs: '',
+	timeInt: '',
+	timeAcc: '',
+	eto: '',
+	ato: '',
+	fuelRem: '',
+	remark: '',
 }
 
 export const initialState = [OfpRow]
@@ -21,7 +36,7 @@ const ofpReducer = (state, action) => {
 			}
 
 		case 'ADD_ROW':
-			return [...state, { ...OfpRow, id: new Date().valueOf() }]
+			return [...state, { ...OfpRow, id: payload }]
 
 		case 'CLEAR':
 			return initialState
@@ -34,6 +49,11 @@ const ofpReducer = (state, action) => {
 					return row
 				}
 			})
+
+		case 'CHANGE_ITEM':
+			return state.map((item, idx) =>
+				payload.i === idx ? { ...item, [payload.name]: payload.value } : item
+			)
 
 		default:
 			return state

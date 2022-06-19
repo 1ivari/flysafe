@@ -37,9 +37,10 @@ export const AppContextProvider = ({ children }) => {
 
 	const [ofpState, dispatch] = useReducer(ofpReducer, initialState)
 
-	const addOfpRow = () => {
+	const addOfpRow = (id) => {
 		dispatch({
 			type: 'ADD_ROW',
+			payload: id,
 		})
 	}
 
@@ -53,6 +54,13 @@ export const AppContextProvider = ({ children }) => {
 		dispatch({
 			type: 'ADD_POI',
 			payload: { poi, i },
+		})
+	}
+
+	const changeItem = (name, value, i) => {
+		dispatch({
+			type: 'CHANGE_ITEM',
+			payload: { name, value, i },
 		})
 	}
 
@@ -74,6 +82,7 @@ export const AppContextProvider = ({ children }) => {
 				addOfpRow,
 				clearOfp,
 				addPoi,
+				changeItem,
 			}}>
 			{children}
 		</AppContext.Provider>

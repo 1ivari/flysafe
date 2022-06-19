@@ -8,23 +8,27 @@ function OperationalFlightPlanPage() {
 	// TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
 	// TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react/
 
-	const { route, ofpState, addOfpRow, clearOfp, addPoi } =
+	const { route, ofpState, addOfpRow, clearOfp, addPoi, changeItem } =
 		useContext(AppContext)
 
 	useEffect(() => {
-		clearOfp()
 		constructOfp(route)
 		route.map((poi, idx) => {
-			console.log(poi.ident)
 			addPoi(poi, idx)
 		})
-		// addPoi(route[0])
 	}, [])
 
 	const constructOfp = (route) => {
-		for (let i = 0; i < route.length - 1; i++) {
-			addOfpRow()
+		// only excecute if poi's have not been spread to ofpState (=> state length === 1)
+		if (ofpState.length === 1) {
+			for (let i = 0; i < route.length - 1; i++) {
+				addOfpRow(i + 1)
+			}
 		}
+	}
+
+	const handleChange2 = (e, idx) => {
+		changeItem(e.target.name, e.target.value, idx)
 	}
 
 	return (
@@ -64,16 +68,56 @@ function OperationalFlightPlanPage() {
 						</tr>
 					</thead>
 					<tbody>
-						{ofpState.map((row) => {
+						{ofpState.map((row, idx) => {
 							return (
 								<tr>
 									<td>{row.poi.ident}</td>
 									<td>{row.poi.name}</td>
-									<td>{row.minAlt}</td>
-									<td>{row.planAlt}</td>
-									<td>{row.tas}</td>
-									<td>{row.wind}</td>
-									<td>Wind speed</td>
+									<td>
+										<input
+											key={row.id}
+											value={row.minAlt}
+											name='minAlt'
+											onChange={(e) => handleChange2(e, idx)}
+											className='input input-xs text-base max-w-xs w-14'
+										/>
+									</td>
+									<td>
+										<input
+											key={row.id}
+											value={row.planAlt}
+											name='planAlt'
+											onChange={(e) => handleChange2(e, idx)}
+											className='input input-xs text-base max-w-xs w-14'
+										/>
+									</td>
+									<td>
+										<input
+											key={row.id}
+											value={row.tas}
+											name='tas'
+											onChange={(e) => handleChange2(e, idx)}
+											className='input input-xs text-base max-w-xs w-14'
+										/>
+									</td>
+									<td>
+										<input
+											key={row.id}
+											value={row.wind}
+											name='wind'
+											onChange={(e) => handleChange2(e, idx)}
+											className='input input-xs text-base max-w-xs w-14'
+										/>
+									</td>
+									<td>
+										<input
+											key={row.id}
+											value={row.windSpeed}
+											name='windSpeed'
+											onChange={(e) => handleChange2(e, idx)}
+											className='input input-xs text-base max-w-xs w-14'
+										/>
+									</td>
 									<td>Tc</td>
 									<td>Wca</td>
 									<td>td</td>
