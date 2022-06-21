@@ -12,7 +12,6 @@ function OperationalFlightPlanPage() {
 		route,
 		ofpState,
 		addOfpRow,
-		clearOfp,
 		addPoi,
 		changeItem,
 		haverSineDistance,
@@ -23,7 +22,7 @@ function OperationalFlightPlanPage() {
 		constructOfp(route)
 		cleanFirstRow()
 		route.map((poi, idx) => {
-			addPoi(poi, idx)
+			return addPoi(poi, idx)
 		})
 		calcDistance()
 	}, [])
@@ -84,7 +83,6 @@ function OperationalFlightPlanPage() {
 			<ProgressSteps activePage={4} />
 			<PreviousNextBtn previousPage='/weather' nextPage='/wnb' />
 			<h1>Operational Flight Plan</h1>
-
 			<div className='flex flex-col justify-center p-6'>
 				<table className='table'>
 					<thead>
@@ -118,7 +116,7 @@ function OperationalFlightPlanPage() {
 					<tbody>
 						{ofpState.map((row, idx) => {
 							return (
-								<tr>
+								<tr key={row.id}>
 									<td>{row.poi.ident}</td>
 									<td>{row.poi.name}</td>
 									<td>
