@@ -8,14 +8,24 @@ function OperationalFlightPlanPage() {
 	// TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
 	// TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react/
 
-	const { route, ofpState, addOfpRow, clearOfp, addPoi, changeItem } =
-		useContext(AppContext)
+	const {
+		route,
+		ofpState,
+		addOfpRow,
+		clearOfp,
+		addPoi,
+		changeItem,
+		haverSineDistance,
+		calcTime,
+	} = useContext(AppContext)
 
 	useEffect(() => {
 		constructOfp(route)
+		cleanFirstRow()
 		route.map((poi, idx) => {
 			addPoi(poi, idx)
 		})
+		calcDistance()
 	}, [])
 
 	const constructOfp = (route) => {
@@ -27,8 +37,46 @@ function OperationalFlightPlanPage() {
 		}
 	}
 
+	// Set's first row as '-'
+	const cleanFirstRow = () => {
+		ofpState.map((row, idx) => {
+			if (idx === 0) {
+				for (const key in row) {
+					changeItem(key, '-', idx)
+				}
+			}
+		})
+	}
+
 	const handleChange2 = (e, idx) => {
 		changeItem(e.target.name, e.target.value, idx)
+	}
+
+	const handleChangeTas = (e, idx) => {
+		const tas = e.target.value
+		changeItem('tas', tas, idx)
+		const distInt = ofpState[idx].distInt
+		console.log(distInt)
+		const timeInt = calcTime(tas, 'kt', distInt, 'nm', 'min')
+		console.log(timeInt)
+		changeItem('timeInt', timeInt, idx)
+	}
+
+	const calcDistance = () => {
+		let cumSum = 0
+		ofpState.map((row, idx) => {
+			if (idx > 0) {
+				const dist = haverSineDistance(
+					Number(ofpState[idx - 1].poi.coordinates.split(',')[0]),
+					Number(ofpState[idx - 1].poi.coordinates.split(',')[1]),
+					Number(ofpState[idx].poi.coordinates.split(',')[0]),
+					Number(ofpState[idx].poi.coordinates.split(',')[1])
+				)
+				changeItem('distInt', dist, idx)
+				cumSum = cumSum + dist
+				changeItem('distAcc', cumSum, idx)
+			}
+		})
 	}
 
 	return (
@@ -74,61 +122,81 @@ function OperationalFlightPlanPage() {
 									<td>{row.poi.ident}</td>
 									<td>{row.poi.name}</td>
 									<td>
-										<input
-											key={row.id}
-											value={row.minAlt}
-											name='minAlt'
-											onChange={(e) => handleChange2(e, idx)}
-											className='input input-xs text-base max-w-xs w-14'
-										/>
+										{idx > 0 ? (
+											<input
+												key={row.id}
+												value={row.minAlt}
+												name='minAlt'
+												onChange={(e) => handleChange2(e, idx)}
+												className='input input-xs text-base max-w-xs w-14'
+											/>
+										) : (
+											'-'
+										)}
 									</td>
 									<td>
-										<input
-											key={row.id}
-											value={row.planAlt}
-											name='planAlt'
-											onChange={(e) => handleChange2(e, idx)}
-											className='input input-xs text-base max-w-xs w-14'
-										/>
+										{idx > 0 ? (
+											<input
+												key={row.id}
+												value={row.planAlt}
+												name='planAlt'
+												onChange={(e) => handleChange2(e, idx)}
+												className='input input-xs text-base max-w-xs w-14'
+											/>
+										) : (
+											'-'
+										)}
 									</td>
 									<td>
-										<input
-											key={row.id}
-											value={row.tas}
-											name='tas'
-											onChange={(e) => handleChange2(e, idx)}
-											className='input input-xs text-base max-w-xs w-14'
-										/>
+										{idx > 0 ? (
+											<input
+												key={row.id}
+												value={row.tas}
+												name='tas'
+												onChange={(e) => handleChangeTas(e, idx)}
+												className='input input-xs text-base max-w-xs w-14'
+											/>
+										) : (
+											'-'
+										)}
 									</td>
 									<td>
-										<input
-											key={row.id}
-											value={row.wind}
-											name='wind'
-											onChange={(e) => handleChange2(e, idx)}
-											className='input input-xs text-base max-w-xs w-14'
-										/>
+										{idx > 0 ? (
+											<input
+												key={row.id}
+												value={row.wind}
+												name='wind'
+												onChange={(e) => handleChange2(e, idx)}
+												className='input input-xs text-base max-w-xs w-14'
+											/>
+										) : (
+											'-'
+										)}
 									</td>
 									<td>
-										<input
-											key={row.id}
-											value={row.windSpeed}
-											name='windSpeed'
-											onChange={(e) => handleChange2(e, idx)}
-											className='input input-xs text-base max-w-xs w-14'
-										/>
+										{idx > 0 ? (
+											<input
+												key={row.id}
+												value={row.windSpeed}
+												name='windSpeed'
+												onChange={(e) => handleChange2(e, idx)}
+												className='input input-xs text-base max-w-xs w-14'
+											/>
+										) : (
+											'-'
+										)}
 									</td>
-									<td>Tc</td>
-									<td>Wca</td>
-									<td>td</td>
-									<td>Var</td>
-									<td>Mh</td>
-									<td>Dev</td>
-									<td>Ch</td>
-									<td>Dist Int</td>
-									<td>Dist Acc</td>
+									<td>{row.tc}</td>
+									<td>{row.wca}</td>
+									<td>{row.th}</td>
+									<td>{row.var}</td>
+									<td>{row.mh}</td>
+									<td>{row.dev}</td>
+									<td>{row.ch}</td>
+									<td>{row.distInt}</td>
+									<td>{row.distAcc}</td>
 									<td>Gs</td>
-									<td>Time Int</td>
+									<td>{row.timeInt}</td>
 									<td>Time Acc</td>
 									<td>Eto/Reto</td>
 									<td>Ato</td>
