@@ -58,10 +58,18 @@ function OperationalFlightPlanPage() {
 		const tas = e.target.value
 		changeItem('tas', tas, idx)
 		const distInt = ofpState[idx].distInt
-		console.log(distInt)
 		const timeInt = calcTime(tas, 'kt', distInt, 'nm', 'min')
-		console.log(timeInt)
 		changeItem('timeInt', timeInt, idx)
+
+		// calculate and set timeAcc
+		if (idx > 0) {
+			if (idx === 1) {
+				changeItem('timeAcc', timeInt, idx)
+			} else {
+				let prev = Number(ofpState[idx - 1].timeAcc)
+				changeItem('timeAcc', prev + timeInt, idx)
+			}
+		}
 	}
 
 	const calcDistance = () => {
@@ -199,7 +207,7 @@ function OperationalFlightPlanPage() {
 									<td>{row.distAcc}</td>
 									<td>Gs</td>
 									<td>{row.timeInt}</td>
-									<td>Time Acc</td>
+									<td>{row.timeAcc}</td>
 									<td>Eto/Reto</td>
 									<td>Ato</td>
 									<td>Fuel Rem Est</td>

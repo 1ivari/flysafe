@@ -84,9 +84,14 @@ export const AppContextProvider = ({ children }) => {
 	}
 
 	const calcTime = (spd, spdUnit, dist, distUnit, outFormat) => {
+		if (Number(spd) === 0 || Number(dist) === 0) {
+			return 0
+		}
+
 		let spd_ms = Number(0)
 		let time_s = Number(0)
 		let dist_m = Number(0)
+
 		switch (spdUnit) {
 			case 'kt':
 				spd_ms = 0.5144444 * spd
