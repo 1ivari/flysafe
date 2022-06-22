@@ -1,5 +1,5 @@
 import React from 'react'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import AppContext from '../../context/AppContext'
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
@@ -24,8 +24,11 @@ function OperationalFlightPlanPage() {
 		route.map((poi, idx) => {
 			return addPoi(poi, idx)
 		})
-		calcDistance()
 	}, [])
+
+	useEffect(() => {
+		calcDistance()
+	}, [ofpState[0].poi.coordinates])
 
 	const constructOfp = (route) => {
 		// only excecute if poi's have not been spread to ofpState (=> state length === 1)
@@ -74,6 +77,7 @@ function OperationalFlightPlanPage() {
 				changeItem('distInt', dist, idx)
 				cumSum = cumSum + dist
 				changeItem('distAcc', cumSum, idx)
+				console.log('calcd distance')
 			}
 		})
 	}
