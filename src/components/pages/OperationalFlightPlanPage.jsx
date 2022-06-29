@@ -28,7 +28,7 @@ function OperationalFlightPlanPage() {
 
   useEffect(() => {
     calcDistance()
-  }, [ofpState[ofpState.length - 1].poi.coordinates])
+  }, [ofpState[ofpState.length - 1].poi.latitude_deg])
 
   const constructOfp = (route) => {
     // correct: only execute if ofp state.length is different than route.length => there is a change to the route.
@@ -78,10 +78,10 @@ function OperationalFlightPlanPage() {
     ofpState.map((row, idx) => {
       if (idx > 0) {
         const dist = haverSineDistance(
-          Number(ofpState[idx - 1].poi.coordinates.split(',')[0]),
-          Number(ofpState[idx - 1].poi.coordinates.split(',')[1]),
-          Number(ofpState[idx].poi.coordinates.split(',')[0]),
-          Number(ofpState[idx].poi.coordinates.split(',')[1])
+          Number(ofpState[idx - 1].poi.longitude_deg),
+          Number(ofpState[idx - 1].poi.latitude_deg),
+          Number(ofpState[idx].poi.longitude_deg),
+          Number(ofpState[idx].poi.latitude_deg)
         )
         changeItem('distInt', dist, idx)
         cumSum = cumSum + dist
