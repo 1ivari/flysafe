@@ -1,7 +1,7 @@
 import PreviousNextBtn from '../PreviousNextBtn'
 import ProgressSteps from '../ProgressSteps'
 import AirfieldSearch from '../AirfieldSearch'
-import Map from '../Map'
+import MapBox from '../MapBox'
 
 function RoutePage() {
   // const render = (status: Status) => {
@@ -35,7 +35,9 @@ function RoutePage() {
           </div>
         </div>
         <div className='flex flex-col justify-center py-12 px-3 lg:px-4 col-span-2'>
-          <Map />
+          <div className='map-container'>
+            <MapBox />
+          </div>
         </div>
       </div>
     </>
