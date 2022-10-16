@@ -10,9 +10,14 @@ const MapBox = () => {
         latitude: 61.461700439453,
         zoom: 6,
       }}
-      mapStyle='mapbox://styles/mapbox/dark-v9'
+      mapStyle='mapbox://styles/mapbox/outdoors-v11'
       mapboxAccessToken={MAPBOX_TOKEN}
       id='map-container'
+      projection={{
+        name: 'lambertConformalConic',
+        center: [-40, 0],
+        parallels: [90, 90],
+      }}
     />
   )
 }
