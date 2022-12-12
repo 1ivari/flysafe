@@ -4,16 +4,7 @@ import AirfieldSearch from '../AirfieldSearch'
 import MapBox from '../MapBox'
 
 function RoutePage() {
-  // const render = (status: Status) => {
-  // 	return <h1>{status}</h1>
-  // }
 
-  // const [clicks, setClicks] = useState([])
-  // const [zoom, setZoom] = useState(3) // initial zoom
-  // const [center, setCenter] = useState({
-  // 	lat: 0,
-  // 	lng: 0,
-  // })
 
   return (
     <>
@@ -35,7 +26,7 @@ function RoutePage() {
           </div>
         </div>
         <div className='flex flex-col justify-center py-12 px-3 lg:px-4 col-span-2'>
-          <div className='map-container'>
+          <div className='map-container' id='map-container'>
             <MapBox />
           </div>
         </div>

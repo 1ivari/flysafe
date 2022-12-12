@@ -17,8 +17,11 @@ const MapBox = () => {
         name: 'lambertConformalConic',
         center: [-40, 0],
         parallels: [90, 90],
-      }}
+      }
+    }
     />
+
+    
   )
 }
 
