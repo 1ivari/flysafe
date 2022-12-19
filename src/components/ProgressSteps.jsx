@@ -1,17 +1,7 @@
 import propTypes from 'prop-types'
-import WeightAndBalancePage from './pages/WeightAndBalancePage'
+// import WeightAndBalancePage from './pages/WeightAndBalancePage'
 
 function ProgressSteps({ activePage }) {
-  const pages = [
-    'Basic data',
-    'Route',
-    'Weather',
-    'Operational Flight Plan',
-    'Weight and Balance',
-    'Review',
-    'Submit',
-  ]
-
   return (
     <div className='flex mx-auto max-w-3xl p-3 justify-center'>
       <div>

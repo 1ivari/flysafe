@@ -1,7 +1,8 @@
-import FetchMetar from '../FetchMetar'
-import icao from '../../data/icao.json'
-import PreviousNextBtn from '../PreviousNextBtn'
-import ProgressSteps from '../ProgressSteps'
+import FetchMetar from '../components/FetchMetar'
+import FetchMetarMetNo from '../components/FetchMetarMetNo'
+import icao from '../data/icao.json'
+import PreviousNextBtn from '../components/PreviousNextBtn'
+import ProgressSteps from '../components/ProgressSteps'
 
 function WeatherPage() {
   return (
@@ -18,7 +19,7 @@ function WeatherPage() {
           <div className='mt-8 sm:mx-auto sm:w-full sm:max-w-md'>
             <div className='bg-neutral py-8 px-6 shadow rounded-lg sm:px-10'>
               <div className='mb-0 space-y-6'>
-                <FetchMetar />
+                <FetchMetarMetNo />
               </div>
             </div>
           </div>

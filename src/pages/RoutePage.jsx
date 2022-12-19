@@ -1,11 +1,9 @@
-import PreviousNextBtn from '../PreviousNextBtn'
-import ProgressSteps from '../ProgressSteps'
-import AirfieldSearch from '../AirfieldSearch'
-import MapBox from '../MapBox'
+import PreviousNextBtn from '../components/PreviousNextBtn'
+import ProgressSteps from '../components/ProgressSteps'
+import AirfieldSearch from '../components/AirfieldSearch'
+import MapBox from '../components/MapBox'
 
 function RoutePage() {
-
-
   return (
     <>
       <div className='grid grid-cols-3'>

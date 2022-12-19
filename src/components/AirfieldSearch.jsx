@@ -1,53 +1,84 @@
 import { useContext, useState, useEffect } from 'react'
 import AppContext from '../context/AppContext.jsx'
-import icao from '../data/icao.json'
+import validIcaoIdents from '../data/validIcaoIdents.js'
 
 function AirfieldSearch() {
-  const { route, setRoute } = useContext(AppContext)
+  // Get route state and setRoute function from AppContext
+  // Route is an array of objects, each object is an airfield
+  // Route is used later on to generate OFP
+  const { route, setRoute, clearOfp, metarData, setMetarData } =
+    useContext(AppContext)
+  // Ap is an object, it is the airfield data returned from airportdb
+  // Ap is used to add airfield to route state
   const [ap, setAp] = useState()
-  const [ident, setIdent] = useState()
-  const searchList = []
+  // Ident is the ICAO ident of the airfield
+  const [ident, setIdent] = useState('')
 
-  const handleSearch = (e) => {
+  // Checks if input is valid ICAO ident
+  const checkIfValidIdent = (ident) => {
+    return validIcaoIdents.idents.includes(ident)
+  }
+
+  // Runs every time isValidIdent changes (i.e. when ValidIdent is set)
+  // First check that input is valid ICAO ident
+  // Then fetch data from airportdb
+  // if not found, set ap state to empty string
+  useEffect(() => {
+    if (checkIfValidIdent(ident)) {
+      fetch(
+        `${process.env.REACT_APP_AIRPORTDB_URL}${ident}?apiToken=${process.env.REACT_APP_AIRPORTDB_TOKEN}`
+      )
+        .then((res) => res.json())
+        .then((data) => setAp(data))
+    } else setAp('')
+  }, [ident])
+
+  // Gets called every time user types in search box
+  const handleIdentChange = (e) => {
     e.preventDefault()
-    setRoute([...route, ap])
+    setIdent(e.target.value.toUpperCase())
   }
 
-  // this uses icao.json saved in ../data
-  const handleChange = (e) => {
+  // Gets called when user clicks 'Go' button. Adds ap to route state
+  function handleSetRoute(e) {
     e.preventDefault()
-    const res = icao.filter((ap) =>
-      ap.ident.includes(e.target.value.toUpperCase())
-    )
-    searchList.push(res.slice(0, 5))
-    setIdent(e.target.value)
-    // setAp(res[0])
+    checkIfValidIdent(ident)
+      ? setRoute([...route, ap])
+      : alert('Invalid ICAO ident')
   }
 
-  // useEffect(() => {
-  //   fetchAirfield()
-  // }, [])
-
-  const fetchAirfield = async (searchVal) => {
-    const response = await fetch(
-      `${
-        process.env.REACT_APP_AIRPORTDB_URL
-      }${searchVal.toUpperCase()}?apiToken=${
-        process.env.REACT_APP_AIRPORTDB_TOKEN
-      }`
-    )
-    const data = await response.json()
-    setRoute([...route, data])
-    return data
-  }
-
-  const handleSearch2 = (e) => {
+  // Gets called when user clicks 'Clear' button. Clears route state and OFP
+  function clearRoute(e) {
     e.preventDefault()
-    console.log('ap2 value on')
-    const ap2 = fetchAirfield(ident)
-    console.log(ap2)
-    setRoute([...route, ap2])
+    setRoute([])
+    clearOfp()
+    setMetarData([])
   }
+
+  // This useEffect runs every time route state changes
+  // It fetches METAR data from met.no API
+  // It pushes the last 5 METARs to metarData state
+  useEffect(() => {
+    var path = `https://api.met.no/weatherapi/tafmetar/1.0/?icao=${ident}&content_type=text/xml&offset=+02:00&content=tafmetar`
+    console.log(path)
+    var arr = []
+    if (checkIfValidIdent(ident)) {
+      fetch(path)
+        .then((res) => res.text())
+        .then((data) => {
+          const parser = new DOMParser()
+          const xmlDoc = parser.parseFromString(data, 'text/xml')
+          const metars = xmlDoc.querySelectorAll('metarText')
+
+          metars.forEach((metar, idx) => {
+            if (idx > metars.length - 6) {
+              arr.push(metar.textContent)
+            }
+          })
+          setMetarData([...metarData, arr])
+        })
+    }
+  }, [route])
 
   return (
     <div className='grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8'>
@@ -59,12 +90,12 @@ function AirfieldSearch() {
                 type='text'
                 className='w-full pr-30 bg-gray-200 input input-sm text-black'
                 placeholder='Search'
-                onChange={handleChange}
+                onChange={handleIdentChange}
               />
               <button
                 className='absolute top-0 right-0 rounded-l-none w-8 btn btn-sm'
                 type='submit'
-                onClick={handleSearch2}
+                onClick={handleSetRoute}
               >
                 Go
               </button>
@@ -73,16 +104,9 @@ function AirfieldSearch() {
         </form>
       </div>
       <div>
-        <button className='ml-4 btn btn-ghost btn-sm'>Clear</button>
-      </div>
-
-      <div className=''>
-        <ul id='result' className='menu'>
-          {searchList.map((ap, idx) => {
-            return <li key={idx}>{ap[0].name}</li>
-          })}
-          tähä pitäs tulla lista {searchList.ident}
-        </ul>
+        <button className='ml-4 btn btn-ghost btn-sm' onClick={clearRoute}>
+          Clear
+        </button>
       </div>
 
       <ul id='result' className='menu'>

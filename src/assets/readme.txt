@@ -1,0 +1,1 @@
+This folder should contain everything that is not code. Like images etc.

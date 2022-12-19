@@ -1,22 +1,19 @@
 import React from 'react'
 import { useContext, useEffect, useState } from 'react'
-import AppContext from '../../context/AppContext'
-import PreviousNextBtn from '../PreviousNextBtn'
-import ProgressSteps from '../ProgressSteps'
+import AppContext from '../context/AppContext'
+import PreviousNextBtn from '../components/PreviousNextBtn'
+import ProgressSteps from '../components/ProgressSteps'
+
+// New imports after utils folder created
+import haverSineDistance from '../utils/haverSineDistance'
+import calcTime from '../utils/calcTime'
 
 function OperationalFlightPlanPage() {
   // TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
   // TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react/
 
-  const {
-    route,
-    ofpState,
-    addOfpRow,
-    addPoi,
-    changeItem,
-    haverSineDistance,
-    calcTime,
-  } = useContext(AppContext)
+  const { route, ofpState, addOfpRow, addPoi, changeItem } =
+    useContext(AppContext)
 
   useEffect(() => {
     constructOfp(route)

@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Navbar from './components/Navbar'
 
 // Import pages
-import HomePage from './components/pages/HomePage'
-import AboutPage from './components/pages/AboutPage'
-import WeightAndBalancePage from './components/pages/WeightAndBalancePage'
-import OperationalFlightPlanPage from './components/pages/OperationalFlightPlanPage'
+import HomePage from './pages/HomePage'
+import AboutPage from './pages/AboutPage'
+import WeightAndBalancePage from './pages/WeightAndBalancePage'
+import OperationalFlightPlanPage from './pages/OperationalFlightPlanPage'
 import { AppContextProvider } from './context/AppContext'
-import BasicDataPage from './components/pages/BasicDataPage'
-import WeatherPage from './components/pages/WeatherPage'
-import RoutePage from './components/pages/RoutePage'
+import BasicDataPage from './pages/BasicDataPage'
+import WeatherPage from './pages/WeatherPage'
+import RoutePage from './pages/RoutePage'
 
 function App() {
   // TODO:

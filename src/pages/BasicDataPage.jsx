@@ -1,7 +1,7 @@
-import PreviousNextBtn from '../PreviousNextBtn'
-import ProgressSteps from '../ProgressSteps'
-import AircraftSelector from '../AircraftSelector'
-import AppContext from '../../context/AppContext.jsx'
+import PreviousNextBtn from '../components/PreviousNextBtn'
+import ProgressSteps from '../components/ProgressSteps'
+import AircraftSelector from '../components/AircraftSelector'
+import AppContext from '../context/AppContext.jsx'
 import { useContext } from 'react'
 
 function BasicDataPage() {
