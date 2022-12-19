@@ -129,7 +129,7 @@ function OperationalFlightPlanPage() {
           <tbody>
             {ofpState.map((row, idx) => {
               return (
-                <tr key={row.id}>
+                <tr key={row.id} className='hover'>
                   <td>{row.poi.ident}</td>
                   <td>{row.poi.name}</td>
                   <td>
