@@ -87,7 +87,8 @@ function AirfieldSearch() {
               arr.push(metar.textContent)
             }
           })
-          setMetarData([...metarData, arr])
+          setMetarData([...metarData, { ident: ident, metars: arr }])
+          console.log(metarData)
         })
     }
   }, [route])

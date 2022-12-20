@@ -8,11 +8,13 @@ function FetchMetarMetNo() {
     <>
       <ul>
         {metarData.map((item, idx) => {
-          return (
-            <li key={idx} className='text-slate-600 text-white p-2'>
-              {item}
-            </li>
-          )
+          return item.metars.map((metar, i) => {
+            return (
+              <li key={i} className='text-slate-600 text-white p-2'>
+                {metar}
+              </li>
+            )
+          })
         })}
       </ul>
     </>

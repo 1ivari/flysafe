@@ -25,7 +25,7 @@ function RoutePage() {
         </div>
         <div className='flex flex-col justify-center py-12 px-3 lg:px-4 col-span-2'>
           <div className='map-container' id='map-container'>
-            <MapBox />
+            {/* <MapBox /> */}
           </div>
         </div>
       </div>
