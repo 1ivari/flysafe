@@ -28,7 +28,18 @@ function AirfieldSearch() {
       fetch(
         `${process.env.REACT_APP_AIRPORTDB_URL}${ident}?apiToken=${process.env.REACT_APP_AIRPORTDB_TOKEN}`
       )
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            throw Error(
+              'Could not fetch data from API. Returned with status ' +
+                res.status
+            )
+          }
+          return res.json()
+        })
+        .catch((err) => {
+          alert(err.message)
+        })
         .then((data) => setAp(data))
     } else setAp('')
   }, [ident])
@@ -42,7 +53,8 @@ function AirfieldSearch() {
   // Gets called when user clicks 'Go' button. Adds ap to route state
   function handleSetRoute(e) {
     e.preventDefault()
-    checkIfValidIdent(ident)
+    // Check if ap is valid, this is needed in case fetch fails and ap is empty
+    checkIfValidIdent(ident) && ap
       ? setRoute([...route, ap])
       : alert('Invalid ICAO ident')
   }
