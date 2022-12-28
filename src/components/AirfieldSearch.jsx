@@ -8,8 +8,15 @@ function AirfieldSearch() {
   // Get route state and setRoute function from AppContext
   // Route is an array of objects, each object is an airfield
   // Route is used later on to generate OFP
-  const { route, setRoute, clearOfp, metarData, setMetarData } =
-    useContext(AppContext)
+  const {
+    route,
+    setRoute,
+    clearOfp,
+    metarData,
+    setMetarData,
+    geoJSONRoute,
+    setGeoJSONRoute,
+  } = useContext(AppContext)
   // Ap is an object, it is the airfield data returned from airportdb
   // Ap is used to add airfield to route state
   const [ap, setAp] = useState()
@@ -65,9 +72,22 @@ function AirfieldSearch() {
   function handleSetRoute(e) {
     e.preventDefault()
     // Check if ap is valid, this is needed in case fetch fails and ap is empty
-    checkIfValidIdent(ident) && ap
-      ? setRoute([...route, ap])
-      : alert('Invalid ICAO ident')
+    if (checkIfValidIdent(ident) && ap) {
+      setRoute([...route, ap])
+      setGeoJSONRoute([
+        ...geoJSONRoute,
+        {
+          type: 'Feature',
+          geometry: {
+            type: 'Point',
+            coordinates: [ap.longitude_deg, ap.latitude_deg],
+          },
+          properties: {
+            name: ap.name,
+          },
+        },
+      ])
+    } else alert('Invalid ICAO ident')
   }
 
   // Gets called when user clicks 'Clear' button. Clears route state and OFP
@@ -164,7 +184,11 @@ function AirfieldSearch() {
           </button>
           <ul id='result' className='menu'>
             {route.map((poi, idx) => {
-              return <li key={idx}>{poi.name}</li>
+              return (
+                <li key={idx}>
+                  {idx + 1} {poi.ident} - {poi.name}
+                </li>
+              )
             })}
           </ul>
         </div>

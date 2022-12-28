@@ -2,6 +2,8 @@ import PreviousNextBtn from '../components/PreviousNextBtn'
 import ProgressSteps from '../components/ProgressSteps'
 import AirfieldSearch from '../components/AirfieldSearch'
 import MapBox from '../components/MapBox'
+import RouteMap from '../components/RouteMap'
+import { Route } from 'react-router-dom'
 
 function RoutePage() {
   return (
@@ -25,7 +27,7 @@ function RoutePage() {
         </div>
         <div className='flex flex-col justify-center py-12 px-3 lg:px-4 col-span-2'>
           <div className='map-container' id='map-container'>
-            {/* <MapBox /> */}
+            <RouteMap />
           </div>
         </div>
       </div>
