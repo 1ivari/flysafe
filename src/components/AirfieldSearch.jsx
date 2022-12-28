@@ -1,6 +1,8 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState, useEffect, useRef } from 'react'
 import AppContext from '../context/AppContext.jsx'
 import validIcaoIdents from '../data/validIcaoIdents.js'
+
+import classNames from 'classnames'
 
 function AirfieldSearch() {
   // Get route state and setRoute function from AppContext
@@ -13,6 +15,9 @@ function AirfieldSearch() {
   const [ap, setAp] = useState()
   // Ident is the ICAO ident of the airfield
   const [ident, setIdent] = useState('')
+
+  // Search Results for autocomplete
+  const [searchRes, setSearchRes] = useState([])
 
   // Checks if input is valid ICAO ident
   const checkIfValidIdent = (ident) => {
@@ -47,7 +52,13 @@ function AirfieldSearch() {
   // Gets called every time user types in search box
   const handleIdentChange = (e) => {
     e.preventDefault()
-    setIdent(e.target.value.toUpperCase())
+    // Filter valid ICAO idents with startsWith
+    const arr = validIcaoIdents.idents.filter((str) => {
+      return str.startsWith(e.target.value.toUpperCase())
+    })
+    // Set searchRes state to first 5 results
+    setSearchRes(arr.slice(0, 5))
+    arr.length === 1 ? setIdent(e.target.value.toUpperCase()) : setIdent('')
   }
 
   // Gets called when user clicks 'Go' button. Adds ap to route state
@@ -69,7 +80,7 @@ function AirfieldSearch() {
 
   // This useEffect runs every time route state changes
   // It fetches METAR data from met.no API
-  // It pushes the last 5 METARs to metarData state
+  // It pushes the last 5 METARs to a metars array inside metarData state
   useEffect(() => {
     var path = `https://api.met.no/weatherapi/tafmetar/1.0/?icao=${ident}&content_type=text/xml&offset=+02:00&content=tafmetar`
     console.log(path)
@@ -87,47 +98,78 @@ function AirfieldSearch() {
               arr.push(metar.textContent)
             }
           })
-          setMetarData([...metarData, { ident: ident, metars: arr }])
-          console.log(metarData)
+          setMetarData([
+            ...metarData,
+            { key: crypto.randomUUID(), ident: ident, metars: arr },
+          ])
         })
     }
   }, [route])
 
-  return (
-    <div className='grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8'>
-      <div>
-        <form action=''>
-          <div className='form-control'>
-            <div className='relative'>
-              <input
-                type='text'
-                className='w-full pr-30 bg-gray-200 input input-sm text-black'
-                placeholder='Search'
-                onChange={handleIdentChange}
-              />
-              <button
-                className='absolute top-0 right-0 rounded-l-none w-8 btn btn-sm'
-                type='submit'
-                onClick={handleSetRoute}
-              >
-                Go
-              </button>
-            </div>
-          </div>
-        </form>
-      </div>
-      <div>
-        <button className='ml-4 btn btn-ghost btn-sm' onClick={clearRoute}>
-          Clear
-        </button>
-      </div>
+  const ref = useRef(null)
+  const [open, setOpen] = useState(false)
 
-      <ul id='result' className='menu'>
-        {route.map((poi, idx) => {
-          return <li key={idx}>{poi.name}</li>
-        })}
-      </ul>
-    </div>
+  return (
+    <>
+      <div className='grid grid-cols-1 xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 mb-8 gap-8'>
+        <div>
+          <form action=''>
+            <div className='form-control'>
+              <div className='relative'>
+                <div
+                  className={classNames({
+                    'dropdown w-full': true,
+                    'dropdown-open': open,
+                  })}
+                  ref={ref}
+                >
+                  <input
+                    type='text'
+                    className='w-full pr-30 bg-gray-200 input input-sm text-black'
+                    placeholder='Search...'
+                    onChange={handleIdentChange}
+                  />
+                  <div className='dropdown-content bg-base-200 top-14 max-h-96 overflow-auto flex-col rounded-md'>
+                    <ul
+                      className='menu menu-compact'
+                      style={{ width: ref.current?.clientWidth }}
+                    >
+                      {searchRes.map((res, idx) => {
+                        return (
+                          <li
+                            key={idx}
+                            className='border-b border-b-base-content/10 w-full'
+                          >
+                            {res}
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                </div>
+                <button
+                  className='absolute top-0 right-0 rounded-l-none w-8 btn btn-sm'
+                  type='submit'
+                  onClick={handleSetRoute}
+                >
+                  Go
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div>
+          <button className='ml-4 btn btn-ghost btn-sm' onClick={clearRoute}>
+            Clear
+          </button>
+          <ul id='result' className='menu'>
+            {route.map((poi, idx) => {
+              return <li key={idx}>{poi.name}</li>
+            })}
+          </ul>
+        </div>
+      </div>
+    </>
   )
 }
 
