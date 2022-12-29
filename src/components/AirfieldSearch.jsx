@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, useRef } from 'react'
 import AppContext from '../context/AppContext.jsx'
 import validIcaoIdents from '../data/validIcaoIdents.js'
+import validIdents from '../data/validIdents.js'
 
 import classNames from 'classnames'
 import useFetchJson from '../hooks/useFetchJson.jsx'
@@ -22,13 +23,15 @@ function AirfieldSearch() {
 
 	// utility function to check if input is valid ICAO ident
 	const checkIfValidIdent = (ident) => {
-		return validIcaoIdents.idents.includes(ident.toUpperCase())
+		return validIdents.arr.some(
+			(item) => item.ident.toUpperCase() === ident.toUpperCase()
+		)
 	}
 
 	// Runs every time query changes
 	// Checks if query is valid ICAO ident and sets url for fetching data from airportdb and met.no
 	useEffect(() => {
-		if (checkIfValidIdent(query.toUpperCase())) {
+		if (checkIfValidIdent(query)) {
 			setUrl(
 				`${
 					process.env.REACT_APP_AIRPORTDB_URL
@@ -48,9 +51,12 @@ function AirfieldSearch() {
 	const { metar, metError, metLoading } = useFetchMetar(metarUrl)
 
 	// Filtered idents for search results
-	const filteredIdents = validIcaoIdents.idents
+	const filteredIdents = validIdents.arr
 		.filter((item) => {
-			return item.toUpperCase().includes(query.toUpperCase())
+			return (
+				item.name.toUpperCase().includes(query.toUpperCase()) ||
+				item.ident.toUpperCase().includes(query.toUpperCase())
+			)
 		})
 		.slice(0, 5)
 
@@ -119,7 +125,7 @@ function AirfieldSearch() {
 													<li
 														key={idx}
 														className='border-b border-b-base-content/10 w-full'>
-														{res}
+														{res.name} - {res.ident}
 													</li>
 												)
 											})}
