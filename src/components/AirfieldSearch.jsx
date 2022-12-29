@@ -10,7 +10,8 @@ function AirfieldSearch() {
 	// Get route state and setRoute function from AppContext
 	// Route is an array of objects, each object is an airfield in geoJSON format
 	// Route is used later on to generate OFP
-	const { route, setRoute, clearOfp } = useContext(AppContext)
+	const { route, setRoute, clearOfp, lockRoute, setLockRoute } =
+		useContext(AppContext)
 
 	// Query state for search input
 	const [query, setQuery] = useState('')
@@ -139,6 +140,14 @@ function AirfieldSearch() {
 				<div>
 					<button className='ml-4 btn btn-ghost btn-sm' onClick={clearRoute}>
 						Clear
+					</button>
+					<button
+						className={classNames({
+							'ml-4 btn btn-ghost btn-sm': true,
+							'bg-green-500': lockRoute,
+						})}
+						onClick={(e) => setLockRoute((prevLockRoute) => !prevLockRoute)}>
+						Set
 					</button>
 					<ul id='result' className='menu'>
 						{route.map((poi, idx) => {
