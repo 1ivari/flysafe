@@ -6,51 +6,54 @@ const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
 
 mapboxgl.accessToken = MAPBOX_TOKEN
 const RouteMap = () => {
-  const mapContainerRef = useRef(null)
-  const [map, setMap] = useState(null)
-  const { route, setRoute } = useContext(AppContext)
+	const mapContainerRef = useRef(null)
+	const [map, setMap] = useState(null)
+	const { route, setRoute } = useContext(AppContext)
 
-  const [markers, setMarkers] = useState([])
+	const [markers, setMarkers] = useState([])
 
-  // Initialize map when component mounts
-  useEffect(() => {
-    const map = new mapboxgl.Map({
-      container: mapContainerRef.current,
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [21.48, 61.76],
-      zoom: 5,
-      projection: 'globe',
-    })
+	// Initialize map when component mounts
+	useEffect(() => {
+		const map = new mapboxgl.Map({
+			container: mapContainerRef.current,
+			style: 'mapbox://styles/mapbox/streets-v11',
+			center: [21.48, 61.76],
+			zoom: 5,
+			projection: 'globe',
+		})
 
-    // Add navigation control (the +/- zoom buttons)
-    map.addControl(new mapboxgl.NavigationControl(), 'top-right')
+		// Add navigation control (the +/- zoom buttons)
+		map.addControl(new mapboxgl.NavigationControl(), 'top-right')
 
-    setMap(map)
+		setMap(map)
 
-    // Clean up on unmount
-    return () => map.remove()
-  }, [])
+		// Clean up on unmount
+		return () => map.remove()
+	}, [])
 
-  // add marker to every item in route
-  useEffect(() => {
-    if (map) {
-      route.map((wpt, idx) => {
-        const marker = new mapboxgl.Marker()
-          .setLngLat([wpt.longitude_deg, wpt.latitude_deg])
-          .addTo(map)
-        setMarkers([...markers, { key: crypto.randomUUID(), marker: marker }])
-      })
-    }
-    // remove markers from map if route is empty
-    if (route.length === 0) {
-      markers.forEach((item) => {
-        item.marker.remove()
-      })
-      setMarkers([])
-    }
-  }, [map, route])
+	// add marker to every item in route
+	useEffect(() => {
+		if (map) {
+			route.map((wpt, idx) => {
+				const marker = new mapboxgl.Marker()
+					.setLngLat([
+						wpt.geoJSON.geometry.coordinates[0],
+						wpt.geoJSON.geometry.coordinates[1],
+					])
+					.addTo(map)
+				setMarkers([...markers, { key: crypto.randomUUID(), marker: marker }])
+			})
+		}
+		// remove markers from map if route is empty
+		if (route.length === 0) {
+			markers.forEach((item) => {
+				item.marker.remove()
+			})
+			setMarkers([])
+		}
+	}, [map, route])
 
-  return <div className='map-container' ref={mapContainerRef} />
+	return <div className='map-container' ref={mapContainerRef} />
 }
 
 export default RouteMap
