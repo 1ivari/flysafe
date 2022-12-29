@@ -4,28 +4,28 @@ import validIcaoIdents from '../data/validIcaoIdents.js'
 
 import classNames from 'classnames'
 import useFetchJson from '../hooks/useFetchJson.jsx'
+import useFetchMetar from '../hooks/useFetchMetar.jsx'
 
 function AirfieldSearch() {
 	// Get route state and setRoute function from AppContext
 	// Route is an array of objects, each object is an airfield in geoJSON format
 	// Route is used later on to generate OFP
-	const { route, setRoute, clearOfp, metarData, setMetarData } =
-		useContext(AppContext)
-	// Ap is an object, it is the airfield data returned from airportdb
-	// Ap is used to add airfield to route state
-	const [ap, setAp] = useState(null)
+	const { route, setRoute, clearOfp } = useContext(AppContext)
 
 	// Query state for search input
 	const [query, setQuery] = useState('')
 
-	const [url, setUrl] = useState('')
-	const [testState, setTestState] = useState(null)
+	// Urls for fetching data from airportdb and met.no
+	const [url, setUrl] = useState(null)
+	const [metarUrl, setMetarUrl] = useState(null)
 
-	// Checks if input is valid ICAO ident
+	// utility function to check if input is valid ICAO ident
 	const checkIfValidIdent = (ident) => {
 		return validIcaoIdents.idents.includes(ident.toUpperCase())
 	}
 
+	// Runs every time query changes
+	// Checks if query is valid ICAO ident and sets url for fetching data from airportdb and met.no
 	useEffect(() => {
 		if (checkIfValidIdent(query.toUpperCase())) {
 			setUrl(
@@ -35,37 +35,16 @@ function AirfieldSearch() {
 					process.env.REACT_APP_AIRPORTDB_TOKEN
 				}`
 			)
-		} else setUrl('')
-	}, [query])
-
-	// Runs every time user writes to query
-	// First check that input is valid ICAO ident if not, set ap state to null
-	// Then fetch data from airportdb and set ap state to data
-
-	useEffect(() => {
-		if (checkIfValidIdent(query)) {
-			fetch(
-				`${
-					process.env.REACT_APP_AIRPORTDB_URL
-				}${query.toUpperCase()}?apiToken=${
-					process.env.REACT_APP_AIRPORTDB_TOKEN
-				}`
+			setMetarUrl(
+				`https://api.met.no/weatherapi/tafmetar/1.0/?icao=${query.toUpperCase()}&content_type=text/xml&offset=+02:00&content=tafmetar`
 			)
-				.then((res) => {
-					if (!res.ok) {
-						throw Error(
-							'Could not fetch data from API. Returned with status ' +
-								res.status
-						)
-					}
-					return res.json()
-				})
-				.catch((err) => {
-					alert(err.message)
-				})
-				.then((data) => setAp(data))
-		} else setAp(null)
+		}
 	}, [query])
+
+	// Fetches data from airportdb
+	const { data, error, isLoading } = useFetchJson(url)
+	// Fetches metar data from met.no
+	const { metar, metError, metLoading } = useFetchMetar(metarUrl)
 
 	// Filtered idents for search results
 	const filteredIdents = validIcaoIdents.idents
@@ -77,23 +56,27 @@ function AirfieldSearch() {
 	// Gets called when user submits search form (clicks 'Add' button) or presses enter
 	function handleSetRoute(e) {
 		e.preventDefault()
-		// Check if query is valid and ap is not null
-		if (checkIfValidIdent(query) && ap) {
-			setRoute([
-				...route,
-				{
-					key: crypto.randomUUID(),
-					geoJSON: {
-						type: 'Feature',
-						geometry: {
-							type: 'Point',
-							coordinates: [ap.longitude_deg, ap.latitude_deg],
+		// Ensures fetch is not loading
+		// constructs geoJSON object and adds it to route state
+		// also adds metar data to metar state
+		if (checkIfValidIdent(query.toUpperCase())) {
+			if (!isLoading && !metLoading) {
+				setRoute([
+					...route,
+					{
+						key: crypto.randomUUID(),
+						geoJSON: {
+							type: 'Feature',
+							geometry: {
+								type: 'Point',
+								coordinates: [data.longitude_deg, data.latitude_deg],
+							},
+							properties: { ...data, metars: metar },
 						},
-						properties: ap,
 					},
-				},
-			])
-		} else alert('Invalid ICAO ident, or query not ready yet.')
+				])
+			} else alert('Query not ready yet.')
+		} else alert('Invalid ICAO ident.')
 	}
 
 	// Gets called when user clicks 'Clear' button. Clears route state and OFP
@@ -101,40 +84,7 @@ function AirfieldSearch() {
 		e.preventDefault()
 		setRoute([])
 		clearOfp()
-		setMetarData([])
 	}
-
-	// This useEffect runs every time route state changes
-	// It fetches METAR data from met.no API
-	// It pushes the last 5 METARs to a metars array inside metarData state
-	useEffect(() => {
-		var path = `https://api.met.no/weatherapi/tafmetar/1.0/?icao=${query.toUpperCase()}&content_type=text/xml&offset=+02:00&content=tafmetar`
-		console.log(path)
-		var arr = []
-		if (checkIfValidIdent(query)) {
-			fetch(path)
-				.then((res) => res.text())
-				.then((data) => {
-					const parser = new DOMParser()
-					const xmlDoc = parser.parseFromString(data, 'text/xml')
-					const metars = xmlDoc.querySelectorAll('metarText')
-
-					metars.forEach((metar, idx) => {
-						if (idx > metars.length - 6) {
-							arr.push(metar.textContent.trim())
-						}
-					})
-					setMetarData([
-						...metarData,
-						{
-							key: crypto.randomUUID(),
-							ident: query.toUpperCase(),
-							metars: arr,
-						},
-					])
-				})
-		}
-	}, [route.length])
 
 	const ref = useRef(null)
 	const [open, setOpen] = useState(false)
