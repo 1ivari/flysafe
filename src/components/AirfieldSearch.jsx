@@ -42,7 +42,7 @@ function AirfieldSearch() {
 	}, [query])
 
 	// Fetches data from airportdb
-	const { data, error, isLoading } = useFetchJson(url)
+	const { data, error, loading } = useFetchJson(url)
 	// Fetches metar data from met.no
 	const { metar, metError, metLoading } = useFetchMetar(metarUrl)
 
@@ -60,7 +60,7 @@ function AirfieldSearch() {
 		// constructs geoJSON object and adds it to route state
 		// also adds metar data to metar state
 		if (checkIfValidIdent(query.toUpperCase())) {
-			if (!isLoading && !metLoading) {
+			if (!loading && !metLoading) {
 				setRoute([
 					...route,
 					{
@@ -134,6 +134,7 @@ function AirfieldSearch() {
 							</div>
 						</div>
 					</form>
+					{loading && metLoading && <h1>Loading... </h1>}
 				</div>
 				<div>
 					<button className='ml-4 btn btn-ghost btn-sm' onClick={clearRoute}>
