@@ -51,18 +51,15 @@ function AirfieldSearchAutoComplete() {
 	const handleOnSearch = (string, results) => {
 		// onSearch will have as the first callback parameter
 		// the string searched and for the second the results.
-		console.log('search', string, results)
 	}
 
 	const handleOnHover = (result) => {
 		// the item hovered
-		console.log('hover', result)
 		setQuery(result.ident)
 	}
 
 	const handleOnSelect = (item) => {
 		// the item selected
-		console.log('select', item)
 		if (data && !loading && !metLoading) {
 			setRoute([
 				...route,
@@ -117,19 +114,17 @@ function AirfieldSearchAutoComplete() {
 					{loading && metLoading && <h1>Loading... </h1>}
 				</div>
 				<div>
-					<ul id='result' className='menu'>
-						{route.map((poi, idx) => {
-							return (
-								<div className='pt-2'>
-									<AirfieldCard
-										toDelete={poi.key}
-										name={poi.geoJSON.properties.name}
-										ident={poi.geoJSON.properties.ident}
-									/>
-								</div>
-							)
-						})}
-					</ul>
+					{route.map((poi, idx) => {
+						return (
+							<div className='pt-2'>
+								<AirfieldCard
+									toDelete={poi.key}
+									name={poi.geoJSON.properties.name}
+									ident={poi.geoJSON.properties.ident}
+								/>
+							</div>
+						)
+					})}
 				</div>
 			</div>
 		</>
