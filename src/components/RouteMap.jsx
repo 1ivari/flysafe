@@ -40,56 +40,49 @@ const RouteMap = () => {
 	// add marker to every item in route
 	useEffect(() => {
 		if (map) {
-			if (route.length > 0) {
-				map.addSource(route[route.length - 1].key, {
-					type: 'geojson',
-					data: route[route.length - 1].geoJSON,
-				})
-				console.log('source added')
+			// clear all old keys from map
+			keys.map((key, idx) => {
+				map.removeLayer(key)
+				map.removeSource(key)
+			})
 
+			// set new key array to empty
+			var newKeys = []
+
+			route.map((poi, idx, arr) => {
+				map.addSource(poi.key, {
+					type: 'geojson',
+					data: poi.geoJSON,
+				})
 				map.addLayer({
-					id: route[route.length - 1].key,
-					source: route[route.length - 1].key,
+					id: poi.key,
+					source: poi.key,
 					type: 'circle',
 				})
-
-				if (route.length === 1) {
-					setKeys([route[route.length - 1].key])
+				newKeys.push(poi.key)
+				if (idx > 0) {
+					map.addSource(poi.key + 'line', {
+						type: 'geojson',
+						data: greatCircle(arr[idx - 1].geoJSON, poi.geoJSON),
+					})
+					map.addLayer({
+						id: poi.key + 'line',
+						source: poi.key + 'line',
+						type: 'line',
+						paint: {
+							'line-color': '#ff0000',
+							'line-width': 2,
+						},
+					})
+					newKeys.push(poi.key + 'line')
 				}
-			}
 
-			if (route.length > 1) {
-				map.addSource(route[route.length - 1].key + 'line', {
-					type: 'geojson',
-					data: greatCircle(
-						route[route.length - 2].geoJSON,
-						route[route.length - 1].geoJSON
-					),
-				})
-				map.addLayer({
-					id: route[route.length - 1].key + 'line',
-					source: route[route.length - 1].key + 'line',
-					type: 'line',
-					paint: {
-						'line-color': '#ff0000',
-						'line-width': 2,
-					},
-				})
-				setKeys([
-					...keys,
-					route[route.length - 1].key,
-					route[route.length - 1].key + 'line',
-				])
-			}
+				setKeys(newKeys)
+			})
+		}
 
-			// remove markers from map if route is empty
-			if (route.length === 0) {
-				keys.map((key) => {
-					map.removeLayer(key)
-					map.removeSource(key)
-				})
-				setKeys([])
-			}
+		return () => {
+			setKeys([])
 		}
 	}, [route])
 
