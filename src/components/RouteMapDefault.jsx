@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
 
-import mapboxgl from '!mapbox-gl'
+import mapboxgl from 'mapbox-gl'
 import AppContext from '../context/AppContext'
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
@@ -21,6 +21,8 @@ export default function RouteMapDefault() {
 			center: [lng, lat],
 			zoom: zoom,
 		})
+		console.log('map initialized as:')
+		console.log(map.current)
 	})
 
 	useEffect(() => {
@@ -30,6 +32,8 @@ export default function RouteMapDefault() {
 			setLat(map.current.getCenter().lat.toFixed(4))
 			setZoom(map.current.getZoom().toFixed(2))
 		})
+		console.log('map loaded as:')
+		console.log(map.current)
 	})
 
 	return (
