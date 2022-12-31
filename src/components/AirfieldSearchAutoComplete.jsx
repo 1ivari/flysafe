@@ -116,7 +116,7 @@ function AirfieldSearchAutoComplete() {
 				<div>
 					{route.map((poi, idx) => {
 						return (
-							<div className='pt-2'>
+							<div key={idx} className='pt-2'>
 								<AirfieldCard
 									toDelete={poi.key}
 									name={poi.geoJSON.properties.name}

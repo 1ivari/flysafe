@@ -23,20 +23,22 @@ const RouteMap = () => {
 			style: 'mapbox://styles/mapbox/streets-v11',
 			center: [21.48, 61.76],
 			zoom: 5,
-			projection: projection,
+			projection: 'globe',
 		})
 
 		// Add navigation control (the +/- zoom buttons)
 		map.addControl(new mapboxgl.NavigationControl(), 'top-right')
 
 		setMap(map)
+		console.log('map initialized as:')
+		console.log(map)
 
 		// Clean up on unmount
 		return () => {
 			setKeys([])
 			map.remove()
 		}
-	}, [projection])
+	}, [])
 
 	// add marker to every item in route
 	useEffect(() => {
@@ -79,6 +81,7 @@ const RouteMap = () => {
 				}
 
 				setKeys(newKeys)
+				console.log('markers added with keys:', newKeys)
 			})
 		}
 
