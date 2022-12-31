@@ -6,17 +6,15 @@ export default function AirfieldCard(props) {
 	const { route, setRoute } = useContext(AppContext)
 
 	const handleDelete = () => {
-		console.log('trying to delete key', props.toDelete)
 		setRoute(route.filter((item) => item.key !== props.toDelete))
-		console.log('tried to delete key', props.toDelete)
-		console.log('route is now', route)
 	}
 
 	return (
-		<div className='alert shadow-lg'>
-			<h1>{props.ident}</h1>
+		<div className='h-12 alert shadow-lg flex-row'>
 			<div>
-				<span>{props.name}</span>
+				<span>
+					{props.ident} - {props.name}
+				</span>
 			</div>
 			<button onClick={handleDelete} className='btn btn-square btn-sm'>
 				<svg

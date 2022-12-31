@@ -45,22 +45,8 @@ function AirfieldSearchAutoComplete() {
 	// Fetches metar data from met.no
 	const { metar, metError, metLoading } = useFetchMetar(metarUrl)
 
-	const ref = useRef(null)
-	const [open, setOpen] = useState(false)
-
-	const handleOnSearch = (string, results) => {
-		// onSearch will have as the first callback parameter
-		// the string searched and for the second the results.
-	}
-
-	const handleOnHover = (result) => {
-		// the item hovered
-		setQuery(result.ident)
-	}
-
-	const handleOnSelect = (item) => {
-		// the item selected
-		if (data && !loading && !metLoading) {
+	useEffect(() => {
+		if (data && metar && !loading && !metLoading) {
 			setRoute([
 				...route,
 				{
@@ -76,6 +62,40 @@ function AirfieldSearchAutoComplete() {
 				},
 			])
 		}
+	}, [data, metar])
+
+	const ref = useRef(null)
+	const [open, setOpen] = useState(false)
+
+	const handleOnSearch = (string, results) => {
+		// onSearch will have as the first callback parameter
+		// the string searched and for the second the results.
+	}
+
+	const handleOnHover = (result) => {
+		// the item hovered
+		// setQuery(result.ident)
+	}
+
+	const handleOnSelect = (item) => {
+		// the item selected
+		// if (data && !loading && !metLoading) {
+		// 	setRoute([
+		// 		...route,
+		// 		{
+		// 			key: crypto.randomUUID(),
+		// 			geoJSON: {
+		// 				type: 'Feature',
+		// 				geometry: {
+		// 					type: 'Point',
+		// 					coordinates: [data.longitude_deg, data.latitude_deg],
+		// 				},
+		// 				properties: { ...data, metars: metar },
+		// 			},
+		// 		},
+		// 	])
+		// }
+		setQuery(item.ident)
 	}
 
 	const handleOnFocus = () => {

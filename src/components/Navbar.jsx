@@ -29,7 +29,7 @@ function Navbar({ title }) {
 }
 
 Navbar.defaultProps = {
-	title: 'flySafe',
+	title: 'MagentaPlanner',
 }
 
 Navbar.propTypes = {

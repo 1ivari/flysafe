@@ -16,38 +16,15 @@ const RouteMap = () => {
 
 	const [keys, setKeys] = useState([])
 
-	// Initialize map when component mounts
-	useEffect(() => {
-		const map = new mapboxgl.Map({
-			container: mapContainerRef.current,
-			style: 'mapbox://styles/mapbox/streets-v11',
-			center: [21.48, 61.76],
-			zoom: 5,
-			projection: 'globe',
-		})
-
-		// Add navigation control (the +/- zoom buttons)
-		map.addControl(new mapboxgl.NavigationControl(), 'top-right')
-
-		setMap(map)
-		console.log('map initialized as:')
-		console.log(map)
-
-		// Clean up on unmount
-		return () => {
-			setKeys([])
-			map.remove()
-		}
-	}, [])
-
-	// add marker to every item in route
-	useEffect(() => {
+	const addLayers = (map, route, firstLoad) => {
 		if (map) {
 			// clear all old keys from map
-			keys.map((key, idx) => {
-				map.removeLayer(key)
-				map.removeSource(key)
-			})
+			if (!firstLoad) {
+				keys.map((key, idx) => {
+					map.removeLayer(key)
+					map.removeSource(key)
+				})
+			}
 
 			// set new key array to empty
 			var newKeys = []
@@ -81,10 +58,41 @@ const RouteMap = () => {
 				}
 
 				setKeys(newKeys)
-				console.log('markers added with keys:', newKeys)
 			})
 		}
 
+		return map
+	}
+
+	// Initialize map when component mounts
+	useEffect(() => {
+		const map = new mapboxgl.Map({
+			container: mapContainerRef.current,
+			style: 'mapbox://styles/mapbox/streets-v11',
+			center: [21.48, 61.76],
+			zoom: 5,
+			projection: projection,
+		})
+
+		// Add navigation control (the +/- zoom buttons)
+		map.addControl(new mapboxgl.NavigationControl(), 'top-right')
+
+		setMap(map)
+		map.on('load', () => {
+			console.log('map loaded')
+			addLayers(map, route, true)
+		})
+
+		// Clean up on unmount
+		return () => {
+			setKeys([])
+			map.remove()
+		}
+	}, [projection])
+
+	// add marker to every item in route
+	useEffect(() => {
+		addLayers(map, route, false)
 		return () => {
 			setKeys([])
 		}
