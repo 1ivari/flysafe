@@ -19,8 +19,9 @@ function RoutePage() {
 
 			<div className='relative'>
 				<div className='map-container' id='map-container'>
-					{/* <RouteMap /> */}
-					<RouteMapDefault />
+					<RouteMap />
+					{/* <RouteMapDefault /> */}
+					{/* For debugging the mapbox map */}
 				</div>
 				<div className='absolute top-5 left-5'>
 					<AirfieldSearchAutoComplete />
