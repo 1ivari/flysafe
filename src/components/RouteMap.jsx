@@ -6,8 +6,8 @@ import greatCircle from '@turf/great-circle'
 // import point from '@turf/point'
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
-
 mapboxgl.accessToken = MAPBOX_TOKEN
+
 const RouteMap = () => {
 	const mapContainerRef = useRef(null)
 	const [map, setMap] = useState(null)

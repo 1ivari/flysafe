@@ -1,9 +1,9 @@
 import PreviousNextBtn from '../components/PreviousNextBtn'
 import ProgressSteps from '../components/ProgressSteps'
 import AirfieldSearchAutoComplete from '../components/AirfieldSearchAutoComplete'
-import MapBox from '../components/MapBox'
 import RouteMap from '../components/RouteMap'
 import { Route } from 'react-router-dom'
+import RouteMapDefault from '../components/RouteMapDefault'
 
 function RoutePage() {
 	return (
@@ -19,7 +19,8 @@ function RoutePage() {
 
 			<div className='relative'>
 				<div className='map-container' id='map-container'>
-					<RouteMap />
+					{/* <RouteMap /> */}
+					<RouteMapDefault />
 				</div>
 				<div className='absolute top-5 left-5'>
 					<AirfieldSearchAutoComplete />
