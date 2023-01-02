@@ -5,8 +5,8 @@ import AppContext from '../context/AppContext'
 export default function MapSettings() {
 	const { mapSettings, setMapSettings } = useContext(AppContext)
 
-	const toggleProjection = () => {
-		if (mapSettings.projection === 'globe') {
+	const toggleProjection = (e) => {
+		if (e.target.checked) {
 			setMapSettings({ ...mapSettings, projection: 'mercator' })
 		} else {
 			setMapSettings({ ...mapSettings, projection: 'globe' })

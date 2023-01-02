@@ -125,7 +125,6 @@ function AirfieldSearchAutoComplete() {
 							onHover={handleOnHover}
 							onSelect={handleOnSelect}
 							onFocus={handleOnFocus}
-							autoFocus
 							formatResult={formatResult}
 							placeholder='Search for an airport'
 						/>
