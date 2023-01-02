@@ -81,7 +81,8 @@ function ProgressSteps({ activePage }) {
 				</div>
 			</div>
 
-			<div className='lg:hidden flex justify-center btn-group my-2'>
+			{/* <div className='lg:hidden flex justify-center btn-group my-2'>
+				<button className='btn bg-base-200'>«</button>
 				<button
 					className={activePage === 1 ? 'btn btn-md btn-active' : 'btn btn-md'}>
 					<Link to='/basicdata'>1</Link>
@@ -116,7 +117,8 @@ function ProgressSteps({ activePage }) {
 					className={activePage === 7 ? 'btn btn-md btn-active' : 'btn btn-md'}>
 					<Link to='/basicdata'>7</Link>
 				</button>
-			</div>
+				<button className='btn bg-base-200'>»</button>
+			</div> */}
 		</>
 	)
 }

@@ -4,6 +4,7 @@ import AirfieldSearchAutoComplete from '../components/AirfieldSearchAutoComplete
 import RouteMap from '../components/RouteMap'
 import { Route } from 'react-router-dom'
 import RouteMapDefault from '../components/RouteMapDefault'
+import ProgressStepsMobile from '../components/ProgressStepsMobile'
 
 function RoutePage() {
 	return (
@@ -19,6 +20,12 @@ function RoutePage() {
 					{/* For debugging the mapbox map */}
 				</div>
 			</div>
+
+			<ProgressStepsMobile
+				activePage={2}
+				nextPage={'/weather'}
+				previousPage={'/basicdata'}
+			/>
 		</>
 	)
 }

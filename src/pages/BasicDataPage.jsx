@@ -1,5 +1,6 @@
 import PreviousNextBtn from '../components/PreviousNextBtn'
 import ProgressSteps from '../components/ProgressSteps'
+import ProgressStepsMobile from '../components/ProgressStepsMobile'
 import AircraftSelector from '../components/AircraftSelector'
 import AppContext from '../context/AppContext.jsx'
 import { useContext } from 'react'
@@ -89,6 +90,10 @@ function BasicDataPage() {
 					</div>
 				</form>
 			</div>
+			<ProgressStepsMobile
+				activePage={1}
+				nextPage={'/route'}
+				previousPage={'/basicdata'}></ProgressStepsMobile>
 		</>
 	)
 }

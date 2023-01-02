@@ -1,6 +1,7 @@
 import MetarList from '../components/MetarList'
 import PreviousNextBtn from '../components/PreviousNextBtn'
 import ProgressSteps from '../components/ProgressSteps'
+import ProgressStepsMobile from '../components/ProgressStepsMobile'
 
 function WeatherPage() {
 	return (
@@ -10,6 +11,11 @@ function WeatherPage() {
 				{/* returns ul */}
 				<MetarList />
 			</div>
+			<ProgressStepsMobile
+				activePage={3}
+				nextPage={'/ofp'}
+				previousPage={'/route'}
+			/>
 		</>
 	)
 }
