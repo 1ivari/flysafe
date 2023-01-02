@@ -115,7 +115,7 @@ function AirfieldSearchAutoComplete() {
 
 	return (
 		<>
-			<div className='grid w-80 grid-cols-1 xl:grid-cols-1 lg:grid-cols-1 md:grid-cols-1 mb-8 gap-8'>
+			<div className='w-80 flex flex-col my-2'>
 				<div>
 					<div className='relative'>
 						<ReactSearchAutocomplete

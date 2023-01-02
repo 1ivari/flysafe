@@ -110,7 +110,7 @@ const RouteMap = () => {
 
 	return (
 		<>
-			<div className='map-container' ref={mapContainerRef} />
+			<div className='map-container my-2' ref={mapContainerRef} />
 			<button onClick={toggleProjection} className='btn'>
 				projection
 			</button>
