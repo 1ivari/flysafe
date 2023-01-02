@@ -10,9 +10,9 @@ mapboxgl.accessToken = MAPBOX_TOKEN
 
 const RouteMap = () => {
 	const mapContainerRef = useRef(null)
-	const [map, setMap] = useState(null)
+	// const [map, setMap] = useState(null)
 	const [projection, setProjection] = useState('globe')
-	const { route, lockRoute } = useContext(AppContext)
+	const { route, map, setMap, mapSettings } = useContext(AppContext)
 
 	const [keys, setKeys] = useState([])
 
@@ -71,7 +71,7 @@ const RouteMap = () => {
 			style: 'mapbox://styles/mapbox/streets-v11',
 			center: [21.48, 61.76],
 			zoom: 5,
-			projection: projection,
+			projection: mapSettings.projection,
 		})
 
 		// Add navigation control (the +/- zoom buttons)
@@ -88,7 +88,7 @@ const RouteMap = () => {
 			setKeys([])
 			map.remove()
 		}
-	}, [projection])
+	}, [mapSettings])
 
 	// add marker to every item in route
 	useEffect(() => {
@@ -110,10 +110,7 @@ const RouteMap = () => {
 
 	return (
 		<>
-			<div className='map-container my-2' ref={mapContainerRef} />
-			<button onClick={toggleProjection} className='btn'>
-				projection
-			</button>
+			<div className='map-container my-2' ref={mapContainerRef}></div>
 		</>
 	)
 }

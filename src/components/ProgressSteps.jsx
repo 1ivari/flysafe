@@ -1,5 +1,5 @@
 import propTypes from 'prop-types'
-import { useNavigate, Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function ProgressSteps({ activePage }) {
 	const navigate = useNavigate()
@@ -80,45 +80,6 @@ function ProgressSteps({ activePage }) {
 					</ul>
 				</div>
 			</div>
-
-			{/* <div className='lg:hidden flex justify-center btn-group my-2'>
-				<button className='btn bg-base-200'>«</button>
-				<button
-					className={activePage === 1 ? 'btn btn-md btn-active' : 'btn btn-md'}>
-					<Link to='/basicdata'>1</Link>
-				</button>
-
-				<button
-					className={activePage === 2 ? 'btn btn-md btn-active' : 'btn btn-md'}>
-					<Link to='/route'>2</Link>
-				</button>
-
-				<button
-					className={activePage === 3 ? 'btn btn-md btn-active' : 'btn btn-md'}>
-					<Link to='/weather'>3</Link>
-				</button>
-
-				<button
-					className={activePage === 4 ? 'btn btn-md btn-active' : 'btn btn-md'}>
-					<Link to='/ofp'>4</Link>
-				</button>
-
-				<button
-					className={activePage === 5 ? 'btn btn-md btn-active' : 'btn btn-md'}>
-					<Link to='/wnb'>5</Link>
-				</button>
-
-				<button
-					className={activePage === 6 ? 'btn btn-md btn-active' : 'btn btn-md'}>
-					<Link to='/basicdata'>6</Link>
-				</button>
-
-				<button
-					className={activePage === 7 ? 'btn btn-md btn-active' : 'btn btn-md'}>
-					<Link to='/basicdata'>7</Link>
-				</button>
-				<button className='btn bg-base-200'>»</button>
-			</div> */}
 		</>
 	)
 }

@@ -23,7 +23,11 @@ export const AppContextProvider = ({ children }) => {
 	})
 
 	const [route, setRoute] = useState([])
-	const [lockRoute, setLockRoute] = useState(false)
+	const [map, setMap] = useState(null)
+	const [mapSettings, setMapSettings] = useState({
+		projection: 'globe',
+		zoom: 1,
+	})
 	const [metarData, setMetarData] = useState([])
 
 	const [aircrafts, newAircraft] = useState(aircraftBasicInfo)
@@ -74,8 +78,10 @@ export const AppContextProvider = ({ children }) => {
 				setWnb,
 				route,
 				setRoute,
-				lockRoute,
-				setLockRoute,
+				map,
+				setMap,
+				mapSettings,
+				setMapSettings,
 				metarData,
 				setMetarData,
 				aircrafts,
