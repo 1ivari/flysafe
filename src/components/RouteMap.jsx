@@ -10,8 +10,6 @@ mapboxgl.accessToken = MAPBOX_TOKEN
 
 const RouteMap = () => {
 	const mapContainerRef = useRef(null)
-	// const [map, setMap] = useState(null)
-	const [projection, setProjection] = useState('globe')
 	const { route, map, setMap, mapSettings } = useContext(AppContext)
 
 	const [keys, setKeys] = useState([])
@@ -20,7 +18,7 @@ const RouteMap = () => {
 		if (map) {
 			// clear all old keys from map
 			if (!firstLoad) {
-				keys.map((key, idx) => {
+				keys.forEach((key) => {
 					map.removeLayer(key)
 					map.removeSource(key)
 				})
@@ -29,7 +27,7 @@ const RouteMap = () => {
 			// set new key array to empty
 			var newKeys = []
 
-			route.map((poi, idx, arr) => {
+			route.forEach((poi, idx, arr) => {
 				map.addSource(poi.key, {
 					type: 'geojson',
 					data: poi.geoJSON,
@@ -80,6 +78,7 @@ const RouteMap = () => {
 		setMap(map)
 		map.on('load', () => {
 			console.log('map loaded')
+			console.log('projection:', map.projection)
 			addLayers(map, route, true)
 		})
 
@@ -97,16 +96,6 @@ const RouteMap = () => {
 			setKeys([])
 		}
 	}, [route])
-
-	const toggleProjection = () => {
-		if (map) {
-			if (projection === 'globe') {
-				setProjection('mercator')
-			} else {
-				setProjection('globe')
-			}
-		}
-	}
 
 	return (
 		<>

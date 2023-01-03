@@ -5,7 +5,7 @@ function ProgressStepsMobile({ activePage, nextPage, previousPage }) {
 	const navigate = useNavigate()
 	return (
 		<>
-			<div className='lg:hidden bg-neutral fixed bottom-0 z-40 flex w-full justify-between mt-2'>
+			<div className='lg:hidden bg-neutral fixed bottom-0 z-20 flex w-full justify-between mt-2'>
 				<button className='btn grow ' onClick={() => navigate(previousPage)}>
 					«
 				</button>
@@ -50,9 +50,7 @@ function ProgressStepsMobile({ activePage, nextPage, previousPage }) {
 					onClick={() => navigate('/basicdata')}>
 					7
 				</button>
-				<button
-					className='btn  bg-base-200 grow'
-					onClick={() => navigate(nextPage)}>
+				<button className='btn grow' onClick={() => navigate(nextPage)}>
 					»
 				</button>
 			</div>

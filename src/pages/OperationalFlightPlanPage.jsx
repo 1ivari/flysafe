@@ -1,8 +1,8 @@
 import React from 'react'
 import { useContext, useEffect, useState } from 'react'
 import AppContext from '../context/AppContext'
-import PreviousNextBtn from '../components/PreviousNextBtn'
 import ProgressSteps from '../components/ProgressSteps'
+import ProgressStepsMobile from '../components/ProgressStepsMobile'
 
 // New imports after utils folder created
 import haverSineDistance from '../utils/haverSineDistance'
@@ -91,7 +91,6 @@ function OperationalFlightPlanPage() {
 	return (
 		<>
 			<ProgressSteps activePage={4} />
-			<PreviousNextBtn previousPage='/weather' nextPage='/wnb' />
 			<h1>Operational Flight Plan</h1>
 			<div className='flex flex-col justify-center p-6'>
 				<table className='table'>
@@ -217,6 +216,11 @@ function OperationalFlightPlanPage() {
 					</tbody>
 				</table>
 			</div>
+			<ProgressStepsMobile
+				activePage={4}
+				nextPage={'/wnb'}
+				previousPage={'/weather'}
+			/>
 		</>
 	)
 }

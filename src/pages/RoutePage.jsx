@@ -1,11 +1,11 @@
-import PreviousNextBtn from '../components/PreviousNextBtn'
 import ProgressSteps from '../components/ProgressSteps'
 import AirfieldSearchAutoComplete from '../components/AirfieldSearchAutoComplete'
 import RouteMap from '../components/RouteMap'
-import { Route } from 'react-router-dom'
-import RouteMapDefault from '../components/RouteMapDefault'
 import ProgressStepsMobile from '../components/ProgressStepsMobile'
 import MapSettings from '../components/MapSettings'
+
+// TODO:
+// 1. Add margin to bottom of map so that bottom nav bar does not overlap map
 
 function RoutePage() {
 	return (
@@ -13,10 +13,10 @@ function RoutePage() {
 			<ProgressSteps activePage={2} />
 			<div className='flex flex-col items-center lg:relative lg:w-full'>
 				<div className='flex w-full justify-evenly items-center'>
-					<div className='z-40 lg:absolute lg:top-5 lg:left-5'>
+					<div className='z-10 lg:absolute lg:top-5 lg:left-5'>
 						<AirfieldSearchAutoComplete />
 					</div>
-					<div className='z-40 lg:absolute lg:top-5 lg:right-14'>
+					<div className='z-10 lg:absolute lg:top-5 lg:right-14'>
 						<MapSettings />
 					</div>
 				</div>
