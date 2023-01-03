@@ -2,12 +2,11 @@ import { useState, useEffect } from 'react'
 
 function useFetchJson(url) {
 	const [data, setData] = useState(null)
-	const [loading, setLoading] = useState(false)
+	const [loading, setLoading] = useState(true)
 	const [error, setError] = useState(null)
 
 	useEffect(() => {
 		if (url) {
-			// console.log('starting fetch for ' + url)
 			setLoading(true)
 			setData(null)
 			setError(null)

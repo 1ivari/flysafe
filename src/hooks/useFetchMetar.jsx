@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 
 function useFetchMetar(url) {
 	const [metar, setMetar] = useState([])
-	const [metLoading, setMetLoading] = useState(false)
+	const [metLoading, setMetLoading] = useState(true)
 	const [metError, setMetError] = useState(null)
 
 	var arr = []

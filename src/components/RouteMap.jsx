@@ -3,7 +3,6 @@ import mapboxgl from 'mapbox-gl'
 import AppContext from '../context/AppContext'
 
 import greatCircle from '@turf/great-circle'
-// import point from '@turf/point'
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_TOKEN
 mapboxgl.accessToken = MAPBOX_TOKEN

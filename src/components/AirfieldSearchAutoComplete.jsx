@@ -5,6 +5,7 @@ import airports from '../data/Airports.json'
 
 import useFetchJson from '../hooks/useFetchJson.jsx'
 import useFetchMetar from '../hooks/useFetchMetar.jsx'
+import useRouteConstructor from '../hooks/useRouteConstructor.jsx'
 
 import AirfieldCard from './AirfieldCard.jsx'
 
@@ -15,11 +16,6 @@ import distance from '@turf/distance'
 // 2. consider calculating total distance of route and displaying it somewhere
 
 function AirfieldSearchAutoComplete() {
-	// Get route state and setRoute function from AppContext
-	// Route is an array of objects, each object is an airfield in geoJSON format
-	// Route is used later on to generate OFP
-	const { route, setRoute } = useContext(AppContext)
-
 	// Query state for search input
 	const [query, setQuery] = useState(null)
 
@@ -48,27 +44,8 @@ function AirfieldSearchAutoComplete() {
 	const { data, loading } = useFetchJson(url)
 	// Fetches metar data from met.no
 	const { metar, metLoading } = useFetchMetar(metarUrl)
-
-	// Runs every time data and metar are fetched
-	// Adds fetched data to route state
-	useEffect(() => {
-		if (data && metar && !loading && !metLoading) {
-			setRoute([
-				...route,
-				{
-					key: crypto.randomUUID(),
-					geoJSON: {
-						type: 'Feature',
-						geometry: {
-							type: 'Point',
-							coordinates: [data.longitude_deg, data.latitude_deg],
-						},
-						properties: { ...data, metars: metar },
-					},
-				},
-			])
-		}
-	}, [data, metar])
+	// constructs route state. UseEffect runs every time loading or metLoading changes
+	const { route } = useRouteConstructor(data, metar, loading, metLoading)
 
 	const handleOnSearch = (string, results) => {
 		// onSearch will have as the first callback parameter
@@ -114,8 +91,6 @@ function AirfieldSearchAutoComplete() {
 							placeholder='Search for an airport'
 						/>
 					</div>
-
-					{loading && metLoading && <h1>Loading... </h1>}
 				</div>
 
 				{route.length > 0 ? (
