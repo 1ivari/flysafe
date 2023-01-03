@@ -45,7 +45,34 @@ function AirfieldSearchAutoComplete() {
 	// Fetches metar data from met.no
 	const { metar, metLoading } = useFetchMetar(metarUrl)
 	// constructs route state. UseEffect runs every time loading or metLoading changes
-	const { route } = useRouteConstructor(data, metar, loading, metLoading)
+	// const { route } = useRouteConstructor(data, metar, loading, metLoading)
+
+	const { route, setRoute } = useContext(AppContext)
+	useEffect(() => {
+		if (data && metar && !loading && !metLoading) {
+			if (
+				route.length > 0 &&
+				route[route.length - 1].geoJSON.properties.ident === data.ident
+			) {
+				console.log('Cant add the same airport twice in a row')
+				return
+			}
+			setRoute([
+				...route,
+				{
+					key: crypto.randomUUID(),
+					geoJSON: {
+						type: 'Feature',
+						geometry: {
+							type: 'Point',
+							coordinates: [data.longitude_deg, data.latitude_deg],
+						},
+						properties: { ...data, metars: metar },
+					},
+				},
+			])
+		}
+	}, [data, metar, loading, metLoading])
 
 	const handleOnSearch = (string, results) => {
 		// onSearch will have as the first callback parameter

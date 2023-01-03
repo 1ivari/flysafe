@@ -5,6 +5,7 @@ export default function useRouteConstructor(data, metar, loading, metLoading) {
 	const { route, setRoute } = useContext(AppContext)
 
 	useEffect(() => {
+		console.log('loading', loading, 'metLoading', metLoading)
 		if (!loading && !metLoading) {
 			setRoute([
 				...route,
@@ -22,5 +23,6 @@ export default function useRouteConstructor(data, metar, loading, metLoading) {
 			])
 		}
 	}, [loading, metLoading])
+
 	return { route }
 }
