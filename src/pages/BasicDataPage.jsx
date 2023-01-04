@@ -88,6 +88,20 @@ function BasicDataPage() {
 							</select>
 						</div>
 					</div>
+
+					<div>
+						<label className='block text-sm font-medium text-white-700'>
+							Default TAS
+						</label>
+						<div className='mt-1'>
+							<input
+								name='defaultTas'
+								type='number'
+								className='bg-gray-200 rounded'
+								onChange={handleChange}
+							/>
+						</div>
+					</div>
 				</form>
 			</div>
 			<ProgressStepsMobile

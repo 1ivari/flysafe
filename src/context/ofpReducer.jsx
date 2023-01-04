@@ -1,5 +1,5 @@
 let OfpRow = {
-	id: 0,
+	key: 0,
 	poi: {},
 	description: '',
 	minAlt: '',
@@ -17,15 +17,15 @@ let OfpRow = {
 	distInt: 0,
 	distAcc: 0,
 	gs: '',
-	timeInt: 0,
-	timeAcc: 0,
+	timeInt: {},
+	timeAcc: {},
 	eto: '',
 	ato: '',
 	fuelRem: '',
 	remark: '',
 }
 
-export const initialState = [OfpRow]
+export const initialState = []
 
 const ofpReducer = (state, action) => {
 	const { type, payload } = action
@@ -37,7 +37,21 @@ const ofpReducer = (state, action) => {
 			}
 
 		case 'ADD_ROW':
-			return [...state, { ...OfpRow, id: payload }]
+			return [
+				...state,
+				{
+					...OfpRow,
+					key: payload.key,
+					description: payload.description,
+					distInt: payload.distInt,
+					distAcc: payload.distAcc,
+					var: payload.var,
+					tc: payload.tc,
+					tas: payload.tas,
+					timeInt: payload.timeInt,
+					timeAcc: payload.timeAcc,
+				},
+			]
 
 		case 'CLEAR':
 			return initialState

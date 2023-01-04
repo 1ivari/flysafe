@@ -13,6 +13,7 @@ export const AppContextProvider = ({ children }) => {
 		crew: '',
 		arrival: '',
 		rules: 'vfr',
+		defaultTas: 0,
 	})
 
 	const [wnb, setWnb] = useState({
@@ -40,7 +41,7 @@ export const AppContextProvider = ({ children }) => {
 
 	// REDUCER FUNCTIONS
 
-	const [ofpState, dispatch] = useReducer(ofpReducer, initialState)
+	const [ofp, dispatch] = useReducer(ofpReducer, [])
 
 	const addOfpRow = (id) => {
 		dispatch({
@@ -87,7 +88,8 @@ export const AppContextProvider = ({ children }) => {
 				aircrafts,
 				aircraftId,
 				handleAircraftChange,
-				ofpState,
+				ofp,
+				dispatch,
 				addOfpRow,
 				clearOfp,
 				addPoi,
