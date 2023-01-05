@@ -6,3 +6,8 @@
 	width: 100vw;
 	height: 70vh;
 }
+
+@media print {
+	h1 {
+	}
+}

@@ -9,20 +9,11 @@ import useUpdateEffect from '../hooks/useUpdateEffect.jsx'
 
 import AirfieldCard from './AirfieldCard.jsx'
 
-import distance from '@turf/distance'
-import bearing from '@turf/bearing'
-import * as geomag from 'geomag'
-
-import calcTimev2 from '../utils/calcTimev2.js'
-import dayjs from 'dayjs'
-import duration from 'dayjs/plugin/duration'
-
 // TODO:
 // 1. fix bug that causes the search to not work after the first search if user tries to search for the same airport again
 // 2. consider calculating total distance of route and displaying it somewhere
 
 function AirfieldSearchAutoComplete() {
-	dayjs.extend(duration)
 	// Query state for search input
 	const [query, setQuery] = useState(null)
 
@@ -55,7 +46,6 @@ function AirfieldSearchAutoComplete() {
 	// Fetches metar data from met.no
 	const { metar, metLoading } = useFetchMetar(metarUrl)
 	// constructs route state. UseEffect runs every time loading or metLoading changes
-	// const { route } = useRouteConstructor(data, metar, loading, metLoading)
 	useEffect(() => {
 		if (data && metar && !loading && !metLoading) {
 			setRoute((prevRoute, props) => {
@@ -90,83 +80,10 @@ function AirfieldSearchAutoComplete() {
 		}
 	}, [data, metar, loading, metLoading])
 
-	// Effect that will run every time route changes
-	// for each item in route, generate row in ofp
+	// Construct OFP everytime route changes (except on first render)
 	useUpdateEffect(() => {
-		dispatch({
-			type: 'CLEAR',
-		})
-
-		let sumDistance = 0
-		if (route.length > 0) {
-			route.forEach((poi, i, arr) => {
-				console.log('start:')
-				const properties = poi.geoJSON.properties
-				console.log('arr: ', arr)
-				console.log('poi: ', poi)
-				console.log('i: ', i)
-				const desc =
-					i > 0
-						? arr[i - 1].geoJSON.properties.ident + ' -> ' + properties.ident
-						: 'DEP: ' + properties.ident
-
-				const dist =
-					i > 0
-						? Number(
-								distance(arr[i - 1].geoJSON, poi.geoJSON, {
-									units: 'nauticalmiles',
-								})
-						  )
-						: Number(0)
-				console.log('dist: ', dist)
-				sumDistance += dist
-				console.log('sumDistance: ', sumDistance)
-				// take the starting point declination as in Marilyn
-				const loc =
-					i > 0
-						? arr[i - 1].geoJSON.geometry.coordinates
-						: poi.geoJSON.geometry.coordinates
-				const magVar = geomag.field(loc[1], loc[0])
-				console.log('magVar: ', magVar.declination)
-
-				const trueCourse180 =
-					i > 0
-						? Number(bearing(arr[i - 1].geoJSON.geometry, poi.geoJSON.geometry))
-						: Number(0)
-
-				const trueCourse360 =
-					trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
-				console.log('trueCourse360: ', trueCourse360)
-
-				const tas = 90
-
-				const time = dayjs.duration(dist / tas, 'hours')
-				console.log('time: ', time)
-				const timeAcc = dayjs.duration(sumDistance / tas, 'hours')
-				console.log('timeAcc: ', timeAcc)
-
-				dispatch({
-					type: 'ADD_ROW',
-					payload: {
-						key: poi.key,
-						description: desc,
-						distInt: dist,
-						distAcc: sumDistance,
-						var: magVar.declination,
-						tc: trueCourse360,
-						tas: tas,
-						timeInt: time,
-						timeAcc: timeAcc,
-						wind: 0,
-						windSpeed: 0,
-						wca: 0,
-						gs: 0,
-					},
-				})
-			})
-		}
-		console.log('route now: ', route)
-		console.log('ofp now: ', ofp)
+		dispatch({ type: 'CLEAR' })
+		dispatch({ type: 'CONSTRUCT_FROM_ROUTE', payload: { obj: route } })
 	}, [route])
 
 	const handleOnSearch = (string, results) => {

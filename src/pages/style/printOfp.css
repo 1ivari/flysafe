@@ -1,0 +1,13 @@
+@media print {
+	@page {
+		size: landscape;
+	}
+	header nav,
+	footer {
+		display: none;
+	}
+
+	h1 {
+		color: red;
+	}
+}

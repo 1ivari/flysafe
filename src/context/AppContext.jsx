@@ -1,7 +1,6 @@
 import { createContext, useState, useReducer } from 'react'
 import aircraftBasicInfo from '../data/aircraftBasicInfo'
 import ofpReducer from './ofpReducer'
-import { initialState } from './ofpReducer'
 
 const AppContext = createContext()
 
@@ -43,40 +42,6 @@ export const AppContextProvider = ({ children }) => {
 
 	const [ofp, dispatch] = useReducer(ofpReducer, [])
 
-	const addOfpRow = (id) => {
-		dispatch({
-			type: 'ADD_ROW',
-			payload: id,
-		})
-	}
-
-	const clearOfp = () => {
-		dispatch({
-			type: 'CLEAR',
-		})
-	}
-
-	const addPoi = (poi, i) => {
-		dispatch({
-			type: 'ADD_POI',
-			payload: { poi, i },
-		})
-	}
-
-	const changeItem = (name, value, i) => {
-		dispatch({
-			type: 'CHANGE_ITEM',
-			payload: { name, value, i },
-		})
-	}
-
-	const changeTas = (key, value) => {
-		dispatch({
-			type: 'CHANGE_TAS',
-			payload: { key, value },
-		})
-	}
-
 	return (
 		<AppContext.Provider
 			value={{
@@ -97,11 +62,6 @@ export const AppContextProvider = ({ children }) => {
 				handleAircraftChange,
 				ofp,
 				dispatch,
-				addOfpRow,
-				clearOfp,
-				addPoi,
-				changeItem,
-				changeTas,
 			}}>
 			{children}
 		</AppContext.Provider>

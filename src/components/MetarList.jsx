@@ -13,6 +13,7 @@ function MetarList() {
 						key={obj.key}
 						tabIndex={0}
 						className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-1'>
+						<input type='checkbox' />
 						<div className='collapse-title'>
 							<div className='text-xl font-medium'>
 								Airfield: {obj.geoJSON.properties.name}

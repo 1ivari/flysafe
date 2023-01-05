@@ -1,6 +1,10 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import windCorrection from '../utils/windCorrection'
+import distance from '@turf/distance'
+import bearing from '@turf/bearing'
+import * as geomag from 'geomag'
+dayjs.extend(duration)
 
 let OfpRow = {
 	key: 0,
@@ -21,8 +25,8 @@ let OfpRow = {
 	distInt: 0,
 	distAcc: 0,
 	gs: 0,
-	timeInt: {},
-	timeAcc: {},
+	timeInt: dayjs.duration(0, 'hours'),
+	timeAcc: dayjs.duration(0, 'hours'),
 	eto: '',
 	ato: '',
 	fuelRem: '',
@@ -32,43 +36,10 @@ let OfpRow = {
 export const initialState = []
 
 const ofpReducer = (state, action) => {
-	dayjs.extend(duration)
 	const { type, payload } = action
 	switch (type) {
-		case 'ADD_DESCRIPTION':
-			return {
-				...state,
-				description: payload,
-			}
-
-		case 'ADD_ROW':
-			return [
-				...state,
-				{
-					...OfpRow,
-					key: payload.key,
-					description: payload.description,
-					distInt: payload.distInt,
-					distAcc: payload.distAcc,
-					var: payload.var,
-					tc: payload.tc,
-					tas: payload.tas,
-					timeInt: payload.timeInt,
-					timeAcc: payload.timeAcc,
-				},
-			]
-
 		case 'CLEAR':
 			return initialState
-
-		case 'ADD_POI':
-			return state.map((row, idx) => {
-				if (payload.i === idx) {
-					return { ...row, poi: payload.poi }
-				} else {
-					return row
-				}
-			})
 
 		case 'CHANGE_ITEM':
 			return state.map((item) =>
@@ -78,7 +49,6 @@ const ofpReducer = (state, action) => {
 			)
 
 		case 'RECALCULATE': {
-			console.log('recalculated')
 			let interval = dayjs.duration(0)
 			let sum = dayjs.duration(0)
 			let sumNum = Number(0)
@@ -122,46 +92,96 @@ const ofpReducer = (state, action) => {
 			})
 		}
 
-		case 'CHANGE_TAS': {
-			let interval = dayjs.duration(0)
-			let sum = dayjs.duration(0)
-			let sumNum = Number(0)
-			return state.map((obj) => {
-				if (obj.key === payload.id) {
-					// take wind ito account
-					const { windCorrectionAngle, groundSpeed } = windCorrection(
-						obj.tc,
-						payload.value,
-						obj.wind,
-						obj.windSpeed
-					)
-
-					interval = dayjs.duration(obj.distInt / groundSpeed, 'hours')
-					sumNum += obj.distInt / groundSpeed
-					sum = dayjs.duration(sumNum, 'hours')
-					return {
-						...obj,
-						tas: payload.value,
-						timeInt: interval,
-						timeAcc: sum,
-						wca: windCorrectionAngle,
-						gs: groundSpeed,
-					}
-				} else {
-					if (obj.tas === 0) {
-						return { ...obj }
-					} else {
-						sumNum += obj.distInt / obj.tas
-						sum = dayjs.duration(sumNum, 'hours')
-						return {
-							...obj,
-							timeAcc: sum,
-						}
-					}
-				}
-			})
+		case 'ADD_DEPARTURE': {
+			return [
+				...state,
+				{
+					...OfpRow,
+					key: payload.key,
+					description: 'DEP => ' + payload.ident,
+				},
+			]
 		}
 
+		case 'ADD_LEG': {
+			return [
+				...state,
+				{
+					...OfpRow,
+					key: payload.key,
+				},
+			]
+		}
+
+		case 'DELETE_LEG': {
+			return state.filter((item) => item.key !== payload.id)
+		}
+
+		case 'CONSTRUCT_FROM_ROUTE':
+			{
+				const route = payload.obj
+				let sumDistance = 0
+				if (route.length > 0) {
+					return route.map((poi, i, arr) => {
+						const properties = poi.geoJSON.properties
+						const desc =
+							i > 0
+								? arr[i - 1].geoJSON.properties.ident +
+								  ' -> ' +
+								  properties.ident
+								: 'DEP: ' + properties.ident
+
+						const dist =
+							i > 0
+								? Number(
+										distance(arr[i - 1].geoJSON, poi.geoJSON, {
+											units: 'nauticalmiles',
+										})
+								  )
+								: Number(0)
+						sumDistance += dist
+						// take the starting point declination as in Marilyn
+						const loc =
+							i > 0
+								? arr[i - 1].geoJSON.geometry.coordinates
+								: poi.geoJSON.geometry.coordinates
+						const magVar = geomag.field(loc[1], loc[0])
+
+						const trueCourse180 =
+							i > 0
+								? Number(
+										bearing(arr[i - 1].geoJSON.geometry, poi.geoJSON.geometry)
+								  )
+								: Number(0)
+
+						const trueCourse360 =
+							trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
+
+						const tas = 90
+
+						const time = dayjs.duration(dist / tas, 'hours')
+						const timeAcc = dayjs.duration(sumDistance / tas, 'hours')
+						return {
+							...OfpRow,
+							key: poi.key,
+							description: desc,
+							distInt: dist,
+							distAcc: sumDistance,
+							var: magVar.declination,
+							tc: trueCourse360,
+							tas: tas,
+							timeInt: time,
+							timeAcc: timeAcc,
+							wind: 0,
+							windSpeed: 0,
+							wca: 0,
+							gs: 0,
+						}
+					})
+				}
+			}
+
+			break
 		default:
 			return state
 	}
