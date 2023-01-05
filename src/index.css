@@ -8,6 +8,20 @@
 }
 
 @media print {
+	@page {
+		size: landscape;
+	}
 	h1 {
+		display: none;
+	}
+
+	#navbar {
+		display: none;
+	}
+	#ProgressStepsMobile {
+		display: none;
+	}
+
+	#ofpTable {
 	}
 }

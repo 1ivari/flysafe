@@ -2,12 +2,15 @@
 	@page {
 		size: landscape;
 	}
-	header nav,
-	footer {
+	h1 {
 		display: none;
 	}
 
-	h1 {
-		color: red;
+	#navbar {
+		display: none;
+	}
+
+	table {
+		display: table;
 	}
 }

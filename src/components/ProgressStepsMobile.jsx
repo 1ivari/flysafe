@@ -5,7 +5,9 @@ function ProgressStepsMobile({ activePage, nextPage, previousPage }) {
 	const navigate = useNavigate()
 	return (
 		<>
-			<div className='lg:hidden bg-neutral fixed bottom-0 z-20 flex w-full justify-between mt-2'>
+			<div
+				id='ProgressStepsMobile'
+				className='lg:hidden bg-neutral fixed bottom-0 z-20 flex w-full justify-between mt-2'>
 				<button className='btn grow ' onClick={() => navigate(previousPage)}>
 					«
 				</button>

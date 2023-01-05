@@ -3,8 +3,7 @@ import { useContext } from 'react'
 import AppContext from '../context/AppContext'
 import ProgressSteps from '../components/ProgressSteps'
 import ProgressStepsMobile from '../components/ProgressStepsMobile'
-
-import printOfp from './style/printOfp.css'
+import { useEffect, useState } from 'react'
 
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
@@ -12,13 +11,27 @@ function OperationalFlightPlanPage() {
 	// TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react
 
 	const { ofp, dispatch } = useContext(AppContext)
+	const [toggle, setToggle] = useState('')
+	function toggleLock(e) {
+		if (e.target.checked) {
+			setToggle('disabled')
+		} else {
+			setToggle('')
+		}
+	}
+
+	useEffect(() => {
+		ofp.map((item) => {
+			dispatch({ type: 'RECALCULATE', payload: { id: item.id } })
+			console.log('recalculated')
+		})
+	}, [])
 
 	const handleChange = (e) => {
 		dispatch({
 			type: 'CHANGE_ITEM',
 			payload: { name: e.target.name, value: e.target.value, id: e.target.id },
 		})
-		console.log(printOfp)
 	}
 
 	const handleChangeRecalculate = (e) => {
@@ -36,13 +49,11 @@ function OperationalFlightPlanPage() {
 	return (
 		<>
 			<ProgressSteps activePage={4} />
-			<h1>Operational Flight Plan</h1>
-			<div className='flex flex-col justify-center p-6'>
-				<table className='table'>
+			<div className='hidden lg:flex flex-col justify-center p-6 max-w-xl'>
+				<table id='ofpTable' className='table table-compact'>
 					<thead>
 						<tr>
 							<th>Route</th>
-							{/* <th>Description</th> */}
 							<th>Min Alt</th>
 							<th>Plan Alt</th>
 							<th>TAS</th>
@@ -60,15 +71,15 @@ function OperationalFlightPlanPage() {
 							<th>Gs</th>
 							<th>Time Int</th>
 							<th>Time Acc</th>
-							<th>Eto/Reto</th>
-							<th>Ato</th>
-							<th>Fuel Rem Est</th>
-							<th>Fuel Rem Act</th>
-							<th>Remarks</th>
+							<th>ER</th>
+							<th>A</th>
+							<th>FuelEst</th>
+							<th>FuelAct</th>
+							<th>Rem</th>
 						</tr>
 					</thead>
 					<tbody>
-						{ofp.map((row, idx) => {
+						{ofp.slice(1).map((row, idx) => {
 							return (
 								<tr key={row.key} className='hover'>
 									<td>{row.description}</td>
@@ -152,29 +163,99 @@ function OperationalFlightPlanPage() {
 									<td>{row.gs.toFixed(0)}</td>
 									<td>{row.timeInt.format('HH:mm')}</td>
 									<td>{row.timeAcc.format('HH:mm')}</td>
-									<td>Eto/Reto</td>
-									<td>Ato</td>
-									<td>Fuel Rem Est</td>
-									<td>Fuel Rem Act</td>
-									<td>Remarks</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
+									<td>0</td>
 								</tr>
 							)
 						})}
 					</tbody>
 				</table>
 			</div>
+
+			<div className='lg:hidden flex flex-col justify-center'>
+				<div className='border border-base-300 bg-base-100 rounded-box my-1 grid grid-cols-4 justify-items-center'>
+					<div className='text-md'>Leg</div>
+					<div className='text-md'>Time</div>
+					<div className='text-md'>Heading</div>
+					<div className='text-md'>Distance</div>
+				</div>
+				{ofp.slice(1).map((row, idx) => {
+					return (
+						<div
+							key={row.key}
+							tabIndex={0}
+							className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-1'>
+							<input type='checkbox' />
+							<div className='collapse-title grid grid-cols-4 justify-items-center'>
+								<div className='text-sm font-medium'>{row.description}</div>
+								<div className='text-sm'>{row.timeInt.format('HH:mm')}</div>
+								<div className='text-sm'>{row.mh.toFixed(0)}°</div>
+								<div className='text-sm'>{row.distInt.toFixed(0)} NM</div>
+							</div>
+							<div className='collapse-content'>
+								<div className='grid grid-cols-4 justify-items-center mt-2 border border-base-300 rounded-box p-2'>
+									<input
+										type='checkbox'
+										className='toggle'
+										onClick={toggleLock}
+									/>
+									<div className='text-md'>TAS (kt)</div>
+									<div className='text-md'>Wind (°)</div>
+									<div className='text-md'>Wind (kt)</div>
+									<div className=''></div>
+									<input
+										id={row.key}
+										value={row.tas}
+										name='tas'
+										onChange={(e) => handleChangeRecalculate(e)}
+										disabled={toggle}
+										className='input input-xs text-base max-w-xs w-14 text-center m-2'
+									/>
+									<input
+										id={row.key}
+										value={row.wind}
+										name='wind'
+										onChange={(e) => handleChangeRecalculate(e)}
+										disabled={toggle}
+										className='input input-xs text-base max-w-xs w-14 text-center m-2'
+									/>
+									<input
+										id={row.key}
+										value={row.windSpeed}
+										name='windSpeed'
+										onChange={(e) => handleChangeRecalculate(e)}
+										disabled={toggle}
+										className='input input-xs text-base max-w-xs w-14 text-center m-2'
+									/>
+								</div>
+
+								<div className=''>Details</div>
+								<ul>
+									<li>Wind: {row.wind}</li>
+									<li>Wind Speed: {row.windSpeed}</li>
+									<li>TC: {row.tc.toFixed(0)}</li>
+								</ul>
+							</div>
+						</div>
+					)
+				})}
+			</div>
+
 			<ProgressStepsMobile
 				activePage={4}
 				nextPage={'/wnb'}
 				previousPage={'/weather'}
 			/>
 
-			<link
+			{/* <link
 				rel='stylesheet'
 				type='text/css'
 				href='./style/printOfp.css'
 				media='print'
-			/>
+			/> */}
 
 			{/* <link
 				rel='stylesheet'

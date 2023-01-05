@@ -18,7 +18,9 @@ function Navbar() {
 	return (
 		<>
 			{/* Navbar, visible on mobile */}
-			<div className='navbar bg-neutral flex justify-between lg:hidden px-6'>
+			<div
+				id='navbar'
+				className='navbar bg-neutral flex justify-between lg:hidden px-6'>
 				<div className='dropdown' ref={themeMenu}>
 					<label
 						tabIndex={0}
