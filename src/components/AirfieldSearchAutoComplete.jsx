@@ -5,7 +5,7 @@ import airports from '../data/Airports.json'
 
 import useFetchJson from '../hooks/useFetchJson.jsx'
 import useFetchMetar from '../hooks/useFetchMetar.jsx'
-import useRouteConstructor from '../hooks/useRouteConstructor.jsx'
+import useUpdateEffect from '../hooks/useUpdateEffect.jsx'
 
 import AirfieldCard from './AirfieldCard.jsx'
 
@@ -14,12 +14,15 @@ import bearing from '@turf/bearing'
 import * as geomag from 'geomag'
 
 import calcTimev2 from '../utils/calcTimev2.js'
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
 
 // TODO:
 // 1. fix bug that causes the search to not work after the first search if user tries to search for the same airport again
 // 2. consider calculating total distance of route and displaying it somewhere
 
 function AirfieldSearchAutoComplete() {
+	dayjs.extend(duration)
 	// Query state for search input
 	const [query, setQuery] = useState(null)
 
@@ -89,7 +92,7 @@ function AirfieldSearchAutoComplete() {
 
 	// Effect that will run every time route changes
 	// for each item in route, generate row in ofp
-	useEffect(() => {
+	useUpdateEffect(() => {
 		dispatch({
 			type: 'CLEAR',
 		})
@@ -112,35 +115,34 @@ function AirfieldSearchAutoComplete() {
 						? Number(
 								distance(arr[i - 1].geoJSON, poi.geoJSON, {
 									units: 'nauticalmiles',
-								}).toFixed(1)
+								})
 						  )
 						: Number(0)
 				console.log('dist: ', dist)
 				sumDistance += dist
 				console.log('sumDistance: ', sumDistance)
-				const loc = poi.geoJSON.geometry.coordinates
+				// take the starting point declination as in Marilyn
+				const loc =
+					i > 0
+						? arr[i - 1].geoJSON.geometry.coordinates
+						: poi.geoJSON.geometry.coordinates
 				const magVar = geomag.field(loc[1], loc[0])
 				console.log('magVar: ', magVar.declination)
 
 				const trueCourse180 =
 					i > 0
-						? Number(
-								bearing(
-									arr[i - 1].geoJSON.geometry,
-									poi.geoJSON.geometry
-								).toFixed(0)
-						  )
+						? Number(bearing(arr[i - 1].geoJSON.geometry, poi.geoJSON.geometry))
 						: Number(0)
 
 				const trueCourse360 =
 					trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
 				console.log('trueCourse360: ', trueCourse360)
 
-				const tas = basicData.defaultTas
+				const tas = 90
 
-				const time = calcTimev2(dist, tas)
+				const time = dayjs.duration(dist / tas, 'hours')
 				console.log('time: ', time)
-				const timeAcc = calcTimev2(sumDistance, tas)
+				const timeAcc = dayjs.duration(sumDistance / tas, 'hours')
 				console.log('timeAcc: ', timeAcc)
 
 				dispatch({
@@ -149,12 +151,16 @@ function AirfieldSearchAutoComplete() {
 						key: poi.key,
 						description: desc,
 						distInt: dist,
-						distAcc: sumDistance.toFixed(1),
-						var: magVar.declination.toFixed(1),
+						distAcc: sumDistance,
+						var: magVar.declination,
 						tc: trueCourse360,
 						tas: tas,
 						timeInt: time,
 						timeAcc: timeAcc,
+						wind: 0,
+						windSpeed: 0,
+						wca: 0,
+						gs: 0,
 					},
 				})
 			})

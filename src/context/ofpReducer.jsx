@@ -1,3 +1,7 @@
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import windCorrection from '../utils/windCorrection'
+
 let OfpRow = {
 	key: 0,
 	poi: {},
@@ -5,18 +9,18 @@ let OfpRow = {
 	minAlt: '',
 	planAlt: '',
 	tas: 0,
-	wind: '',
-	windSpeed: '',
-	tc: '',
-	wca: '',
-	th: '',
-	var: '',
-	mh: '',
-	dev: '',
-	ch: '',
+	wind: 0,
+	windSpeed: 0,
+	tc: 0,
+	wca: 0,
+	th: 0,
+	var: 0,
+	mh: 0,
+	dev: 0,
+	ch: 0,
 	distInt: 0,
 	distAcc: 0,
-	gs: '',
+	gs: 0,
 	timeInt: {},
 	timeAcc: {},
 	eto: '',
@@ -28,6 +32,7 @@ let OfpRow = {
 export const initialState = []
 
 const ofpReducer = (state, action) => {
+	dayjs.extend(duration)
 	const { type, payload } = action
 	switch (type) {
 		case 'ADD_DESCRIPTION':
@@ -66,9 +71,96 @@ const ofpReducer = (state, action) => {
 			})
 
 		case 'CHANGE_ITEM':
-			return state.map((item, idx) =>
-				payload.i === idx ? { ...item, [payload.name]: payload.value } : item
+			return state.map((item) =>
+				payload.id === item.key
+					? { ...item, [payload.name]: payload.value }
+					: item
 			)
+
+		case 'RECALCULATE': {
+			console.log('recalculated')
+			let interval = dayjs.duration(0)
+			let sum = dayjs.duration(0)
+			let sumNum = Number(0)
+			return state.map((obj) => {
+				if (obj.key === payload.id) {
+					// take wind ito account
+					const { windCorrectionAngle, groundSpeed } = windCorrection(
+						obj.tc,
+						obj.tas,
+						obj.wind,
+						obj.windSpeed
+					)
+					const int = Math.ceil(obj.distInt) / Math.floor(groundSpeed)
+					interval = dayjs.duration(int, 'hours')
+					sumNum += int
+					sum = dayjs.duration(sumNum, 'hours')
+
+					const th = obj.tc + windCorrectionAngle
+					const mh = th - obj.var
+					return {
+						...obj,
+						timeInt: interval,
+						timeAcc: sum,
+						wca: windCorrectionAngle,
+						gs: groundSpeed,
+						th: th,
+						mh: mh,
+					}
+				} else {
+					if (obj.tas === 0) {
+						return { ...obj }
+					} else {
+						sumNum += obj.distInt / obj.tas
+						sum = dayjs.duration(sumNum, 'hours')
+						return {
+							...obj,
+							timeAcc: sum,
+						}
+					}
+				}
+			})
+		}
+
+		case 'CHANGE_TAS': {
+			let interval = dayjs.duration(0)
+			let sum = dayjs.duration(0)
+			let sumNum = Number(0)
+			return state.map((obj) => {
+				if (obj.key === payload.id) {
+					// take wind ito account
+					const { windCorrectionAngle, groundSpeed } = windCorrection(
+						obj.tc,
+						payload.value,
+						obj.wind,
+						obj.windSpeed
+					)
+
+					interval = dayjs.duration(obj.distInt / groundSpeed, 'hours')
+					sumNum += obj.distInt / groundSpeed
+					sum = dayjs.duration(sumNum, 'hours')
+					return {
+						...obj,
+						tas: payload.value,
+						timeInt: interval,
+						timeAcc: sum,
+						wca: windCorrectionAngle,
+						gs: groundSpeed,
+					}
+				} else {
+					if (obj.tas === 0) {
+						return { ...obj }
+					} else {
+						sumNum += obj.distInt / obj.tas
+						sum = dayjs.duration(sumNum, 'hours')
+						return {
+							...obj,
+							timeAcc: sum,
+						}
+					}
+				}
+			})
+		}
 
 		default:
 			return state

@@ -70,6 +70,13 @@ export const AppContextProvider = ({ children }) => {
 		})
 	}
 
+	const changeTas = (key, value) => {
+		dispatch({
+			type: 'CHANGE_TAS',
+			payload: { key, value },
+		})
+	}
+
 	return (
 		<AppContext.Provider
 			value={{
@@ -94,6 +101,7 @@ export const AppContextProvider = ({ children }) => {
 				clearOfp,
 				addPoi,
 				changeItem,
+				changeTas,
 			}}>
 			{children}
 		</AppContext.Provider>

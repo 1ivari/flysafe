@@ -5,87 +5,31 @@ import ProgressSteps from '../components/ProgressSteps'
 import ProgressStepsMobile from '../components/ProgressStepsMobile'
 
 // New imports after utils folder created
-import haverSineDistance from '../utils/haverSineDistance'
-import calcTimev2 from '../utils/calcTimev2'
-import sumTimeArray from '../utils/sumTimeArray'
-
 function OperationalFlightPlanPage() {
 	// TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
 	// TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react/
 
-	const { route, ofp, addOfpRow, addPoi, changeItem } = useContext(AppContext)
+	const { route, ofp, dispatch, addOfpRow, addPoi, changeItem, changeTas } =
+		useContext(AppContext)
 
-	// useEffect(() => {
-	// 	constructOfp(route)
-	// 	cleanFirstRow()
-	// 	route.map((poi, idx) => {
-	// 		return addPoi(poi.geoJSON.properties, idx)
-	// 	})
-	// }, [])
-
-	// useEffect(() => {
-	// 	calcDistance()
-	// }, [ofp[ofp.length - 1].poi.latitude_deg])
-
-	// const constructOfp = (route) => {
-	// 	// correct: only execute if ofp state.length is different than route.length => there is a change to the route.
-
-	// 	if (ofp.length != route.length) {
-	// 		for (let i = ofp.length - 1; i < route.length - 1; i++) {
-	// 			addOfpRow(i + 1)
-	// 		}
-	// 	}
-	// }
-
-	// Set's first row as '-'
-	// const cleanFirstRow = () => {
-	// 	ofp.map((row, idx) => {
-	// 		if (idx === 0) {
-	// 			for (const key in row) {
-	// 				changeItem(key, '-', idx)
-	// 			}
-	// 		}
-	// 	})
-	// }
-
-	const handleChange2 = (e, idx) => {
-		changeItem(e.target.name, e.target.value, idx)
-	}
-
-	const handleChangeTas = (e, idx) => {
-		// this function is a mess but it works
-		const tas = e.target.value
-		changeItem('tas', tas, idx)
-		const distInt = ofp[idx].distInt
-		const timeInt = calcTimev2(distInt, tas)
-		changeItem('timeInt', timeInt, idx)
-		console.log('timeInt', timeInt)
-
-		const timeInts = ofp.map((row) => row.timeInt)
-		timeInts[idx] = timeInt
-		const timeAccs = sumTimeArray(timeInts)
-		timeAccs.map((timeAcc, i) => {
-			changeItem('timeAcc', timeAcc, i)
+	const handleChange = (e) => {
+		dispatch({
+			type: 'CHANGE_ITEM',
+			payload: { name: e.target.name, value: e.target.value, id: e.target.id },
 		})
 	}
 
-	// const calcDistance = () => {
-	// 	let cumSum = 0
-	// 	ofp.map((row, idx) => {
-	// 		if (idx > 0) {
-	// 			const dist = haverSineDistance(
-	// 				Number(ofp[idx - 1].poi.longitude_deg),
-	// 				Number(ofp[idx - 1].poi.latitude_deg),
-	// 				Number(ofp[idx].poi.longitude_deg),
-	// 				Number(ofp[idx].poi.latitude_deg)
-	// 			)
-	// 			changeItem('distInt', dist, idx)
-	// 			cumSum = cumSum + dist
-	// 			changeItem('distAcc', cumSum, idx)
-	// 			console.log('calcd distance')
-	// 		}
-	// 	})
-	// }
+	const handleChangeRecalculate = (e) => {
+		// dispatch({
+		// 	type: 'CHANGE_TAS',
+		// 	payload: { id: e.target.id, value: e.target.value },
+		// })
+		dispatch({
+			type: 'CHANGE_ITEM',
+			payload: { name: e.target.name, value: e.target.value, id: e.target.id },
+		})
+		dispatch({ type: 'RECALCULATE', payload: { id: e.target.id } })
+	}
 
 	return (
 		<>
@@ -129,10 +73,11 @@ function OperationalFlightPlanPage() {
 									<td>
 										{idx > 0 ? (
 											<input
+												id={row.key}
 												key={row.key}
 												value={row.minAlt}
 												name='minAlt'
-												onChange={(e) => handleChange2(e, idx)}
+												onChange={(e) => handleChange(e)}
 												className='input input-xs text-base max-w-xs w-14'
 											/>
 										) : (
@@ -145,7 +90,7 @@ function OperationalFlightPlanPage() {
 												key={row.key}
 												value={row.planAlt}
 												name='planAlt'
-												onChange={(e) => handleChange2(e, idx)}
+												onChange={(e) => handleChange(e)}
 												className='input input-xs text-base max-w-xs w-14'
 											/>
 										) : (
@@ -155,10 +100,10 @@ function OperationalFlightPlanPage() {
 									<td>
 										{idx > 0 ? (
 											<input
-												key={row.key}
+												id={row.key}
 												value={row.tas}
 												name='tas'
-												onChange={(e) => handleChangeTas(e, idx)}
+												onChange={(e) => handleChangeRecalculate(e)}
 												className='input input-xs text-base max-w-xs w-14'
 											/>
 										) : (
@@ -168,10 +113,11 @@ function OperationalFlightPlanPage() {
 									<td>
 										{idx > 0 ? (
 											<input
+												id={row.key}
 												key={row.key}
 												value={row.wind}
 												name='wind'
-												onChange={(e) => handleChange2(e, idx)}
+												onChange={(e) => handleChangeRecalculate(e)}
 												className='input input-xs text-base max-w-xs w-14'
 											/>
 										) : (
@@ -181,28 +127,29 @@ function OperationalFlightPlanPage() {
 									<td>
 										{idx > 0 ? (
 											<input
+												id={row.key}
 												key={row.key}
 												value={row.windSpeed}
 												name='windSpeed'
-												onChange={(e) => handleChange2(e, idx)}
+												onChange={(e) => handleChangeRecalculate(e)}
 												className='input input-xs text-base max-w-xs w-14'
 											/>
 										) : (
 											'-'
 										)}
 									</td>
-									<td>{row.tc}</td>
-									<td>{row.wca}</td>
-									<td>{row.th}</td>
-									<td>{row.var}</td>
-									<td>{row.mh}</td>
+									<td>{row.tc.toFixed(0)}</td>
+									<td>{row.wca.toFixed(0)}</td>
+									<td>{row.th.toFixed(0)}</td>
+									<td>{row.var.toFixed(1)}</td>
+									<td>{row.mh.toFixed(0)}</td>
 									<td>{row.dev}</td>
 									<td>{row.ch}</td>
-									<td>{row.distInt}</td>
-									<td>{row.distAcc}</td>
-									<td>Gs</td>
-									<td>{row.timeInt.hhmm}</td>
-									<td>{row.timeAcc.hhmm}</td>
+									<td>{row.distInt.toFixed(0)}</td>
+									<td>{row.distAcc.toFixed(0)}</td>
+									<td>{row.gs.toFixed(0)}</td>
+									<td>{row.timeInt.format('HH:mm')}</td>
+									<td>{row.timeAcc.format('HH:mm')}</td>
 									<td>Eto/Reto</td>
 									<td>Ato</td>
 									<td>Fuel Rem Est</td>

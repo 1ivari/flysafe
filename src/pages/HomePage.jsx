@@ -1,6 +1,16 @@
 import { Link } from 'react-router-dom'
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
 
 function Home() {
+	// var duration = require('dayjs/plugin/duration')
+	dayjs.extend(duration)
+	// var test = dayjs.duration(165.54, 'hours')
+	// console.log('moi')
+	// console.log(test.format('D:HH:mm'))
+	var test2 = dayjs.duration(120 / 85.5, 'hours')
+	console.log('moi')
+	console.log(test2.$d.milliseconds)
 	return (
 		<>
 			<div className='relative pt-32 mx-auto max-w-7xl px-6 '>
