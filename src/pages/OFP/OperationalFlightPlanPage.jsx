@@ -13,14 +13,6 @@ function OperationalFlightPlanPage() {
   // TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react
 
   const { ofp, dispatch } = useContext(AppContext)
-  const [toggle, setToggle] = useState('')
-  function toggleLock(e) {
-    if (e.target.checked) {
-      setToggle('disabled')
-    } else {
-      setToggle('')
-    }
-  }
 
   useEffect(() => {
     ofp.forEach((item) => {
@@ -55,9 +47,7 @@ function OperationalFlightPlanPage() {
 
       <MobileStyleOFP
         ofp={ofp}
-        toggle={toggle}
         handleChangeRecalculate={handleChangeRecalculate}
-        toggleLock={toggleLock}
       />
       <ProgressStepsMobile
         activePage={4}
