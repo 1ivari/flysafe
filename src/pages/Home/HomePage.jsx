@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom'
-import dayjs from 'dayjs'
-import duration from 'dayjs/plugin/duration'
 
 function Home() {
   return (

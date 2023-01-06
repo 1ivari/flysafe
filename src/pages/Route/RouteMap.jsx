@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState, useContext } from 'react'
 import mapboxgl from 'mapbox-gl'
-import AppContext from '../context/AppContext'
+import AppContext from '../../context/AppContext'
 
 import greatCircle from '@turf/great-circle'
 
