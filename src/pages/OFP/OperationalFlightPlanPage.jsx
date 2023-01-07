@@ -4,6 +4,7 @@ import AppContext from '../../context/AppContext'
 import ProgressSteps from '../../components/ProgressSteps'
 import ProgressStepsMobile from '../../components/ProgressStepsMobile'
 import { useEffect, useState } from 'react'
+import useMediaQuery from '../../hooks/useMediaQuery'
 import OriginalTableStyleOFP from './OriginalTableStyleOFP'
 import MobileStyleOFP from './MobileStyleOFP'
 
@@ -33,19 +34,24 @@ function OperationalFlightPlanPage() {
     dispatch({ type: 'RECALCULATE', payload: { id: e.target.id } })
   }
 
+  const isLargeScreen = useMediaQuery('(min-width: 1024px)')
   return (
     <>
       <ProgressSteps activePage={4} />
-      <OriginalTableStyleOFP
-        ofp={ofp}
-        handleChange={handleChange}
-        handleChangeRecalculate={handleChangeRecalculate}
-      />
 
-      <MobileStyleOFP
-        ofp={ofp}
-        handleChangeRecalculate={handleChangeRecalculate}
-      />
+      {isLargeScreen ? (
+        <OriginalTableStyleOFP
+          ofp={ofp}
+          handleChange={handleChange}
+          handleChangeRecalculate={handleChangeRecalculate}
+        />
+      ) : (
+        <MobileStyleOFP
+          ofp={ofp}
+          handleChangeRecalculate={handleChangeRecalculate}
+        />
+      )}
+
       <ProgressStepsMobile
         activePage={4}
         nextPage={'/wnb'}

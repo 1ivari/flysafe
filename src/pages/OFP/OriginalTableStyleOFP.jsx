@@ -4,16 +4,16 @@ import dayjs from 'dayjs'
 export default function OriginalTableStyleOFP(props) {
   const { ofp, handleChange, handleChangeRecalculate } = props
   return (
-    <div className='hidden lg:flex flex-col justify-center p-6 max-w-xl'>
-      <table id='ofpTable' className='table table-compact'>
+    <div className='flex flex-col justify-center p-6 max-w-xl'>
+      <table id='ofpTable' className='table table-compact tablestyleofp'>
         <thead>
           <tr>
             <th>Route</th>
             <th>Min Alt</th>
             <th>Plan Alt</th>
             <th>TAS</th>
-            <th>Wind</th>
-            <th>Wind speed</th>
+            <th>Wind (°)</th>
+            <th>Wind (kt)</th>
             <th>Tc</th>
             <th>Wca</th>
             <th>Th</th>
@@ -86,16 +86,16 @@ export default function OriginalTableStyleOFP(props) {
                     className='input input-xs text-base max-w-xs w-14'
                   />
                 </td>
-                <td>{row.tc.toFixed(0)}</td>
-                <td>{row.wca.toFixed(0)}</td>
-                <td>{row.th.toFixed(0)}</td>
-                <td>{row.declination.toFixed(1)}</td>
-                <td>{row.mh.toFixed(0)}</td>
-                <td>{row.dev}</td>
-                <td>{row.ch}</td>
-                <td>{row.distInt.toFixed(0)}</td>
-                <td>{row.distAcc.toFixed(0)}</td>
-                <td>{row.gs.toFixed(0)}</td>
+                <td>{row.tc.toFixed(0)}°</td>
+                <td>{row.wca.toFixed(0)}°</td>
+                <td>{row.th.toFixed(0)}°</td>
+                <td>{row.declination.toFixed(1)}°</td>
+                <td>{row.mh.toFixed(0)}°</td>
+                <td>{row.dev}°</td>
+                <td>{row.ch}°</td>
+                <td>{row.distInt.toFixed(0)} NM</td>
+                <td>{row.distAcc.toFixed(0)} NM</td>
+                <td>{row.gs.toFixed(0)} kt</td>
                 <td>{row.timeInt}</td>
                 <td>{row.timeAcc}</td>
                 <td>0</td>

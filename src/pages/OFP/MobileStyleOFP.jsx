@@ -17,7 +17,7 @@ function MobileStyleOFP(props) {
   }
 
   return (
-    <div className='lg:hidden flex flex-col justify-center'>
+    <div id='mobilestyleofp' className='flex flex-col justify-center mobileofp'>
       {ofp.slice(1).map((row, idx) => {
         return (
           <div

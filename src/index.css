@@ -3,25 +3,34 @@
 @tailwind utilities;
 
 .map-container {
-	width: 100vw;
-	height: 70vh;
+  width: 100vw;
+  height: 70vh;
 }
 
 @media print {
-	@page {
-		size: landscape;
-	}
-	h1 {
-		display: none;
-	}
+  /* page size needs to be defined explicitly to avoid going mobile on print */
+  @page {
+    size: 427mm 330mm;
+    margin: 14mm;
+  }
+  /* below is maybe also needed */
+  /* .container {
+    width: 1170px;
+  } */
 
-	#navbar {
-		display: none;
-	}
-	#ProgressStepsMobile {
-		display: none;
-	}
+  h1 {
+    display: none;
+  }
 
-	#ofpTable {
-	}
+  #navbar {
+    display: none;
+  }
+
+  #progressSteps {
+    display: none;
+  }
+
+  #ProgressStepsMobile {
+    display: none;
+  }
 }
