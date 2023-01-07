@@ -14,6 +14,10 @@ function OperationalFlightPlanPage() {
 
   const { ofp, dispatch } = useContext(AppContext)
 
+  useEffect(() => {
+    console.log('ofp', ofp)
+  }, [])
+
   const handleChange = (e) => {
     dispatch({
       type: 'CHANGE_ITEM',

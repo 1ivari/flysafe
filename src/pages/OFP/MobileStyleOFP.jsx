@@ -36,7 +36,7 @@ function MobileStyleOFP(props) {
                 </>
               ) : null}
               <div className='text-sm font-medium'>{row.description}</div>
-              <div className='text-sm'>{row.timeInt.format('HH:mm')}</div>
+              <div className='text-sm'>{row.timeInt}</div>
               <div className='text-sm flex flex-row '>
                 {row.mh.toFixed(0)}°
                 <motion.div

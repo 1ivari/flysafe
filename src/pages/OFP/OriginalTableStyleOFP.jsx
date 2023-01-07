@@ -1,4 +1,5 @@
 import React from 'react'
+import dayjs from 'dayjs'
 
 export default function OriginalTableStyleOFP(props) {
   const { ofp, handleChange, handleChangeRecalculate } = props
@@ -95,8 +96,8 @@ export default function OriginalTableStyleOFP(props) {
                 <td>{row.distInt.toFixed(0)}</td>
                 <td>{row.distAcc.toFixed(0)}</td>
                 <td>{row.gs.toFixed(0)}</td>
-                <td>{row.timeInt.format('HH:mm')}</td>
-                <td>{row.timeAcc.format('HH:mm')}</td>
+                <td>{row.timeInt}</td>
+                <td>{row.timeAcc}</td>
                 <td>0</td>
                 <td>0</td>
                 <td>0</td>

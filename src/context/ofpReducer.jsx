@@ -25,17 +25,21 @@ let OfpRow = {
   distInt: 0,
   distAcc: 0,
   gs: 0,
-  timeInt: dayjs.duration(0, 'hours'),
-  timeAcc: dayjs.duration(0, 'hours'),
+  timeInt: '',
+  timeIntRaw: 0,
+  timeAcc: '',
+  timeAccRaw: 0,
   eto: '',
   ato: '',
   fuelRem: '',
   remark: '',
 }
 
-export const initialState = []
+const initialState = []
+export const initializer = (initialValue = initialState) =>
+  JSON.parse(localStorage.getItem('localOfp')) || initialValue
 
-const ofpReducer = (state, action) => {
+export const ofpReducer = (state, action) => {
   const { type, payload } = action
   switch (type) {
     case 'CLEAR':
@@ -49,7 +53,6 @@ const ofpReducer = (state, action) => {
       )
 
     case 'RECALCULATE': {
-      let sum = dayjs.duration(0)
       let sumNum = Number(0)
       return state.map((obj) => {
         if (obj.key === payload.id) {
@@ -64,11 +67,10 @@ const ofpReducer = (state, action) => {
           )
 
           sumNum += values.timeIntervalRaw
-          sum = dayjs.duration(sumNum, 'hours')
           return {
             ...obj,
-            timeInt: values.timeIntervalDayjs,
-            timeAcc: sum,
+            timeInt: values.timeIntervalDayjs.format('HH:mm'),
+            timeAcc: dayjs.duration(sumNum, 'hours').format('HH:mm'),
             wca: values.windCorrectionAngle,
             gs: values.groundSpeed,
             th: values.trueHeading,
@@ -78,11 +80,10 @@ const ofpReducer = (state, action) => {
           if (obj.tas === 0) {
             return { ...obj }
           } else {
-            sumNum += obj.distInt / obj.tas
-            sum = dayjs.duration(sumNum, 'hours')
+            sumNum += obj.distInt / obj.gs
             return {
               ...obj,
-              timeAcc: sum,
+              timeAcc: dayjs.duration(sumNum, 'hours').format('HH:mm'),
             }
           }
         }
@@ -168,7 +169,7 @@ const ofpReducer = (state, action) => {
               magVar.declination
             )
             sumTime += values.timeIntervalRaw
-            const timeAcc = dayjs.duration(sumTime, 'hours')
+
             return {
               ...OfpRow,
               key: poi.key,
@@ -178,8 +179,8 @@ const ofpReducer = (state, action) => {
               declination: magVar.declination,
               tc: trueCourse360,
               tas: tas,
-              timeInt: values.timeIntervalDayjs,
-              timeAcc: timeAcc,
+              timeInt: values.timeIntervalDayjs.format('HH:mm'),
+              timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
               wind: wind,
               windSpeed: windSpeed,
               wca: values.windCorrectionAngle,
@@ -188,7 +189,7 @@ const ofpReducer = (state, action) => {
               mh: values.magHeading,
             }
           })
-        }
+        } else return initialState
       }
 
       break
@@ -196,5 +197,3 @@ const ofpReducer = (state, action) => {
       return state
   }
 }
-
-export default ofpReducer
