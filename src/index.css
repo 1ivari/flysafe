@@ -11,7 +11,7 @@
   /* page size needs to be defined explicitly to avoid going mobile on print */
   @page {
     size: 427mm 330mm;
-    margin: 14mm;
+    margin: 4mm;
   }
   /* below is maybe also needed */
   /* .container {
@@ -32,5 +32,13 @@
 
   #ProgressStepsMobile {
     display: none;
+  }
+
+  td {
+    border: 1px solid black;
+  }
+
+  th {
+    border: 1px solid black;
   }
 }
