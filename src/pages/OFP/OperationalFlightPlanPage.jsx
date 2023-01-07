@@ -43,14 +43,19 @@ function OperationalFlightPlanPage() {
 
       {isLargeScreen ? (
         <>
-          <OriginalTableStyleBasicData />
-          <OriginalTableStyleOFP
-            ofp={ofp}
-            handleChange={handleChange}
-            handleChangeRecalculate={handleChangeRecalculate}
-          />
-
-          <RadioFrequencyTable />
+          <div className='m-4'>
+            <div className='flex justify-between my-4'>
+              <OriginalTableStyleBasicData />
+            </div>
+            <OriginalTableStyleOFP
+              ofp={ofp}
+              handleChange={handleChange}
+              handleChangeRecalculate={handleChangeRecalculate}
+            />
+            <div className='my-4'>
+              <RadioFrequencyTable />
+            </div>
+          </div>
         </>
       ) : (
         <MobileStyleOFP
