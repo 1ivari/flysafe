@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import OriginalTableStyleOFP from './OriginalTableStyleOFP'
 import MobileStyleOFP from './MobileStyleOFP'
+import OriginalTableStyleBasicData from './OriginalTableStyleBasicData'
+import RadioFrequencyTable from './RadioFrequencyTable'
 
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
@@ -40,11 +42,16 @@ function OperationalFlightPlanPage() {
       <ProgressSteps activePage={4} />
 
       {isLargeScreen ? (
-        <OriginalTableStyleOFP
-          ofp={ofp}
-          handleChange={handleChange}
-          handleChangeRecalculate={handleChangeRecalculate}
-        />
+        <>
+          <OriginalTableStyleBasicData />
+          <OriginalTableStyleOFP
+            ofp={ofp}
+            handleChange={handleChange}
+            handleChangeRecalculate={handleChangeRecalculate}
+          />
+
+          <RadioFrequencyTable />
+        </>
       ) : (
         <MobileStyleOFP
           ofp={ofp}

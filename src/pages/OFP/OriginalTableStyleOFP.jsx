@@ -5,10 +5,7 @@ export default function OriginalTableStyleOFP(props) {
   const { ofp, handleChange, handleChangeRecalculate } = props
   return (
     <div className='flex flex-col justify-center p-6 max-w-xl'>
-      <table
-        id='ofpTable'
-        className='table table-compact tablestyleofp text-center'
-      >
+      <table id='ofpTable' className='table tablestyleofp text-center'>
         <thead>
           <tr>
             <th>Route</th>
