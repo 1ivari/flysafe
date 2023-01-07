@@ -14,13 +14,6 @@ function OperationalFlightPlanPage() {
 
   const { ofp, dispatch } = useContext(AppContext)
 
-  useEffect(() => {
-    ofp.forEach((item) => {
-      dispatch({ type: 'RECALCULATE', payload: { id: item.id } })
-      console.log('recalculated')
-    })
-  }, [])
-
   const handleChange = (e) => {
     dispatch({
       type: 'CHANGE_ITEM',
