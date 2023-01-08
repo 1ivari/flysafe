@@ -4,6 +4,12 @@ import AppContext from '../../context/AppContext'
 
 function OriginalTableStyleBasicData() {
   const { basicData, route } = useContext(AppContext)
+  let departure = 'N/A'
+  let arrival = 'N/A'
+  if (route.length > 0) {
+    departure = route[0].geoJSON.properties.ident
+    arrival = route[route.length - 1].geoJSON.properties.ident
+  }
   return (
     <>
       <table
@@ -27,8 +33,8 @@ function OriginalTableStyleBasicData() {
         <tbody>
           <tr className='hover h-12'>
             <td>{basicData.date}</td>
-            <td>{route[0].geoJSON.properties.ident}</td>
-            <td>{route[route.length - 1].geoJSON.properties.ident}</td>
+            <td>{departure}</td>
+            <td>{arrival}</td>
             <td>{basicData.pob}</td>
             <td></td>
             <td></td>
@@ -54,9 +60,11 @@ function OriginalTableStyleBasicData() {
 
       <div className='table table-compact'>
         <thead>
-          <th colSpan='6' className='text-center'>
-            Operational flight plan
-          </th>
+          <tr>
+            <th colSpan='6' className='text-center'>
+              Operational flight plan
+            </th>
+          </tr>
         </thead>
         <tbody>
           <tr>

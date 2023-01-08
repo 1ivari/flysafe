@@ -1,7 +1,9 @@
+import { faArrowDownUpAcrossLine } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useState, useEffect } from 'react'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import AppContext from '../../context/AppContext.jsx'
 import airports from '../../data/Airports.json'
+import vfrRep from '../../data/vfrRep.json'
 
 import useFetchJson from '../../hooks/useFetchJson.jsx'
 import useFetchMetar from '../../hooks/useFetchMetar.jsx'
@@ -16,6 +18,7 @@ import AirfieldCard from './AirfieldCard.jsx'
 function AirfieldSearchAutoComplete() {
   // Query state for search input
   const [query, setQuery] = useState(null)
+  const [queryType, setQueryType] = useState(null)
 
   // Urls for fetching data from airportdb and met.no
   const [url, setUrl] = useState(null)
@@ -28,16 +31,33 @@ function AirfieldSearchAutoComplete() {
   // Checks if query is valid ICAO ident and sets url for fetching data from airportdb and met.no
   useEffect(() => {
     if (query) {
-      setUrl(
-        `${
-          process.env.REACT_APP_AIRPORTDB_URL
-        }${query.toUpperCase()}?apiToken=${
-          process.env.REACT_APP_AIRPORTDB_TOKEN
-        }`
-      )
-      setMetarUrl(
-        `https://api.met.no/weatherapi/tafmetar/1.0/?icao=${query.toUpperCase()}&content_type=text/xml&offset=+02:00&content=tafmetar`
-      )
+      if (queryType !== 'VFR REP') {
+        setUrl(
+          `${
+            process.env.REACT_APP_AIRPORTDB_URL
+          }${query.toUpperCase()}?apiToken=${
+            process.env.REACT_APP_AIRPORTDB_TOKEN
+          }`
+        )
+        setMetarUrl(
+          `https://api.met.no/weatherapi/tafmetar/1.0/?icao=${query.toUpperCase()}&content_type=text/xml&offset=+02:00&content=tafmetar`
+        )
+      } else {
+        let geoJsonData = vfrRep.features.find((item) => {
+          return item.properties.name === query
+        })
+        geoJsonData = {
+          ...geoJsonData,
+          properties: { ...geoJsonData.properties, ident: query, metars: [] },
+        }
+        setRoute([
+          ...route,
+          {
+            key: crypto.randomUUID(),
+            geoJSON: geoJsonData,
+          },
+        ])
+      }
     }
   }, [query])
 
@@ -98,6 +118,7 @@ function AirfieldSearchAutoComplete() {
 
   const handleOnSelect = (item) => {
     setQuery(item.ident)
+    setQueryType(item.type)
   }
 
   const handleOnFocus = (e) => {}
@@ -119,7 +140,18 @@ function AirfieldSearchAutoComplete() {
         <div>
           <div className='relative z-10'>
             <ReactSearchAutocomplete
-              items={airports}
+              items={vfrRep.features
+                .map((item) => {
+                  return {
+                    id: crypto.randomUUID(),
+                    ident: item.properties.name,
+                    name: item.properties.name,
+                    latitude_deg: item.geometry.coordinates[1],
+                    longitude_deg: item.geometry.coordinates[0],
+                    type: item.properties.type,
+                  }
+                })
+                .concat(airports)}
               fuseOptions={{ keys: ['name', 'ident'], minMatchCharLength: 3 }}
               onSearch={handleOnSearch}
               onHover={handleOnHover}

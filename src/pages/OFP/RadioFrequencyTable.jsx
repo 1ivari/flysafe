@@ -13,38 +13,40 @@ function RadioFrequencyTable() {
   let longest = 0
   let longestId = ''
 
-  const freqs = route.map((item) => {
-    const apFreqs = item.geoJSON.properties.freqs
-    let atis = apFreqs.find((item) => item.type === 'ATIS')
-    if (typeof atis === 'undefined') {
-      atis = 'N/A'
-    } else atis = atis.frequency_mhz
+  const freqs = route
+    .filter((item) => item.geoJSON.properties.type !== 'VFR REP')
+    .map((item) => {
+      const apFreqs = item.geoJSON.properties.freqs
+      let atis = apFreqs.find((item) => item.type === 'ATIS')
+      if (typeof atis === 'undefined') {
+        atis = 'N/A'
+      } else atis = atis.frequency_mhz
 
-    let app = apFreqs.find((item) => item.type === 'APP')
-    if (typeof app === 'undefined') {
-      app = 'N/A'
-    } else app = app.frequency_mhz
+      let app = apFreqs.find((item) => item.type === 'APP')
+      if (typeof app === 'undefined') {
+        app = 'N/A'
+      } else app = app.frequency_mhz
 
-    let twr = apFreqs.find((item) => item.type === 'TWR')
-    if (typeof twr === 'undefined') {
-      twr = 'N/A'
-    } else twr = twr.frequency_mhz
+      let twr = apFreqs.find((item) => item.type === 'TWR')
+      if (typeof twr === 'undefined') {
+        twr = 'N/A'
+      } else twr = twr.frequency_mhz
 
-    let traffic = apFreqs.find((item) => item.type === 'RDO')
-    if (typeof traffic === 'undefined') {
-      traffic = 'N/A'
-    } else traffic = traffic.frequency_mhz
+      let traffic = apFreqs.find((item) => item.type === 'RDO')
+      if (typeof traffic === 'undefined') {
+        traffic = 'N/A'
+      } else traffic = traffic.frequency_mhz
 
-    return {
-      key: item.key,
-      ident: item.geoJSON.properties.ident,
-      atis: atis,
-      app: app,
-      twr: twr,
-      traffic: traffic,
-      allLoaded: apFreqs.length < 5 ? true : false,
-    }
-  })
+      return {
+        key: item.key,
+        ident: item.geoJSON.properties.ident,
+        atis: atis,
+        app: app,
+        twr: twr,
+        traffic: traffic,
+        allLoaded: apFreqs.length < 5 ? true : false,
+      }
+    })
 
   console.log('freqs', freqs)
 
