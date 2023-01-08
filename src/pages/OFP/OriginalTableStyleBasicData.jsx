@@ -13,8 +13,8 @@ function OriginalTableStyleBasicData() {
   return (
     <>
       <table
-        id='ofpTable'
-        className='table table-compact tablestyleofp text-center max-w-5xl'
+        id='basicDataTable'
+        className='table table-compact text-center max-w-5xl'
       >
         <thead>
           <tr>
@@ -58,7 +58,7 @@ function OriginalTableStyleBasicData() {
         </tbody>
       </table>
 
-      <div className='table table-compact'>
+      <table id='basicDataTable2' className='table table-compact text-center'>
         <thead>
           <tr>
             <th colSpan='6' className='text-center'>
@@ -83,7 +83,7 @@ function OriginalTableStyleBasicData() {
             <td colSpan='4'></td>
           </tr>
         </tbody>
-      </div>
+      </table>
     </>
   )
 }

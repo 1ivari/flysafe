@@ -48,11 +48,9 @@ function RadioFrequencyTable() {
       }
     })
 
-  console.log('freqs', freqs)
-
   return (
     <>
-      <table className='table table-compact'>
+      <table id='radioTable' className='table table-compact'>
         <thead>
           <tr>
             <th className=''>Radio</th>

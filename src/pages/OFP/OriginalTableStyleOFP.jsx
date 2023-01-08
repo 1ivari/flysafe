@@ -2,7 +2,13 @@ import React from 'react'
 import dayjs from 'dayjs'
 
 export default function OriginalTableStyleOFP(props) {
-  const { ofp, handleChange, handleChangeRecalculate } = props
+  const {
+    ofp,
+    handleChange,
+    handleChangeRecalculate,
+    handleChangeAll,
+    handleChangeAllRecalculate,
+  } = props
   return (
     <table id='ofpTable' className='table tablestyleofp text-center'>
       <thead>
@@ -76,7 +82,11 @@ export default function OriginalTableStyleOFP(props) {
                   key={row.key}
                   value={row.minAlt}
                   name='minAlt'
-                  onChange={(e) => handleChange(e)}
+                  onChange={
+                    idx === 0
+                      ? (e) => handleChangeAll(e)
+                      : (e) => handleChange(e)
+                  }
                   className='input input-xs text-base max-w-xs w-14 text-center'
                 />
               </td>
@@ -85,7 +95,11 @@ export default function OriginalTableStyleOFP(props) {
                   key={row.key}
                   value={row.planAlt}
                   name='planAlt'
-                  onChange={(e) => handleChange(e)}
+                  onChange={
+                    idx === 0
+                      ? (e) => handleChangeAll(e)
+                      : (e) => handleChange(e)
+                  }
                   className='input input-xs text-base max-w-xs w-14 text-center'
                 />
               </td>
@@ -94,7 +108,11 @@ export default function OriginalTableStyleOFP(props) {
                   id={row.key}
                   value={row.tas}
                   name='tas'
-                  onChange={(e) => handleChangeRecalculate(e)}
+                  onChange={
+                    idx === 0
+                      ? (e) => handleChangeAllRecalculate(e)
+                      : (e) => handleChangeRecalculate(e)
+                  }
                   className='input input-xs text-base max-w-xs w-12 text-center'
                 />
               </td>
@@ -104,7 +122,11 @@ export default function OriginalTableStyleOFP(props) {
                   key={row.key}
                   value={row.wind}
                   name='wind'
-                  onChange={(e) => handleChangeRecalculate(e)}
+                  onChange={
+                    idx === 0
+                      ? (e) => handleChangeAllRecalculate(e)
+                      : (e) => handleChangeRecalculate(e)
+                  }
                   className='input input-xs text-base max-w-xs w-12 text-center'
                 />
               </td>
@@ -114,7 +136,11 @@ export default function OriginalTableStyleOFP(props) {
                   key={row.key}
                   value={row.windSpeed}
                   name='windSpeed'
-                  onChange={(e) => handleChangeRecalculate(e)}
+                  onChange={
+                    idx === 0
+                      ? (e) => handleChangeAllRecalculate(e)
+                      : (e) => handleChangeRecalculate(e)
+                  }
                   className='input input-xs text-base max-w-xs w-10 text-center'
                 />
               </td>

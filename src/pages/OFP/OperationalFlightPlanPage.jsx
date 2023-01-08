@@ -9,6 +9,7 @@ import OriginalTableStyleOFP from './OriginalTableStyleOFP'
 import MobileStyleOFP from './MobileStyleOFP'
 import OriginalTableStyleBasicData from './OriginalTableStyleBasicData'
 import RadioFrequencyTable from './RadioFrequencyTable'
+import OriginalTableStyleFuel from './OriginalTableStyleFuel'
 
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
@@ -16,10 +17,6 @@ function OperationalFlightPlanPage() {
   // TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react
 
   const { ofp, dispatch } = useContext(AppContext)
-
-  useEffect(() => {
-    console.log('ofp', ofp)
-  }, [])
 
   const handleChange = (e) => {
     dispatch({
@@ -34,6 +31,31 @@ function OperationalFlightPlanPage() {
       payload: { name: e.target.name, value: e.target.value, id: e.target.id },
     })
     dispatch({ type: 'RECALCULATE', payload: { id: e.target.id } })
+  }
+
+  const handleChangeAll = (e) => {
+    const keys = ofp.slice(1).map((row) => {
+      return row.key
+    })
+    keys.forEach((key) => {
+      dispatch({
+        type: 'CHANGE_ITEM',
+        payload: { name: e.target.name, value: e.target.value, id: key },
+      })
+    })
+  }
+
+  const handleChangeAllRecalculate = (e) => {
+    const keys = ofp.slice(1).map((row) => {
+      return row.key
+    })
+    keys.forEach((key) => {
+      dispatch({
+        type: 'CHANGE_ITEM',
+        payload: { name: e.target.name, value: e.target.value, id: key },
+      })
+      dispatch({ type: 'RECALCULATE', payload: { id: key } })
+    })
   }
 
   const isLargeScreen = useMediaQuery('(min-width: 1024px)')
@@ -51,9 +73,14 @@ function OperationalFlightPlanPage() {
               ofp={ofp}
               handleChange={handleChange}
               handleChangeRecalculate={handleChangeRecalculate}
+              handleChangeAll={handleChangeAll}
+              handleChangeAllRecalculate={handleChangeAllRecalculate}
             />
-            <div className='my-4'>
-              <RadioFrequencyTable />
+            <div className='my-4 flex justify-evenly items-center'>
+              <div className='grow-0'>
+                <RadioFrequencyTable />
+              </div>
+              <OriginalTableStyleFuel />
             </div>
           </div>
         </>

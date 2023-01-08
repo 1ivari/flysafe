@@ -11,7 +11,7 @@
   /* page size needs to be defined explicitly to avoid going mobile on print */
   @page {
     size: 427mm 330mm;
-    margin: 4mm;
+    margin: 6mm;
   }
   /* below is maybe also needed */
   /* .container {
@@ -32,6 +32,34 @@
 
   #ProgressStepsMobile {
     display: none;
+  }
+
+  #basicDataTable {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  #basicDataTable2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  #ofpTable {
+    position: absolute;
+    top: 170px;
+    left: 0;
+  }
+
+  #fuelTable {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+
+  #radioTable {
+    position: absolute;
+    bottom: 0;
+    left: 0;
   }
 
   td {
