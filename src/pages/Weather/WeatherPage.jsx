@@ -1,5 +1,4 @@
 import MetarList from './MetarList'
-import FimDataProvider from './FimDataProvider'
 import ProgressSteps from '../../components/ProgressSteps'
 import ProgressStepsMobile from '../../components/ProgressStepsMobile'
 
@@ -10,7 +9,6 @@ function WeatherPage() {
       <div className='flex flex-col mx-4'>
         {/* returns ul */}
         <MetarList />
-        <FimDataProvider />
       </div>
       <ProgressStepsMobile
         activePage={3}

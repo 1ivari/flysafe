@@ -1,9 +1,7 @@
 import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import windCorrection from './windCorrection'
-import distance from '@turf/distance'
-import bearing from '@turf/bearing'
-import * as geomag from 'geomag'
+
 dayjs.extend(duration)
 
 function calculateOFP(
@@ -20,6 +18,7 @@ function calculateOFP(
     windDirection,
     windSpeed
   )
+  console.log('distanceInterval', distanceInterval, 'groundSpeed', groundSpeed)
   const timeIntervalRaw = Math.ceil(distanceInterval) / Math.floor(groundSpeed)
   const timeIntervalDayjs = dayjs.duration(timeIntervalRaw, 'hours')
   // sumNum += int

@@ -120,7 +120,7 @@ export default function OriginalTableStyleOFP(props) {
                 <input
                   id={row.key}
                   key={row.key}
-                  value={row.wind}
+                  value={Math.round(row.wind)}
                   name='wind'
                   onChange={
                     idx === 0
@@ -134,7 +134,7 @@ export default function OriginalTableStyleOFP(props) {
                 <input
                   id={row.key}
                   key={row.key}
-                  value={row.windSpeed}
+                  value={Math.round(row.windSpeed)}
                   name='windSpeed'
                   onChange={
                     idx === 0

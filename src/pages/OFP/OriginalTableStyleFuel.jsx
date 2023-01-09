@@ -38,7 +38,7 @@ function OriginalTableStyleFuel() {
           <td style={stylingObject.td}>
             <input
               className=' input input-xs text-base max-w-xs w-12 text-center'
-              value='36.0'
+              defaultValue='36.0'
             />
           </td>
           <td style={stylingObject.td}>1:02</td>
@@ -47,7 +47,7 @@ function OriginalTableStyleFuel() {
               className='input input-xs text-base max-w-xs w-12 text-center'
               name=''
               id=''
-              value='37.0'
+              defaultValue='37.0'
             />
           </td>
           <td style={stylingObject.td}></td>
@@ -69,7 +69,7 @@ function OriginalTableStyleFuel() {
               className='input input-xs text-base max-w-xs w-12 text-center'
               name=''
               id=''
-              value='7.0'
+              defaultValue='7.0'
             />
           </td>
           <td style={stylingObject.td}></td>

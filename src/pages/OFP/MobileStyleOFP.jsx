@@ -38,7 +38,7 @@ function MobileStyleOFP(props) {
               <div className='text-sm font-medium'>{row.description}</div>
               <div className='text-sm'>{row.timeInt}</div>
               <div className='text-sm flex flex-row '>
-                {row.mh.toFixed(0)}°
+                {row.mh !== null ? row.mh.toFixed(0) : ''}°
                 <motion.div
                   animate={{ rotate: Number(row.mh) }}
                   className='origin-center ml-2'

@@ -3,12 +3,15 @@ import duration from 'dayjs/plugin/duration'
 import calculateOFP from '../utils/calculateOFP'
 import distance from '@turf/distance'
 import bearing from '@turf/bearing'
+import midpoint from '@turf/midpoint'
 import * as geomag from 'geomag'
 dayjs.extend(duration)
 
 let OfpRow = {
   key: 0,
-  poi: {},
+  startCoord: [0, 0],
+  midCoord: [0, 0],
+  endCoord: [0, 0],
   description: '',
   minAlt: '',
   planAlt: '',
@@ -146,6 +149,19 @@ export const ofpReducer = (state, action) => {
                 : poi.geoJSON.geometry.coordinates
             const magVar = geomag.field(loc[1], loc[0])
 
+            const startCoord =
+              i > 0
+                ? arr[i - 1].geoJSON.geometry.coordinates
+                : poi.geoJSON.geometry.coordinates
+            const midCoord =
+              i > 0
+                ? midpoint(
+                    arr[i - 1].geoJSON.geometry.coordinates,
+                    poi.geoJSON.geometry.coordinates
+                  ).geometry.coordinates
+                : poi.geoJSON.geometry.coordinates
+            const endCoord = poi.geoJSON.geometry.coordinates
+
             const trueCourse180 =
               i > 0
                 ? Number(
@@ -173,6 +189,9 @@ export const ofpReducer = (state, action) => {
             return {
               ...OfpRow,
               key: poi.key,
+              startCoord: startCoord,
+              midCoord: midCoord,
+              endCoord: endCoord,
               description: desc,
               distInt: dist,
               distAcc: sumDistance,
