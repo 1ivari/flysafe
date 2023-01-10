@@ -18,7 +18,6 @@ function calculateOFP(
     windDirection,
     windSpeed
   )
-  console.log('distanceInterval', distanceInterval, 'groundSpeed', groundSpeed)
   const timeIntervalRaw = Math.ceil(distanceInterval) / Math.floor(groundSpeed)
   const timeIntervalDayjs = dayjs.duration(timeIntervalRaw, 'hours')
   // sumNum += int

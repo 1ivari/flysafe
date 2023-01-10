@@ -91,7 +91,7 @@ function FmiDataProvider() {
         type: 'CHANGE_ITEM',
         payload: {
           name: 'windSpeed',
-          value: fmiData.data[1].WindSpeedMS,
+          value: fmiData.data[1].WindSpeedMS * constants.MS_TO_KNOTS,
           id: fmiData.key,
         },
       })
