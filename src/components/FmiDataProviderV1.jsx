@@ -14,7 +14,10 @@ function FmiDataProviderV1() {
 
   const fetchMet = async (planAlt, midCoord, key) => {
     // Define query parameters
-    const height = planAlt * constants.FEET_TO_METERS // meters
+    let height = planAlt * constants.FEET_TO_METERS // meters
+    if (height < 20) {
+      height = 20
+    }
     let latlon = `${midCoord[1].toFixed(2)},${midCoord[0].toFixed(2)}` // latlon
     const timeStep = 60 // minutes
     const numResults = 5 // result rows

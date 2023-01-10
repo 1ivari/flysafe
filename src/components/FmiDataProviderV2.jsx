@@ -71,7 +71,11 @@ function FmiDataProviderV2() {
   }
 
   function sourceURLset(coord, planAlt, timeStep) {
-    const height = planAlt * constants.FEET_TO_METERS // meters
+    let height = planAlt * constants.FEET_TO_METERS // meters
+    if (height < 20) {
+      height = 20
+    }
+
     let latlon = `${coord[1].toFixed(2)},${coord[0].toFixed(2)}` // latlon
 
     const numResults = 5 // result rows
