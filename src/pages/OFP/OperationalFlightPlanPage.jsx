@@ -10,7 +10,8 @@ import MobileStyleOFP from './MobileStyleOFP'
 import OriginalTableStyleBasicData from './OriginalTableStyleBasicData'
 import RadioFrequencyTable from './RadioFrequencyTable'
 import OriginalTableStyleFuel from './OriginalTableStyleFuel'
-import FmiDataProvider from '../../components/FmiDataProvider'
+import FmiDataProviderV2 from '../../components/FmiDataProviderV2'
+import FmiDataProviderV1 from '../../components/FmiDataProviderV1'
 
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
@@ -69,7 +70,7 @@ function OperationalFlightPlanPage() {
           <div className='m-4'>
             <div className='flex justify-between my-4'>
               <OriginalTableStyleBasicData />
-              <FmiDataProvider />
+              <FmiDataProviderV2 />
             </div>
             <OriginalTableStyleOFP
               ofp={ofp}

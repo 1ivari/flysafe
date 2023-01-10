@@ -4,33 +4,16 @@ import AppContext from '../context/AppContext'
 import constants from '../utils/constants'
 import useUpdateEffect from '../hooks/useUpdateEffect'
 
-function FmiDataProvider() {
+function FmiDataProviderV2() {
   const [fmiData, setFmiData] = useState({})
   const { ofp, dispatch } = useContext(AppContext)
-  const [ofpSlice, setOfpSlice] = useState(ofp.slice(1))
+  // const [ofpSlice, setOfpSlice] = useState(ofp.slice(1))
 
   // See for query definitions
   // http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=describeStoredQueries&
 
-  const fetchMet = async (planAlt, midCoord, key) => {
-    // Define query parameters
-    const height = planAlt * constants.FEET_TO_METERS // meters
-    let latlon = `${midCoord[1].toFixed(2)},${midCoord[0].toFixed(2)}` // latlon
-    const timeStep = 60 // minutes
-    const numResults = 5 // result rows
-    const place = 'helsinki'
-    const id = 'fmi::forecast::harmonie::hybrid::point::multipointcoverage'
-    const request = 'getFeature'
-    const startTimeParameter = new Date()
-    const endTimeParameter = new Date(
-      startTimeParameter.getTime() + numResults * timeStep * 60 * 1000
-    )
-
-    const url = `http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=${request}&storedquery_id=${id}&latlon=${latlon}&height=${height}&timestep=${timeStep}&starttime=${startTimeParameter.toISOString()}&endtime=${endTimeParameter.toISOString()}`
-    console.log('fetching from url: ', url)
-    // fetch data
-    const response = await fetch(url)
-    const data = await response.text() // returns typeof string
+  // ------------- UTIL FUNCTIONS -------------
+  function xmlParser(data, timeStep) {
     const parser = new DOMParser()
     const xmlDoc = parser.parseFromString(data, 'text/xml')
     let fieldArr = Array.prototype.slice.call(
@@ -62,7 +45,10 @@ function FmiDataProvider() {
         } else return true
       })
       .map((item, idx) => {
-        item === 'NaN' ? (item = 0) : item
+        // Handle nan values by simply setting 0
+        if (item === 'NaN') {
+          item = 0
+        }
         Obj = {
           ...Obj,
           [fieldArr[idx % fieldArr.length].attributes.name.textContent]: item,
@@ -81,7 +67,38 @@ function FmiDataProvider() {
       })
       .filter((item) => item !== null)
 
-    setFmiData({ key: key, data: results })
+    return results
+  }
+
+  function sourceURLset(coord, planAlt, timeStep) {
+    const height = planAlt * constants.FEET_TO_METERS // meters
+    let latlon = `${coord[1].toFixed(2)},${coord[0].toFixed(2)}` // latlon
+
+    const numResults = 5 // result rows
+    const place = 'helsinki'
+    const id = 'fmi::forecast::harmonie::hybrid::point::multipointcoverage'
+    const request = 'getFeature'
+    const startTimeParameter = new Date()
+    const endTimeParameter = new Date(
+      startTimeParameter.getTime() + numResults * timeStep * 60 * 1000
+    )
+
+    const url = `http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=${request}&storedquery_id=${id}&latlon=${latlon}&height=${height}&timestep=${timeStep}&starttime=${startTimeParameter.toISOString()}&endtime=${endTimeParameter.toISOString()}`
+
+    return url
+  }
+
+  // ------------- END UTIL FUNCTIONS -------------
+
+  const fetchMet = async (planAlt, midCoord, key) => {
+    const timeStep = 60 // minutes
+    const url = sourceURLset(midCoord, planAlt, timeStep)
+    console.log('fetching from url: ', url)
+    // fetch data
+    const response = await fetch(url)
+    const data = await response.text() // returns typeof string
+    const ress = xmlParser(data, timeStep)
+    setFmiData({ key: key, data: ress })
   }
 
   useUpdateEffect(() => {
@@ -112,6 +129,7 @@ function FmiDataProvider() {
   }
 
   const handleClick = async () => {
+    const ofpSlice = ofp.slice(1)
     for (const item of ofpSlice) {
       await sleep(500)
       fetchMet(item.planAlt, item.midCoord, item.key)
@@ -127,4 +145,4 @@ function FmiDataProvider() {
   )
 }
 
-export default FmiDataProvider
+export default FmiDataProviderV2
