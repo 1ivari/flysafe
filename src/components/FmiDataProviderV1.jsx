@@ -26,7 +26,7 @@ function FmiDataProviderV1() {
       startTimeParameter.getTime() + numResults * timeStep * 60 * 1000
     )
 
-    const url = `http://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=${request}&storedquery_id=${id}&latlon=${latlon}&height=${height}&timestep=${timeStep}&starttime=${startTimeParameter.toISOString()}&endtime=${endTimeParameter.toISOString()}`
+    const url = `https://opendata.fmi.fi/wfs?service=WFS&version=2.0.0&request=${request}&storedquery_id=${id}&latlon=${latlon}&height=${height}&timestep=${timeStep}&starttime=${startTimeParameter.toISOString()}&endtime=${endTimeParameter.toISOString()}`
     console.log('fetching from url: ', url)
     // fetch data
     const response = await fetch(url)
