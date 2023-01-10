@@ -1,8 +1,10 @@
 import { FaPlaneDeparture } from 'react-icons/fa'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { Link } from 'react-router-dom'
+import AppContext from '../context/AppContext'
 
 function Navbar() {
+  const { drawerOpen, setDrawerOpen } = useContext(AppContext)
   const [themeMenuOpened, setThemeMenuOpened] = useState(false)
   const themeMenu = useRef(null)
   useEffect(() => {
@@ -27,7 +29,7 @@ function Navbar() {
             tabIndex={0}
             className='btn btn-ghost'
             onClick={(e) => {
-              setThemeMenuOpened(!themeMenuOpened)
+              setDrawerOpen(!drawerOpen)
             }}
           >
             <svg
@@ -44,6 +46,20 @@ function Navbar() {
                 d='M4 6h16M4 12h16M4 18h7'
               />
             </svg>
+          </label>
+        </div>
+        <Link to='/' className='btn normal-case text-xl'>
+          <div className='font-bold'>MagentaPlanner</div>
+        </Link>
+        <div className='dropdown dropdown-end' ref={themeMenu}>
+          <label
+            tabIndex={0}
+            className='btn btn-ghost'
+            onClick={(e) => {
+              setThemeMenuOpened(!themeMenuOpened)
+            }}
+          >
+            <FaPlaneDeparture className='mr-2 inline' />
           </label>
           <ul
             tabIndex={0}
@@ -70,12 +86,6 @@ function Navbar() {
               </Link>
             </li>
           </ul>
-        </div>
-        <Link to='/' className='btn normal-case text-xl'>
-          <div className='font-bold'>MagentaPlanner</div>
-        </Link>
-        <div>
-          <FaPlaneDeparture className='mr-2 inline' />
         </div>
       </div>
 

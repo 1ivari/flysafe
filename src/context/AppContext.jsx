@@ -40,6 +40,8 @@ export const AppContextProvider = ({ children }) => {
     console.log('aircraft set')
   }
 
+  const [drawerOpen, setDrawerOpen] = useState(false)
+
   // REDUCER FUNCTIONS
 
   const [ofp, dispatch] = useReducer(ofpReducer, [], initializer)
@@ -68,6 +70,8 @@ export const AppContextProvider = ({ children }) => {
         handleAircraftChange,
         ofp,
         dispatch,
+        drawerOpen,
+        setDrawerOpen,
       }}
     >
       {children}

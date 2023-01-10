@@ -12,6 +12,7 @@ import RadioFrequencyTable from './RadioFrequencyTable'
 import OriginalTableStyleFuel from './OriginalTableStyleFuel'
 import FmiDataProviderV2 from '../../components/FmiDataProviderV2'
 import FmiDataProviderV1 from '../../components/FmiDataProviderV1'
+import Drawer from '../../components/Drawer'
 
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
@@ -88,10 +89,13 @@ function OperationalFlightPlanPage() {
           </div>
         </>
       ) : (
-        <MobileStyleOFP
-          ofp={ofp}
-          handleChangeRecalculate={handleChangeRecalculate}
-        />
+        <div className='relative'>
+          <MobileStyleOFP
+            ofp={ofp}
+            handleChangeRecalculate={handleChangeRecalculate}
+          />
+          <Drawer />
+        </div>
       )}
 
       <ProgressStepsMobile
