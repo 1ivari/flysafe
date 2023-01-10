@@ -62,7 +62,10 @@ function FmiDataProviderV1() {
         } else return true
       })
       .map((item, idx) => {
-        item === 'NaN' ? (item = 0) : item
+        // Handle nan values by simply setting 0
+        if (item === 'NaN') {
+          item = 0
+        }
         Obj = {
           ...Obj,
           [fieldArr[idx % fieldArr.length].attributes.name.textContent]: item,
