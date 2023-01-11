@@ -142,8 +142,8 @@ function FmiDataProviderV2() {
 
   return (
     <>
-      <button className='btn' onClick={handleClick}>
-        Fetch Data from FMI
+      <button className='btn btn-primary' onClick={handleClick}>
+        Fetch wind for planned altitude from FMI
       </button>
     </>
   )

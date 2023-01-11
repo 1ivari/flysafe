@@ -15,25 +15,15 @@ export default function MapSettings() {
 
   return (
     <>
-      <div className='dropdown dropdown-end'>
-        <label tabIndex={0} className='btn'>
-          Set
+      <div className='form-control'>
+        <label className='label cursor-pointer'>
+          <span className='label-text'>Mercator projection set </span>
+          <input
+            type='checkbox'
+            className='toggle pl-2'
+            onClick={toggleProjection}
+          />
         </label>
-        <div
-          tabIndex={0}
-          className='dropdown-content p-2 bg-base-100 rounded-box w-36'
-        >
-          <div className='form-control'>
-            <label className='label cursor-pointer'>
-              <span className='label-text'>Mercator</span>
-              <input
-                type='checkbox'
-                className='toggle'
-                onClick={toggleProjection}
-              />
-            </label>
-          </div>
-        </div>
       </div>
     </>
   )

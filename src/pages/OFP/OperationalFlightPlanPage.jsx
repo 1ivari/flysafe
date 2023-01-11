@@ -14,12 +14,43 @@ import FmiDataProviderV2 from '../../components/FmiDataProviderV2'
 import FmiDataProviderV1 from '../../components/FmiDataProviderV1'
 import Drawer from '../../components/Drawer'
 
+function DrawerContent() {
+  const { ofpLock, setOfpLock } = useContext(AppContext)
+
+  function toggleOfpLock(e) {
+    if (e.target.checked) {
+      setOfpLock(true)
+    } else {
+      setOfpLock(false)
+    }
+  }
+
+  return (
+    <ul className='menu p-4 w-80 bg-base-100 text-base-content'>
+      {/* <!-- Sidebar content here --> */}
+      <li>
+        <FmiDataProviderV2 />
+      </li>
+      <li>
+        <div>
+          <span>Lock Ofp</span>
+          <input
+            type='checkbox'
+            className='toggle toggle-primary toggle-md'
+            onClick={toggleOfpLock}
+          />
+        </div>
+      </li>
+    </ul>
+  )
+}
+
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
   // TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
   // TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react
 
-  const { ofp, dispatch } = useContext(AppContext)
+  const { ofp, dispatch, ofpLock } = useContext(AppContext)
 
   const handleChange = (e) => {
     dispatch({
@@ -64,45 +95,46 @@ function OperationalFlightPlanPage() {
   const isLargeScreen = useMediaQuery('(min-width: 1024px)')
   return (
     <>
-      <ProgressSteps activePage={4} />
-
       {isLargeScreen ? (
         <>
-          <div className='m-4'>
-            <div className='flex justify-between my-4'>
-              <OriginalTableStyleBasicData />
-              <FmiDataProviderV2 />
-            </div>
-            <OriginalTableStyleOFP
-              ofp={ofp}
-              handleChange={handleChange}
-              handleChangeRecalculate={handleChangeRecalculate}
-              handleChangeAll={handleChangeAll}
-              handleChangeAllRecalculate={handleChangeAllRecalculate}
-            />
-            <div className='my-4 flex justify-evenly items-center'>
-              <div className='grow-0'>
-                <RadioFrequencyTable />
+          <Drawer drawerContent={<DrawerContent />}>
+            <ProgressSteps activePage={4} />
+            <div className='m-4'>
+              <div className='flex justify-between my-4'>
+                <OriginalTableStyleBasicData />
               </div>
-              <OriginalTableStyleFuel />
+              <OriginalTableStyleOFP
+                ofp={ofp}
+                handleChange={handleChange}
+                handleChangeRecalculate={handleChangeRecalculate}
+                handleChangeAll={handleChangeAll}
+                handleChangeAllRecalculate={handleChangeAllRecalculate}
+              />
+              <div className='my-4 flex justify-evenly items-center'>
+                <div className='grow-0'>
+                  <RadioFrequencyTable />
+                </div>
+                <OriginalTableStyleFuel />
+              </div>
             </div>
-          </div>
+          </Drawer>
         </>
       ) : (
-        <div className='relative'>
-          <MobileStyleOFP
-            ofp={ofp}
-            handleChangeRecalculate={handleChangeRecalculate}
-          />
-          <Drawer />
-        </div>
+        <>
+          <Drawer drawerContent={<DrawerContent />}>
+            <MobileStyleOFP
+              ofp={ofp}
+              handleChangeRecalculate={handleChangeRecalculate}
+              ofpLock={ofpLock}
+            />
+            <ProgressStepsMobile
+              activePage={4}
+              nextPage={'/wnb'}
+              previousPage={'/weather'}
+            />
+          </Drawer>
+        </>
       )}
-
-      <ProgressStepsMobile
-        activePage={4}
-        nextPage={'/wnb'}
-        previousPage={'/weather'}
-      />
 
       {/* <link
 				rel='stylesheet'

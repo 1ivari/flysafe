@@ -42,6 +42,8 @@ export const AppContextProvider = ({ children }) => {
 
   const [drawerOpen, setDrawerOpen] = useState(false)
 
+  const [ofpLock, setOfpLock] = useState(false)
+
   // REDUCER FUNCTIONS
 
   const [ofp, dispatch] = useReducer(ofpReducer, [], initializer)
@@ -70,6 +72,8 @@ export const AppContextProvider = ({ children }) => {
         handleAircraftChange,
         ofp,
         dispatch,
+        ofpLock,
+        setOfpLock,
         drawerOpen,
         setDrawerOpen,
       }}
