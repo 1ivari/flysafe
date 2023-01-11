@@ -125,6 +125,7 @@ function OperationalFlightPlanPage() {
             <MobileStyleOFP
               ofp={ofp}
               handleChangeRecalculate={handleChangeRecalculate}
+              handleChange={handleChange}
               ofpLock={ofpLock}
             />
             <div className='mt-4 flex grow-0 justify-center'>

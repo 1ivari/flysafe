@@ -2,7 +2,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 function MobileStyleOFP(props) {
-  const { ofp, handleChangeRecalculate, ofpLock } = props
+  const { ofp, handleChangeRecalculate, handleChange, ofpLock } = props
 
   return (
     <>
@@ -62,7 +62,7 @@ function MobileStyleOFP(props) {
                     id={row.key}
                     value={row.planAlt}
                     name='planAlt'
-                    onChange={(e) => handleChangeRecalculate(e)}
+                    onChange={(e) => handleChange(e)}
                     disabled={ofpLock}
                     className='input input-xs text-base max-w-xs w-14 text-center m-2'
                   />

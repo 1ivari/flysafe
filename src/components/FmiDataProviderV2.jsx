@@ -6,6 +6,7 @@ import useUpdateEffect from '../hooks/useUpdateEffect'
 
 function FmiDataProviderV2() {
   const [fmiData, setFmiData] = useState({})
+  const [loading, setLoading] = useState(false)
   const { ofp, dispatch } = useContext(AppContext)
   // const [ofpSlice, setOfpSlice] = useState(ofp.slice(1))
 
@@ -133,17 +134,22 @@ function FmiDataProviderV2() {
   }
 
   const handleClick = async () => {
+    setLoading(true)
     const ofpSlice = ofp.slice(1)
     for (const item of ofpSlice) {
       await sleep(500)
       fetchMet(item.planAlt, item.midCoord, item.key)
     }
+    setLoading(false)
   }
 
   return (
     <>
-      <button className='btn btn-primary' onClick={handleClick}>
-        Fetch wind for planned altitude from FMI
+      <button
+        className={loading ? 'btn btn-primary loading' : 'btn btn-primary'}
+        onClick={handleClick}
+      >
+        Fetch wind from FMI
       </button>
     </>
   )
