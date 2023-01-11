@@ -127,6 +127,13 @@ function OperationalFlightPlanPage() {
               handleChangeRecalculate={handleChangeRecalculate}
               ofpLock={ofpLock}
             />
+            <div className='mt-4 flex grow-0 justify-center'>
+              <RadioFrequencyTable />
+            </div>
+            <div className='mt-4 flex justify-center'>
+              <OriginalTableStyleFuel />
+            </div>
+
             <ProgressStepsMobile
               activePage={4}
               nextPage={'/wnb'}

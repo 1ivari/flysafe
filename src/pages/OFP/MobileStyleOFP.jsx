@@ -99,14 +99,14 @@ function MobileStyleOFP(props) {
                     <li>WCA: {row.wca.toFixed(0)}°</li>
                     <li>Dist Acc: {row.distAcc.toFixed(0)} NM</li>
                   </ul>
-                  <ul>
+                  {/* <ul>
                     <li>kamaa</li>
                     <li>kamaa</li>
                     <li>kamaa</li>
                     <li>kamaa</li>
                     <li>kamaa</li>
                     <li>kamaa</li>
-                  </ul>
+                  </ul> */}
                 </div>
               </div>
             </div>
