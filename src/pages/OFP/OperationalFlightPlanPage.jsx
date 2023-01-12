@@ -15,7 +15,7 @@ import FmiDataProviderV1 from '../../components/FmiDataProviderV1'
 import Drawer from '../../components/Drawer'
 
 function DrawerContent() {
-  const { ofpLock, setOfpLock } = useContext(AppContext)
+  const { setOfpLock } = useContext(AppContext)
 
   function toggleOfpLock(e) {
     if (e.target.checked) {
@@ -26,22 +26,39 @@ function DrawerContent() {
   }
 
   return (
-    <ul className='menu p-4 w-80 bg-base-100 text-base-content'>
-      {/* <!-- Sidebar content here --> */}
-      <li>
+    <>
+      <li className='mt-2'>
         <FmiDataProviderV2 />
       </li>
       <li>
-        <div>
-          <span>Lock Ofp</span>
+        <label className='label cursor-pointer'>
+          <span className='label-text'>Lock OFP inputs 🔒 </span>
           <input
             type='checkbox'
-            className='toggle toggle-primary toggle-md'
+            className='toggle toggle-primary'
             onClick={toggleOfpLock}
           />
-        </div>
+        </label>
       </li>
-    </ul>
+      <li className='mt-2 menu-title'>
+        <h1>Print instructions</h1>
+        <h2>Desktop:</h2>
+        <p>
+          Currently you can print the OFP in table format by simply pressing{' '}
+          <kbd className='kbd kbd-xs'>ctrl</kbd> +{' '}
+          <kbd className='kbd kbd-xs'>P</kbd>{' '}
+        </p>
+
+        <h2>Mobile:</h2>
+        <p>
+          Tested on Android Chrome: When on OFP page, press the three dots in
+          the top right corner. Then, select "Share" and from the share options
+          you should find "Print" option. It will print to PDF. Then select
+          "landscape" and "A4" Currently the page will be cropped, this need to
+          be fixed...
+        </p>
+      </li>
+    </>
   )
 }
 
@@ -109,6 +126,7 @@ function OperationalFlightPlanPage() {
                 handleChangeRecalculate={handleChangeRecalculate}
                 handleChangeAll={handleChangeAll}
                 handleChangeAllRecalculate={handleChangeAllRecalculate}
+                ofpLock={ofpLock}
               />
               <div className='my-4 flex justify-evenly items-center'>
                 <div className='grow-0'>

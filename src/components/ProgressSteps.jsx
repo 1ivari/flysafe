@@ -54,7 +54,18 @@ function ProgressSteps({ activePage }) {
               Operational Flight Plan
             </li>
 
-            <li
+            {/* <li
+              className={
+                activePage > 4
+                  ? 'step step-primary cursor-pointer'
+                  : 'grid step cursor-pointer'
+              }
+              onClick={() => navigate('/submit')}
+            >
+              Print
+            </li> */}
+
+            {/* <li
               className={
                 activePage > 4
                   ? 'step step-primary cursor-pointer'
@@ -85,7 +96,7 @@ function ProgressSteps({ activePage }) {
               onClick={() => navigate('/submit')}
             >
               Submit
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

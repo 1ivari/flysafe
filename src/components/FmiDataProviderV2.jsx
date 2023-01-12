@@ -149,7 +149,7 @@ function FmiDataProviderV2() {
         className={loading ? 'btn btn-primary loading' : 'btn btn-primary'}
         onClick={handleClick}
       >
-        Fetch wind from FMI
+        Fetch wind from FMI 💨
       </button>
     </>
   )

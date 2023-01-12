@@ -8,6 +8,7 @@ export default function OriginalTableStyleOFP(props) {
     handleChangeRecalculate,
     handleChangeAll,
     handleChangeAllRecalculate,
+    ofpLock,
   } = props
   return (
     <table id='ofpTable' className='table tablestyleofp text-center'>
@@ -88,6 +89,7 @@ export default function OriginalTableStyleOFP(props) {
                       : (e) => handleChange(e)
                   }
                   className='input input-xs text-base max-w-xs w-14 text-center'
+                  disabled={ofpLock}
                 />
               </td>
               <td>
@@ -101,6 +103,7 @@ export default function OriginalTableStyleOFP(props) {
                       : (e) => handleChange(e)
                   }
                   className='input input-xs text-base max-w-xs w-14 text-center'
+                  disabled={ofpLock}
                 />
               </td>
               <td>
@@ -114,6 +117,7 @@ export default function OriginalTableStyleOFP(props) {
                       : (e) => handleChangeRecalculate(e)
                   }
                   className='input input-xs text-base max-w-xs w-12 text-center'
+                  disabled={ofpLock}
                 />
               </td>
               <td>
@@ -128,6 +132,7 @@ export default function OriginalTableStyleOFP(props) {
                       : (e) => handleChangeRecalculate(e)
                   }
                   className='input input-xs text-base max-w-xs w-12 text-center'
+                  disabled={ofpLock}
                 />
               </td>
               <td>
@@ -142,6 +147,7 @@ export default function OriginalTableStyleOFP(props) {
                       : (e) => handleChangeRecalculate(e)
                   }
                   className='input input-xs text-base max-w-xs w-10 text-center'
+                  disabled={ofpLock}
                 />
               </td>
               <td>{row.tc.toFixed(0)}°</td>

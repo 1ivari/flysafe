@@ -7,6 +7,10 @@
   height: 70vh;
 }
 
+.drawer-height {
+  height: calc(100vh - 64px);
+}
+
 @media print {
   /* page size needs to be defined explicitly to avoid going mobile on print */
   @page {
@@ -68,5 +72,9 @@
 
   th {
     border: 1px solid black;
+  }
+
+  input {
+    border-style: none;
   }
 }

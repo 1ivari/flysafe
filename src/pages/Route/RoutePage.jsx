@@ -10,12 +10,15 @@ import Drawer from '../../components/Drawer'
 
 function DrawerContent() {
   return (
-    <ul className='menu p-4 w-80 bg-base-100 text-base-content'>
-      {/* <!-- Sidebar content here --> */}
+    <>
+      <li className='menu-title mt-2'>
+        <span>Map Settings</span>
+        <span>Default projection is globe</span>
+      </li>
       <li>
         <MapSettings />
       </li>
-    </ul>
+    </>
   )
 }
 

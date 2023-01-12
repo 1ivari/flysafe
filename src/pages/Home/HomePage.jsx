@@ -1,28 +1,61 @@
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import Drawer from '../../components/Drawer'
 
-function Home() {
+function DrawerContent() {
+  const nav = useNavigate()
   return (
     <>
-      <div className='relative pt-32 mx-auto max-w-7xl px-6 '>
-        <h1 className='text-slate-900 font-extrabold text-4xl lg:text-6xl tracking-tight text-center dark:text-white'>
-          Rapidly plan your flights on a single platform.
-        </h1>
-        <p className='mt-6 text-lg text-slate-600 text-center max-w-3xl mx-auto dark:text-slate-400'>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium
-          corporis voluptas debitis maiores eius animi dolorem incidunt
-          similique veritatis minus.
-        </p>
-        <div className='mt-6 flex justify-center space-x-6 text-sm'>
-          <Link
-            to='/basicdata'
-            className='bg-slate-900 hover:bg-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50 text-white font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center w-auto dark:bg-sky-500 dark:highlight-white/20 dark:hover:bg-sky-400'
-          >
-            Get started
-          </Link>
-        </div>
-      </div>
+      <li className='mt-2'>
+        <a onClick={() => nav('/about')} href=''>
+          About
+        </a>
+      </li>
     </>
   )
 }
 
-export default Home
+function HomePage() {
+  const navigate = useNavigate()
+  return (
+    <>
+      <Drawer drawerContent={<DrawerContent />}>
+        <div className='relative pt-32 mx-auto max-w-7xl px-6 '>
+          <h1 className='text-slate-900 font-extrabold text-4xl lg:text-6xl tracking-tight text-center dark:text-white'>
+            Navigating the skies with ease.
+          </h1>
+          <p className='mt-6 text-lg text-slate-600 text-center max-w-3xl mx-auto dark:text-slate-400'>
+            Fly with confidence using Magenta. Generate efficient routes with
+            up-to-date weather conditions using our powerful and easy-to-use
+            interface. Magenta streamlines the flight planning process for
+            private pilots and helps you to aviate the skies.
+          </p>
+          <div className='mt-6 flex justify-center space-x-6 text-sm'>
+            <button
+              className='btn btn-primary'
+              onClick={() => navigate('/basicdata')}
+            >
+              Get started
+            </button>
+          </div>
+
+          <div className='mt-32 text-center max-w-3xl mx-auto text-slate-900 dark:text-white'>
+            <h1 className='font-bold dark:text-white'>Terms and Conditions</h1>
+            <p className='mt-4 text-lg text-slate-600 dark:text-slate-400'>
+              By using this website/application, you agree to our terms and
+              conditions.
+              <strong> Use website/application at your own risk.</strong>{' '}
+              Website/application provides
+              <strong> no warranty</strong> of any kind. By using the provided
+              data and suggestions, you agree that website/application creator,
+              maintainers, and anyone involved with the website/application hold{' '}
+              <strong> no liability</strong> for anything that happens when you
+              use the data and suggestions.
+            </p>
+          </div>
+        </div>
+      </Drawer>
+    </>
+  )
+}
+
+export default HomePage
