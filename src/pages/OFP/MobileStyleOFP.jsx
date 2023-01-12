@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { useState } from 'react'
 
 function MobileStyleOFP(props) {
   const { ofp, handleChangeRecalculate, handleChange, ofpLock } = props

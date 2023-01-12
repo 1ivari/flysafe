@@ -3,7 +3,6 @@ import { useContext } from 'react'
 import AppContext from '../../context/AppContext'
 import ProgressSteps from '../../components/ProgressSteps'
 import ProgressStepsMobile from '../../components/ProgressStepsMobile'
-import { useEffect, useState } from 'react'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import OriginalTableStyleOFP from './OriginalTableStyleOFP'
 import MobileStyleOFP from './MobileStyleOFP'
@@ -11,7 +10,6 @@ import OriginalTableStyleBasicData from './OriginalTableStyleBasicData'
 import RadioFrequencyTable from './RadioFrequencyTable'
 import OriginalTableStyleFuel from './OriginalTableStyleFuel'
 import FmiDataProviderV2 from '../../components/FmiDataProviderV2'
-import FmiDataProviderV1 from '../../components/FmiDataProviderV1'
 import Drawer from '../../components/Drawer'
 
 function DrawerContent() {
@@ -64,9 +62,6 @@ function DrawerContent() {
 
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
-  // TODO: dynamic table https://www.pluralsight.com/guides/dynamic-tables-from-editable-columns-in-react-html
-  // TODO: https://atomizedobjects.com/blog/react/how-to-render-an-array-of-objects-with-map-in-react
-
   const { ofp, dispatch, ofpLock } = useContext(AppContext)
 
   const handleChange = (e) => {

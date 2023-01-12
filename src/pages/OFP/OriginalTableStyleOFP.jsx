@@ -1,5 +1,4 @@
 import React from 'react'
-import dayjs from 'dayjs'
 
 export default function OriginalTableStyleOFP(props) {
   const {
@@ -94,7 +93,7 @@ export default function OriginalTableStyleOFP(props) {
               </td>
               <td>
                 <input
-                  key={row.key}
+                  id={row.key}
                   value={row.planAlt}
                   name='planAlt'
                   onChange={

@@ -1,4 +1,3 @@
-import { faArrowDownUpAcrossLine } from '@fortawesome/free-solid-svg-icons'
 import { useContext, useState, useEffect } from 'react'
 import { ReactSearchAutocomplete } from 'react-search-autocomplete'
 import AppContext from '../../context/AppContext.jsx'
@@ -50,16 +49,18 @@ function AirfieldSearchAutoComplete() {
           ...geoJsonData,
           properties: { ...geoJsonData.properties, ident: query, metars: [] },
         }
-        setRoute([
-          ...route,
-          {
-            key: crypto.randomUUID(),
-            geoJSON: geoJsonData,
-          },
-        ])
+        setRoute((prevRoute) => {
+          return [
+            ...prevRoute,
+            {
+              key: crypto.randomUUID(),
+              geoJSON: geoJsonData,
+            },
+          ]
+        })
       }
     }
-  }, [query])
+  }, [query, queryType, setRoute])
 
   // Fetches data from airportdb
   const { data, loading } = useFetchJson(url)
@@ -68,7 +69,7 @@ function AirfieldSearchAutoComplete() {
   // constructs route state. UseEffect runs every time loading or metLoading changes
   useEffect(() => {
     if (data && metar && !loading && !metLoading) {
-      setRoute((prevRoute, props) => {
+      setRoute((prevRoute) => {
         // Check if same poi is added twice in a row
         if (
           prevRoute.length > 0 &&
@@ -79,7 +80,7 @@ function AirfieldSearchAutoComplete() {
           return prevRoute
         } else {
           return [
-            ...route,
+            ...prevRoute,
             {
               key: crypto.randomUUID(),
               geoJSON: {
@@ -98,7 +99,7 @@ function AirfieldSearchAutoComplete() {
         }
       })
     }
-  }, [data, metar, loading, metLoading])
+  }, [data, metar, loading, metLoading, setRoute])
 
   // Construct OFP everytime route changes (except on first render)
   useUpdateEffect(() => {

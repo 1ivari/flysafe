@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import AppContext from '../context/AppContext'
 import constants from '../utils/constants'
 import useUpdateEffect from '../hooks/useUpdateEffect'
@@ -26,9 +26,9 @@ function FmiDataProviderV2() {
     const beginTime = new Date(
       xmlDoc.getElementsByTagName('gml:TimePeriod')[0].childNodes[1].textContent
     ) // gets the actual forecast begin time from xml results
-    const endTime = new Date(
-      xmlDoc.getElementsByTagName('gml:TimePeriod')[0].childNodes[3].textContent
-    ) // gets the actual forecast end time from xml results
+    // const endTime = new Date(
+    //   xmlDoc.getElementsByTagName('gml:TimePeriod')[0].childNodes[3].textContent
+    // ) // gets the actual forecast end time from xml results
 
     // parse xml results
     // this is rather complicated, but could not find ready made solution for parsing xml results
@@ -80,7 +80,7 @@ function FmiDataProviderV2() {
     let latlon = `${coord[1].toFixed(2)},${coord[0].toFixed(2)}` // latlon
 
     const numResults = 5 // result rows
-    const place = 'helsinki'
+    // const place = 'helsinki'
     const id = 'fmi::forecast::harmonie::hybrid::point::multipointcoverage'
     const request = 'getFeature'
     const startTimeParameter = new Date()
@@ -98,7 +98,6 @@ function FmiDataProviderV2() {
   const fetchMet = async (planAlt, midCoord, key) => {
     const timeStep = 60 // minutes
     const url = sourceURLset(midCoord, planAlt, timeStep)
-    console.log('fetching from url: ', url)
     // fetch data
     const response = await fetch(url)
     const data = await response.text() // returns typeof string
@@ -108,7 +107,6 @@ function FmiDataProviderV2() {
 
   useUpdateEffect(() => {
     if (fmiData) {
-      console.log('fmiData', fmiData)
       dispatch({
         type: 'CHANGE_ITEM',
         payload: {

@@ -9,9 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 function RadioFrequencyTable() {
-  const { ofp, route } = useContext(AppContext)
-  let longest = 0
-  let longestId = ''
+  const { route } = useContext(AppContext)
 
   const freqs = route
     .filter((item) => item.geoJSON.properties.type !== 'VFR REP')

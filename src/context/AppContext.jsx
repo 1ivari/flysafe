@@ -1,5 +1,5 @@
 import { createContext, useState, useReducer, useEffect } from 'react'
-import { useSessionStorage, useLocalStorage } from '../hooks/useStorage'
+import { useLocalStorage } from '../hooks/useStorage'
 import aircraftBasicInfo from '../data/aircraftBasicInfo'
 import { ofpReducer, initializer } from './ofpReducer'
 
@@ -32,12 +32,11 @@ export const AppContextProvider = ({ children }) => {
   })
   const [metarData, setMetarData] = useState([])
 
-  const [aircrafts, newAircraft] = useState(aircraftBasicInfo)
+  const [aircrafts] = useState(aircraftBasicInfo)
 
   const [aircraftId, setAircraftId] = useState(1)
   const handleAircraftChange = (e) => {
     setAircraftId(e.target.value)
-    console.log('aircraft set')
   }
 
   const [drawerOpen, setDrawerOpen] = useState(false)

@@ -1,14 +1,11 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Drawer from '../../components/Drawer'
 
 function DrawerContent() {
-  const nav = useNavigate()
   return (
     <>
       <li className='mt-2'>
-        <a onClick={() => nav('/about')} href=''>
-          About
-        </a>
+        <Link to='/about'> 🤔 About </Link>
       </li>
     </>
   )

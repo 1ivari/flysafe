@@ -5,7 +5,6 @@ const DEFAULT_OPTIONS = {
 }
 
 export default function useFetch(url, options = {}, dependencies = []) {
-  console.log('useFetch fired')
   return useAsync(() => {
     return fetch(url, { ...DEFAULT_OPTIONS, ...options }).then((res) => {
       if (res.ok) return res.text()

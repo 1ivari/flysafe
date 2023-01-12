@@ -27,6 +27,7 @@ function Navbar() {
         <label className='btn btn-circle swap swap-rotate'>
           <input
             type='checkbox'
+            checked={drawerOpen}
             onClick={(e) => {
               setDrawerOpen(!drawerOpen)
             }}
@@ -102,6 +103,7 @@ function Navbar() {
         <label className='btn btn-circle swap swap-rotate'>
           <input
             type='checkbox'
+            checked={drawerOpen}
             onClick={() => {
               setDrawerOpen(!drawerOpen)
             }}

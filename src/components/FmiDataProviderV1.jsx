@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState, useContext } from 'react'
+import { useState, useContext } from 'react'
 import AppContext from '../context/AppContext'
 import constants from '../utils/constants'
 import useUpdateEffect from '../hooks/useUpdateEffect'
@@ -21,7 +21,7 @@ function FmiDataProviderV1() {
     let latlon = `${midCoord[1].toFixed(2)},${midCoord[0].toFixed(2)}` // latlon
     const timeStep = 60 // minutes
     const numResults = 5 // result rows
-    const place = 'helsinki'
+    // const place = 'helsinki'
     const id = 'fmi::forecast::harmonie::hybrid::point::multipointcoverage'
     const request = 'getFeature'
     const startTimeParameter = new Date()

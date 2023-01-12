@@ -45,12 +45,6 @@ function windCorrection(course, trueAirspeed, windDirection, windSpeed) {
   // convert results back to original units
   // windCorrectionAngle from radians to degrees
   windCorrectionAngle = (windCorrectionAngle * 180) / Math.PI
-  console.log(
-    'groundSpeed',
-    groundSpeed,
-    'windCorrectionAngle',
-    windCorrectionAngle
-  )
   // groundSpeed from m/s to knots
   groundSpeed = groundSpeed * constants.MS_TO_KNOTS
   // crosswindComponent from m/s to knots
