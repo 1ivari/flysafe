@@ -1,4 +1,3 @@
-import propTypes from 'prop-types'
 import { useNavigate } from 'react-router-dom'
 
 function ProgressSteps({ activePage }) {
@@ -96,10 +95,6 @@ function ProgressSteps({ activePage }) {
 
 ProgressSteps.defaultProps = {
   activePage: 0,
-}
-
-ProgressSteps.propTypes = {
-  activePage: propTypes.number,
 }
 
 export default ProgressSteps

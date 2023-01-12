@@ -170,10 +170,7 @@ function AirfieldSearchAutoComplete() {
         </div>
 
         {route.length > 0 ? (
-          <div
-            tabIndex={0}
-            className='collapse collapse-arrow border border-base-300 rounded-box bg-base-100 mt-2'
-          >
+          <div className='collapse collapse-arrow border border-base-300 rounded-box bg-base-100 mt-2'>
             <input type='checkbox' />
             <div className='collapse-title'>
               {route[0].geoJSON.properties.ident} {' -> '}

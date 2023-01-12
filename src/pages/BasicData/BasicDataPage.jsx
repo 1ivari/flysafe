@@ -5,7 +5,8 @@ import AppContext from '../../context/AppContext.jsx'
 import { useContext } from 'react'
 
 function BasicDataPage() {
-  const { basicData, setBasicData } = useContext(AppContext)
+  const { basicData, setBasicData, aircrafts, handleAircraftChange } =
+    useContext(AppContext)
 
   const handleChange = (e) => {
     setBasicData({ ...basicData, [e.target.name]: e.target.value })
@@ -20,89 +21,86 @@ function BasicDataPage() {
       </div>
       <ProgressSteps activePage={1} />
 
-      <div className='flex justify-center my-4'>
-        <form className='mb-0 space-y-4'>
-          <div>
-            <label className='block text-sm font-medium text-white-700'>
-              Date
-            </label>
-            <div className='mt-1'>
-              <input
-                className='bg-gray-200 rounded'
-                name='date'
-                type='date'
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
+      <div className='flex flex-col items-center justify-center my-4'>
+        <div className='form-control w-full max-w-xs'>
+          <label className='label'>
+            <span className='label-text'>Date</span>
+            <span className='label-text-alt'>For Flight Plan</span>
+          </label>
+          <input
+            name='date'
+            type='date'
+            placeholder='Type here'
+            className='input input-bordered w-full max-w-xs'
+            onChange={handleChange}
+          />
 
-          <div>
-            <label className='block text-sm font-medium text-white-700'>
-              Persons on Board
-            </label>
-            <div className='mt-1'>
-              <input
-                className='bg-gray-200 rounded'
-                name='pob'
-                type='number'
-                required
-                onChange={handleChange}
-              />
-            </div>
-          </div>
+          <label className='label'>
+            <span className='label-text'>Persons On Board</span>
+            <span className='label-text-alt'>For Flight Plan</span>
+          </label>
+          <input
+            name='pob'
+            type='number'
+            placeholder='Type here'
+            className='input input-bordered w-full max-w-xs'
+            onChange={handleChange}
+          />
 
-          <div>
-            <label className='block text-sm font-medium text-white-700'>
-              Aircraft
-            </label>
-            <AircraftSelector />
-          </div>
+          <label className='label'>
+            <span className='label-text'>Select Aircraft</span>
+            <span className='label-text-alt'>For Flight Plan</span>
+          </label>
+          <select
+            onChange={handleAircraftChange}
+            className='select select-bordered'
+          >
+            {aircrafts.map((aircraft) => {
+              return (
+                <option key={aircraft.id} value={aircraft.id}>
+                  {aircraft.name}
+                </option>
+              )
+            })}
+          </select>
 
-          <div>
-            <label className='block text-sm font-medium text-white-700'>
-              Crew
-            </label>
-            <div className='mt-1'>
-              <input
-                name='crew'
-                type='text'
-                className='bg-gray-200 rounded'
-                onChange={handleChange}
-              />
-            </div>
-          </div>
+          <label className='label'>
+            <span className='label-text'>Crew</span>
+            <span className='label-text-alt'>For Flight Plan</span>
+          </label>
+          <input
+            name='crew'
+            type='text'
+            placeholder='Type initials here'
+            className='input input-bordered w-full max-w-xs'
+            onChange={handleChange}
+          />
 
-          <div>
-            <label className='block text-sm font-medium text-white-700'>
-              Rules
-            </label>
-            <div className='mt-1'>
-              <select
-                name='rules'
-                className='bg-gray-200 rounded'
-                onChange={handleChange}
-              >
-                <option value='vfr'>VFR</option>
-                <option value='ifr'>IFR</option>
-              </select>
-            </div>
-          </div>
+          <label className='label'>
+            <span className='label-text'>Rules</span>
+            <span className='label-text-alt'>For Flight Plan</span>
+          </label>
+          <select
+            name='rules'
+            className='select select-bordered'
+            onChange={handleChange}
+          >
+            <option value='IFR'>IFR</option>
+            <option value='VFR'>VFR</option>
+          </select>
 
-          <div>
-            <label className='block text-sm font-medium text-white-700'>
-              Default TAS
-            </label>
-            <div className='mt-1'>
-              <input
-                name='defaultTas'
-                type='number'
-                className='bg-gray-200 rounded'
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-        </form>
+          <label className='label'>
+            <span className='label-text'>Default TAS</span>
+            <span className='label-text-alt'>For Flight Plan</span>
+          </label>
+          <input
+            name='defaultTAS'
+            type='number'
+            placeholder='Type here'
+            className='input input-bordered w-full max-w-xs'
+            onChange={handleChange}
+          />
+        </div>
       </div>
       <ProgressStepsMobile
         activePage={1}

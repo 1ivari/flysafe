@@ -1,0 +1,51 @@
+Daisyui v 2.15.0 works.
+for at least 2.46, the collapse with checkbox does not work anymore. It will uncollapse automatically...  
+
+
+before any updates:
+PS C:\Users\iivar\Documents\GitHub\flysafe> npm outdated
+Package                    Current   Wanted   Latest  Location                                Depended by
+@tailwindcss/forms           0.5.2    0.5.3    0.5.3  node_modules/@tailwindcss/forms         flysafe
+autoprefixer                10.4.7  10.4.13  10.4.13  node_modules/autoprefixer               flysafe
+daisyui                     2.15.0   2.46.1   2.46.1  node_modules/daisyui                    flysafe   problems with checkbox collapse if updated 
+framer-motion                8.1.9    8.4.2    8.4.2  node_modules/framer-motion              flysafe
+mapbox-gl                    2.9.1   2.12.0   2.12.0  node_modules/mapbox-gl                  flysafe
+postcss                     8.4.14   8.4.21   8.4.21  node_modules/postcss                    flysafe
+react                       18.1.0   18.2.0   18.2.0  node_modules/react                      flysafe
+react-dom                   18.1.0   18.2.0   18.2.0  node_modules/react-dom                  flysafe
+react-icons                  4.3.1    4.7.1    4.7.1  node_modules/react-icons                flysafe
+react-router-dom             6.3.0    6.6.2    6.6.2  node_modules/react-router-dom           flysafe
+react-search-autocomplete    8.2.1    8.3.1    8.3.1  node_modules/react-search-autocomplete  flysafe  if updated from 8.2.1, will give outline
+tailwindcss                 3.0.24    3.2.4    3.2.4  node_modules/tailwindcss                flysafe  
+
+
+Ok to proceed? (y) y
+npm WARN deprecated sourcemap-codec@1.4.8: Please use @jridgewell/sourcemap-codec instead
+Unused dependencies
+* @fortawesome/free-regular-svg-icons
+* @googlemaps/react-wrapper
+* @testing-library/jest-dom
+* @testing-library/react
+* @testing-library/user-event
+* @turf/turf
+* classnames
+* react-map-gl
+* web-vitals
+Unused devDependencies
+* @iconify/react
+Missing dependencies
+* eslint-config-react-app: .\package.json
+* @turf/great-circle: .\src\pages\Route\RouteMap.jsx
+* @turf/distance: .\src\context\ofpReducer.jsx
+* @turf/bearing: .\src\context\ofpReducer.jsx
+* @turf/midpoint: .\src\context\ofpReducer.jsx
+* prop-types: .\src\components\ProgressSteps.jsx
+
+
+-removed tailwindcss to require forms
+
+SOLUTION: 
+collapse checkbox works with tailwindcss 3.2.4 and daisyui 2.46.1 if require(tailwindcss/forms) is removed from tailwindcss.config. 
+However, this made basicdata form to look bit ugly. But better to remove the forms plugin and restyle the basicdata form.
+
+It still might be that package.json should be updated.

@@ -13,7 +13,6 @@ function MetarList() {
           return (
             <div
               key={obj.key}
-              tabIndex={0}
               className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-1'
             >
               <input type='checkbox' />
