@@ -18,6 +18,7 @@ function AirfieldSearchAutoComplete() {
   // Query state for search input
   const [query, setQuery] = useState(null)
   const [queryType, setQueryType] = useState(null)
+  const [searchString, setSearchString] = useState('')
 
   // Urls for fetching data from airportdb and met.no
   const [url, setUrl] = useState(null)
@@ -68,6 +69,7 @@ function AirfieldSearchAutoComplete() {
   const { metar, metLoading } = useFetchMetar(metarUrl)
   // constructs route state. UseEffect runs every time loading or metLoading changes
   useEffect(() => {
+    setSearchString('') // reset searchstring
     if (data && metar && !loading && !metLoading) {
       setRoute((prevRoute) => {
         // Check if same poi is added twice in a row
@@ -110,6 +112,7 @@ function AirfieldSearchAutoComplete() {
   const handleOnSearch = (string, results) => {
     // onSearch will have as the first callback parameter
     // the string searched and for the second the results.
+    setSearchString(string)
   }
 
   const handleOnHover = (result) => {
@@ -161,6 +164,7 @@ function AirfieldSearchAutoComplete() {
               formatResult={formatResult}
               maxResults={5}
               placeholder='Search for an airport'
+              inputSearchString={searchString}
               styling={
                 {
                   // backgroundColor: 'red',
