@@ -16,11 +16,6 @@ function BasicDataPage() {
   return (
     <>
       <Drawer>
-        <div className='flex justify-center my-2 '>
-          <h1 className='w-72 rounded text-center text-xl text-bold text-white bg-gradient-to-r from-primary to-secondary '>
-            Basic Data
-          </h1>
-        </div>
         <ProgressSteps activePage={1} />
 
         <div className='flex flex-col items-center justify-center my-4'>

@@ -1,60 +1,83 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 function ProgressSteps({ activePage }) {
   const navigate = useNavigate()
+  let location = useLocation()
   return (
     <>
       <div
         id='progressSteps'
-        className='hidden lg:flex justify-center text-xs my-2'
+        className='hidden lg:flex justify-center items-center text-xs my-2'
       >
-        <div>
-          <ul className='steps'>
-            <li
-              className={
-                activePage > 0
-                  ? 'step step-primary cursor-pointer'
-                  : 'grid step cursor-pointer'
+        {location.pathname !== '/basicdata' ? (
+          <button
+            className='btn'
+            onClick={() => {
+              const path = location.pathname
+              switch (path) {
+                case '/route':
+                  navigate('/basicdata')
+                  break
+                case '/weather':
+                  navigate('/route')
+                  break
+                case '/ofp':
+                  navigate('/weather')
+                  break
+                default:
+                  break
               }
-              onClick={() => navigate('/basicdata')}
-            >
-              Basic data
-            </li>
+            }}
+          >
+            👈
+          </button>
+        ) : null}
+        <ul className='steps'>
+          <li
+            className={
+              activePage > 0
+                ? 'step step-primary cursor-pointer'
+                : 'grid step cursor-pointer'
+            }
+            onClick={() => navigate('/basicdata')}
+          >
+            Basic data
+          </li>
 
-            <li
-              className={
-                activePage > 1
-                  ? 'step step-primary cursor-pointer'
-                  : 'grid step cursor-pointer'
-              }
-              onClick={() => navigate('/route')}
-            >
-              Route
-            </li>
+          <li
+            className={
+              activePage > 1
+                ? 'step step-primary cursor-pointer'
+                : 'grid step cursor-pointer'
+            }
+            onClick={() => navigate('/route')}
+          >
+            Route
+          </li>
 
-            <li
-              className={
-                activePage > 2
-                  ? 'step step-primary cursor-pointer'
-                  : 'grid step cursor-pointer'
-              }
-              onClick={() => navigate('/weather')}
-            >
-              Weather
-            </li>
+          <li
+            className={
+              activePage > 2
+                ? 'step step-primary cursor-pointer'
+                : 'grid step cursor-pointer'
+            }
+            onClick={() => navigate('/weather')}
+          >
+            Weather
+          </li>
 
-            <li
-              className={
-                activePage > 3
-                  ? 'step step-primary cursor-pointer'
-                  : 'grid step cursor-pointer'
-              }
-              onClick={() => navigate('/ofp')}
-            >
-              Operational Flight Plan
-            </li>
+          <li
+            className={
+              activePage > 3
+                ? 'step step-primary cursor-pointer'
+                : 'grid step cursor-pointer'
+            }
+            onClick={() => navigate('/ofp')}
+          >
+            OFP
+          </li>
 
-            {/* <li
+          {/* <li
               className={
                 activePage > 4
                   ? 'step step-primary cursor-pointer'
@@ -65,7 +88,7 @@ function ProgressSteps({ activePage }) {
               Print
             </li> */}
 
-            {/* <li
+          {/* <li
               className={
                 activePage > 4
                   ? 'step step-primary cursor-pointer'
@@ -97,8 +120,30 @@ function ProgressSteps({ activePage }) {
             >
               Submit
             </li> */}
-          </ul>
-        </div>
+        </ul>
+        {location.pathname !== '/ofp' ? (
+          <button
+            className='btn'
+            onClick={() => {
+              const path = location.pathname
+              switch (path) {
+                case '/basicdata':
+                  navigate('/route')
+                  break
+                case '/route':
+                  navigate('/weather')
+                  break
+                case '/weather':
+                  navigate('/ofp')
+                  break
+                default:
+                  break
+              }
+            }}
+          >
+            👉
+          </button>
+        ) : null}
       </div>
     </>
   )
