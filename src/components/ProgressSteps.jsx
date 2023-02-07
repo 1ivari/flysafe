@@ -31,7 +31,11 @@ function ProgressSteps({ activePage }) {
           >
             👈
           </button>
-        ) : null}
+        ) : (
+          <button className='btn' onClick={() => navigate('/')}>
+            🏠
+          </button>
+        )}
         <ul className='steps'>
           <li
             className={
@@ -143,7 +147,11 @@ function ProgressSteps({ activePage }) {
           >
             👉
           </button>
-        ) : null}
+        ) : (
+          <button className='btn' onClick={() => navigate('/')}>
+            🏠
+          </button>
+        )}
       </div>
     </>
   )
