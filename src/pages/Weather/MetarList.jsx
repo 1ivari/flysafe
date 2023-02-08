@@ -1,31 +1,15 @@
 import { useContext } from 'react'
 import AppContext from '../../context/AppContext'
-import { useNavigate } from 'react-router-dom'
+import NoRouteCard from './NoRouteCard'
 
 // crypto.randomUUID()
 function MetarList() {
   const { route } = useContext(AppContext)
-  const navigate = useNavigate()
 
   return (
     <>
       {route.length === 0 ? (
-        <div className='flex justify-center content-center'>
-          <div className='card w-96 bg-base-100 shadow-xl'>
-            <div className='card-body'>
-              <h2 className='card-title'>Forgot to add route!</h2>
-              <p>Please add route first so you can see the weather ⛅</p>
-              <div className='card-actions justify-end'>
-                <button
-                  className='btn btn-primary'
-                  onClick={() => navigate('/route')}
-                >
-                  Go Back
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <NoRouteCard />
       ) : (
         route
           .filter((item) => item.geoJSON.properties.type !== 'VFR REP')

@@ -11,7 +11,7 @@ import RadioFrequencyTable from './RadioFrequencyTable'
 import OriginalTableStyleFuel from './OriginalTableStyleFuel'
 import FmiDataProviderV2 from '../../components/FmiDataProviderV2'
 import Drawer from '../../components/Drawer'
-import { useNavigate } from 'react-router-dom'
+import NoOfpCard from './NoOfpCard'
 
 function DrawerContent() {
   const { setOfpLock } = useContext(AppContext)
@@ -64,7 +64,6 @@ function DrawerContent() {
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
   const { ofp, dispatch, ofpLock } = useContext(AppContext)
-  const navigate = useNavigate()
 
   const handleChange = (e) => {
     dispatch({
@@ -112,25 +111,7 @@ function OperationalFlightPlanPage() {
       {ofp.length === 0 ? (
         <>
           <ProgressSteps activePage={4} />
-          <div className='flex justify-center content-center'>
-            <div className='card w-96 bg-base-100 shadow-xl'>
-              <div className='card-body'>
-                <h2 className='card-title'>Forgot to add route!</h2>
-                <p>
-                  Please add route first so you can edit the Operational Flight
-                  Plan.
-                </p>
-                <div className='card-actions justify-end'>
-                  <button
-                    className='btn btn-primary'
-                    onClick={() => navigate('/route')}
-                  >
-                    Go Back
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <NoOfpCard />
         </>
       ) : isLargeScreen ? (
         <>
