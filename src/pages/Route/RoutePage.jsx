@@ -1,6 +1,7 @@
 import ProgressSteps from '../../components/ProgressSteps'
 import AirfieldSearchAutoComplete from './AirfieldSearchAutoComplete'
 import RouteMap from './RouteMap'
+import LeafletMap from './LeafletMap'
 import ProgressStepsMobile from '../../components/ProgressStepsMobile'
 import MapSettings from './MapSettings'
 import Drawer from '../../components/Drawer'
@@ -29,13 +30,14 @@ function RoutePage() {
         <ProgressSteps activePage={2} />
         <div className='flex flex-col items-center lg:relative lg:w-full'>
           <div className='flex w-full justify-evenly items-center'>
-            <div className='z-10 lg:absolute lg:top-5 lg:left-5'>
+            <div className='z-[1000] lg:absolute lg:top-5 lg:left-12'>
               <AirfieldSearchAutoComplete />
             </div>
           </div>
 
           <div className='map-container' id='map-container'>
-            <RouteMap />
+            {/* <RouteMap /> */}
+            <LeafletMap />
           </div>
         </div>
 
