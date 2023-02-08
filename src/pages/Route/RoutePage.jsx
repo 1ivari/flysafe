@@ -1,9 +1,7 @@
 import ProgressSteps from '../../components/ProgressSteps'
 import AirfieldSearchAutoComplete from './AirfieldSearchAutoComplete'
-import RouteMap from './RouteMap'
 import LeafletMap from './LeafletMap'
 import ProgressStepsMobile from '../../components/ProgressStepsMobile'
-import MapSettings from './MapSettings'
 import Drawer from '../../components/Drawer'
 
 // TODO:
@@ -13,11 +11,7 @@ function DrawerContent() {
   return (
     <>
       <li className='menu-title mt-2'>
-        <span>Map Settings</span>
-        <span>Default projection is globe</span>
-      </li>
-      <li>
-        <MapSettings />
+        <span>Map Settings to be added</span>
       </li>
     </>
   )
@@ -36,7 +30,6 @@ function RoutePage() {
           </div>
 
           <div className='map-container' id='map-container'>
-            {/* <RouteMap /> */}
             <LeafletMap />
           </div>
         </div>

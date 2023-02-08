@@ -25,11 +25,7 @@ export const AppContextProvider = ({ children }) => {
 
   // const [route, setRoute] = useState([])
   const [route, setRoute] = useLocalStorage('route', [])
-  const [map, setMap] = useState(null)
-  const [mapSettings, setMapSettings] = useState({
-    projection: 'globe',
-    zoom: 1,
-  })
+
   const [metarData, setMetarData] = useState([])
 
   const [aircrafts] = useState(aircraftBasicInfo)
@@ -60,10 +56,6 @@ export const AppContextProvider = ({ children }) => {
         setWnb,
         route,
         setRoute,
-        map,
-        setMap,
-        mapSettings,
-        setMapSettings,
         metarData,
         setMetarData,
         aircrafts,

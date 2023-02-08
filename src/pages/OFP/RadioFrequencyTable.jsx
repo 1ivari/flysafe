@@ -12,7 +12,11 @@ function RadioFrequencyTable() {
   const { route } = useContext(AppContext)
 
   const freqs = route
-    .filter((item) => item.geoJSON.properties.type !== 'VFR REP')
+    .filter(
+      (item) =>
+        item.geoJSON.properties.type !== 'VFR REP' &&
+        item.geoJSON.properties.type !== 'custom'
+    )
     .map((item) => {
       const apFreqs = item.geoJSON.properties.freqs
       let atis = apFreqs.find((item) => item.type === 'ATIS')

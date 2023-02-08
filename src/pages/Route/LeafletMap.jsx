@@ -7,11 +7,47 @@ import {
   TileLayer,
   GeoJSON,
   Polyline,
+  useMapEvents,
+  useMap,
 } from 'react-leaflet'
 import greatCircle from '@turf/great-circle'
 
 function LeafletMap() {
-  const { route } = useContext(AppContext)
+  const { route, setRoute } = useContext(AppContext)
+  console.log(
+    'rendering route map for: ',
+    route.map((item) => item.geoJSON.properties.ident)
+  )
+
+  function AddMarker() {
+    const [pos, setPos] = useState(null)
+    const map = useMapEvents({
+      click: (e) => {
+        setPos(e.latlng)
+        console.log('click:', pos)
+        setRoute([
+          ...route,
+          {
+            key: crypto.randomUUID(),
+            geoJSON: {
+              type: 'Feature',
+              geometry: {
+                type: 'Point',
+                coordinates: [e.latlng.lng, e.latlng.lat],
+              },
+              properties: {
+                ident: 'Custom',
+                type: 'custom',
+                metars: [],
+              },
+            },
+          },
+        ])
+        console.log(route)
+      },
+    })
+    return pos ? <Marker position={pos} /> : null
+  }
   return (
     <MapContainer
       style={{ height: '100%', width: '100%' }}
@@ -19,7 +55,7 @@ function LeafletMap() {
       zoom={6}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors. NOT FOR OPERATIONAL USE'
         url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
 
@@ -36,12 +72,16 @@ function LeafletMap() {
                     <div>
                       <strong>{props.ident}</strong>
                       <ul>
-                        <li>METAR: {props.metars[props.metars.length - 1]}</li>
+                        <li key={poi.key}>
+                          METAR: {props.metars[props.metars.length - 1]}
+                        </li>
                         {props.runways.map((runway) => {
                           return (
-                            <li key={runway.ident}>
-                              Runway: {runway.he_ident} - {runway.le_ident}
-                            </li>
+                            <>
+                              <li key={crypto.randomUUID()}>
+                                Runway: {runway.he_ident} - {runway.le_ident}
+                              </li>
+                            </>
                           )
                         })}
                       </ul>
@@ -58,7 +98,7 @@ function LeafletMap() {
           </>
         )
       })}
-      {/* <GeoJSON data={route[0].geoJSON} /> */}
+      <AddMarker />
     </MapContainer>
   )
 }

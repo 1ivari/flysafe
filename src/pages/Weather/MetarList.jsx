@@ -12,7 +12,11 @@ function MetarList() {
         <NoRouteCard />
       ) : (
         route
-          .filter((item) => item.geoJSON.properties.type !== 'VFR REP')
+          .filter(
+            (item) =>
+              item.geoJSON.properties.type !== 'VFR REP' &&
+              item.geoJSON.properties.type !== 'custom'
+          )
           .map((obj, idx) => {
             return (
               <div
