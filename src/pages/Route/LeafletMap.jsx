@@ -11,20 +11,104 @@ import {
   useMap,
 } from 'react-leaflet'
 import greatCircle from '@turf/great-circle'
+import { Input } from 'postcss'
 
 function LeafletMap() {
   const { route, setRoute } = useContext(AppContext)
-  console.log(
-    'rendering route map for: ',
-    route.map((item) => item.geoJSON.properties.ident)
-  )
 
-  function AddMarker() {
+  function MarkerForAirports(props) {
+    const poi = props.poi
+    const properties = poi.geoJSON.properties
+    return (
+      <>
+        <GeoJSON key={poi.key} data={poi.geoJSON}>
+          <Popup>
+            {
+              <div>
+                <strong>{properties.ident}</strong>
+                <ul>
+                  <li key={poi.key}>
+                    METAR: {properties.metars[properties.metars.length - 1]}
+                  </li>
+                  {properties.runways.map((runway) => {
+                    return (
+                      <>
+                        <li key={crypto.randomUUID()}>
+                          Runway: {runway.he_ident} - {runway.le_ident}
+                        </li>
+                      </>
+                    )
+                  })}
+                </ul>
+              </div>
+            }
+          </Popup>
+        </GeoJSON>
+      </>
+    )
+  }
+
+  function MarkerForSmallAirports(props) {
+    const poi = props.poi
+    const properties = poi.geoJSON.properties
+    return (
+      <>
+        <GeoJSON key={poi.key} data={poi.geoJSON}>
+          <Popup>
+            {
+              <div>
+                <strong>{properties.ident}</strong>
+                <ul>
+                  {properties.runways.map((runway) => {
+                    return (
+                      <>
+                        <li key={crypto.randomUUID()}>
+                          Runway: {runway.he_ident} - {runway.le_ident}
+                        </li>
+                      </>
+                    )
+                  })}
+                </ul>
+              </div>
+            }
+          </Popup>
+        </GeoJSON>
+      </>
+    )
+  }
+
+  function MarkerForCustom(props) {
+    const poi = props.poi
+    const idx = props.idx
+    const properties = poi.geoJSON.properties
+    return (
+      <>
+        <GeoJSON key={poi.key} data={poi.geoJSON}>
+          <Popup>
+            {
+              <input
+                className='input bg-primary-content'
+                defaultValue={props.ident}
+                onChange={(e) => {
+                  const newRoute = [...route]
+                  newRoute[idx].geoJSON.properties.ident = e.target.value
+                  setRoute(newRoute)
+                  console.log(poi.key)
+                }}
+                type='text'
+              ></input>
+            }
+          </Popup>
+        </GeoJSON>
+      </>
+    )
+  }
+
+  function AddCustomMarkerOnClick() {
     const [pos, setPos] = useState(null)
     const map = useMapEvents({
       click: (e) => {
         setPos(e.latlng)
-        console.log('click:', pos)
         setRoute([
           ...route,
           {
@@ -43,11 +127,12 @@ function LeafletMap() {
             },
           },
         ])
-        console.log(route)
       },
     })
+
     return pos ? <Marker position={pos} /> : null
   }
+
   return (
     <MapContainer
       style={{ height: '100%', width: '100%' }}
@@ -63,42 +148,24 @@ function LeafletMap() {
         const props = poi.geoJSON.properties
         return (
           <>
-            <GeoJSON data={poi.geoJSON}>
-              {props.type === 'medium_airport' ||
-              props.type === 'large_airport' ? (
-                // Popup for airports
-                <Popup>
-                  {
-                    <div>
-                      <strong>{props.ident}</strong>
-                      <ul>
-                        <li key={poi.key}>
-                          METAR: {props.metars[props.metars.length - 1]}
-                        </li>
-                        {props.runways.map((runway) => {
-                          return (
-                            <>
-                              <li key={crypto.randomUUID()}>
-                                Runway: {runway.he_ident} - {runway.le_ident}
-                              </li>
-                            </>
-                          )
-                        })}
-                      </ul>
-                    </div>
-                  }
-                </Popup>
-              ) : null}
-            </GeoJSON>
+            {props.type === 'medium_airport' ||
+            props.type === 'large_airport' ? (
+              <MarkerForAirports poi={poi} />
+            ) : props.type === 'custom' ? (
+              <MarkerForCustom poi={poi} idx={idx} />
+            ) : props.type === 'small_airport' ? (
+              <MarkerForSmallAirports poi={poi} />
+            ) : null}
             {idx > 0 ? (
               <GeoJSON
+                key={crypto.randomUUID()}
                 data={greatCircle(arr[idx - 1].geoJSON, arr[idx].geoJSON)}
               />
             ) : null}
           </>
         )
       })}
-      <AddMarker />
+      <AddCustomMarkerOnClick />
     </MapContainer>
   )
 }
