@@ -37,7 +37,7 @@ App is available at https://magenta-flightplan.vercel.app/. To run it in your ow
 You can also fetch the wind data as follows:
 * Input Plan alt for the legs
 * Go to the menu top left and press "fetch wind". This will fetch the wind for the selected altitude from FMI. 
-6. Print the OFP. Simply press <kbd>^P</kbd> and you get a formatted print preview. 
+6. Print the OFP. Simply press <kbd>CTRL + P</kbd> and you get a formatted print preview. 
 
 
 # Getting Started with Create React App
