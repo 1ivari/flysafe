@@ -12,6 +12,9 @@
 /build
 
 # misc
+/.vscode
+/unused
+/notes.txt
 .DS_Store
 .env
 .env.local
