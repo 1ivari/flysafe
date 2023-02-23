@@ -11,10 +11,15 @@ import {
   useMap,
 } from 'react-leaflet'
 import greatCircle from '@turf/great-circle'
-import { Input } from 'postcss'
+import L from 'leaflet'
 
 function LeafletMap() {
   const { route, setRoute } = useContext(AppContext)
+  const mapRef = useRef()
+
+  useEffect(() => {
+    console.log(mapRef)
+  }, [mapRef])
 
   function MarkerForAirports(props) {
     const poi = props.poi
@@ -51,9 +56,27 @@ function LeafletMap() {
   function MarkerForSmallAirports(props) {
     const poi = props.poi
     const properties = poi.geoJSON.properties
+    var greenIcon = new L.Icon({
+      iconUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+      shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    })
     return (
       <>
-        <GeoJSON key={poi.key} data={poi.geoJSON}>
+        <GeoJSON
+          key={poi.key}
+          data={poi.geoJSON}
+          pointToLayer={function (feature, latlng) {
+            return L.marker(latlng, {
+              icon: greenIcon,
+            })
+          }}
+        >
           <Popup>
             {
               <div>
@@ -80,23 +103,44 @@ function LeafletMap() {
   function MarkerForCustom(props) {
     const poi = props.poi
     const idx = props.idx
-    const properties = poi.geoJSON.properties
+    var violetIcon = new L.Icon({
+      iconUrl:
+        'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-violet.png',
+      shadowUrl:
+        'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    })
     return (
       <>
-        <GeoJSON key={poi.key} data={poi.geoJSON}>
+        <GeoJSON
+          key={poi.key}
+          data={poi.geoJSON}
+          pointToLayer={function (feature, latlng) {
+            return L.marker(latlng, {
+              icon: violetIcon,
+            })
+          }}
+        >
           <Popup>
             {
-              <input
-                className='input bg-primary-content'
-                defaultValue={props.ident}
-                onChange={(e) => {
-                  const newRoute = [...route]
-                  newRoute[idx].geoJSON.properties.ident = e.target.value
-                  setRoute(newRoute)
-                  console.log(poi.key)
-                }}
-                type='text'
-              ></input>
+              <form action=''>
+                <label htmlFor='ident'>Ident</label>
+
+                <input
+                  className='input bg-primary-content'
+                  defaultValue={props.ident}
+                  onChange={(e) => {
+                    const newRoute = [...route]
+                    newRoute[idx].geoJSON.properties.ident = e.target.value
+                    setRoute(newRoute)
+                    console.log(poi.key)
+                  }}
+                  type='text'
+                ></input>
+              </form>
             }
           </Popup>
         </GeoJSON>
@@ -105,6 +149,7 @@ function LeafletMap() {
   }
 
   function AddCustomMarkerOnClick() {
+    function ptoLayer() {}
     const [pos, setPos] = useState(null)
     const map = useMapEvents({
       click: (e) => {
@@ -135,6 +180,7 @@ function LeafletMap() {
 
   return (
     <MapContainer
+      ref={mapRef}
       style={{ height: '100%', width: '100%' }}
       center={[61.76, 21.48]}
       zoom={6}
