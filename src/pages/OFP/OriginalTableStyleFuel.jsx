@@ -1,4 +1,9 @@
 import React from 'react'
+import { useContext } from 'react'
+import dayjs from 'dayjs'
+import duration from 'dayjs/plugin/duration'
+import AppContext from '../../context/AppContext'
+dayjs.extend(duration)
 
 const stylingObject = {
   td: {
@@ -11,6 +16,9 @@ const stylingObject = {
 }
 
 function OriginalTableStyleFuel() {
+  const { basicData, setBasicData, ofp } = useContext(AppContext)
+  const lastOfpRow = ofp[ofp.length - 1]
+  const taxiFuel = 5
   return (
     <div id='fuelTable' className='table table-compact'>
       <thead>
@@ -37,18 +45,18 @@ function OriginalTableStyleFuel() {
           <td style={stylingObject.td}>Trip</td>
           <td style={stylingObject.td}>
             <input
-              className=' input input-xs text-base max-w-xs w-12 text-center'
-              defaultValue='36.0'
+              type='number'
+              value={basicData.tripFuel}
+              onChange={(e) =>
+                setBasicData({ ...basicData, [e.target.name]: e.target.value })
+              }
+              name='tripFuel'
+              className=' input input-primary input-xs text-base max-w-xs w-12 text-center'
             />
           </td>
-          <td style={stylingObject.td}>1:02</td>
+          <td style={stylingObject.td}>{lastOfpRow.timeAcc}</td>
           <td style={stylingObject.td}>
-            <input
-              className='input input-xs text-base max-w-xs w-12 text-center'
-              name=''
-              id=''
-              defaultValue='37.0'
-            />
+            {Number(lastOfpRow.timeAccRaw * basicData.tripFuel).toFixed(1)}
           </td>
           <td style={stylingObject.td}></td>
           <td style={stylingObject.td}>
@@ -211,13 +219,18 @@ function OriginalTableStyleFuel() {
           <td style={stylingObject.td} colSpan='2'>
             Take-off
           </td>
-          <td style={stylingObject.td}>0:00</td>
           <td style={stylingObject.td}>
-            <input
-              className='input input-xs text-base max-w-xs w-12 text-center'
-              name=''
-              id=''
-            />
+            {basicData.rampFuel > 5
+              ? dayjs
+                  .duration(
+                    (basicData.rampFuel - taxiFuel) / basicData.tripFuel,
+                    'hours'
+                  )
+                  .format('HH:mm')
+              : '00:00'}
+          </td>
+          <td style={stylingObject.td}>
+            {basicData.rampFuel > 5 ? basicData.rampFuel - taxiFuel : 0}
           </td>
           <td style={stylingObject.td}></td>
           <td style={stylingObject.td}>
@@ -232,13 +245,9 @@ function OriginalTableStyleFuel() {
           <td style={stylingObject.td} colSpan='2'>
             Taxi
           </td>
-          <td style={stylingObject.td}>0:00</td>
+          <td style={stylingObject.td}></td>
           <td style={stylingObject.td}>
-            <input
-              className='input input-xs text-base max-w-xs w-12 text-center'
-              name=''
-              id=''
-            />
+            {basicData.rampFuel > 5 ? taxiFuel : 0}
           </td>
           <td style={stylingObject.td}></td>
           <td style={stylingObject.td}>
@@ -256,8 +265,13 @@ function OriginalTableStyleFuel() {
           <td style={stylingObject.td}></td>
           <td style={stylingObject.td}>
             <input
-              className='input input-xs text-base max-w-xs w-12 text-center'
-              name=''
+              type='number'
+              value={basicData.rampFuel}
+              onChange={(e) =>
+                setBasicData({ ...basicData, [e.target.name]: e.target.value })
+              }
+              className='input input-primary input-xs text-base max-w-xs w-12 text-center'
+              name='rampFuel'
               id=''
             />
           </td>

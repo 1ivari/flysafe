@@ -16,14 +16,15 @@ function MobileStyleOFP(props) {
               className='collapse collapse-arrow border border-base-300 bg-base-100 rounded-box my-1'
             >
               <input type='checkbox' />
-              <div className='collapse-title grid grid-cols-5 justify-items-center items-center text-center'>
+              <div className='collapse-title grid grid-cols-6 justify-items-center items-center text-center'>
                 {idx === 0 ? (
                   <>
                     <div className='text-md mb-2'>Leg</div>
                     <div className='text-md mb-2'>MH</div>
                     <div className='text-md mb-2'>TC</div>
-                    <div className='text-md mb-2'>Time</div>
                     <div className='text-md mb-2'>Dist.</div>
+                    <div className='text-md mb-2'>Time</div>
+                    <div className='text-md mb-2'>AccTime</div>
                   </>
                 ) : null}
                 <div className='text-sm font-medium'>{row.description}</div>
@@ -47,46 +48,61 @@ function MobileStyleOFP(props) {
                   </motion.div>
                 </div>
                 <div className='text-sm'>{row.tc.toFixed(0)}°</div>
-                <div className='text-sm'>{row.timeInt}</div>
                 <div className='text-sm'>{row.distInt.toFixed(0)} NM</div>
+                <div className='text-sm'>{row.timeInt}</div>
+                <div className='text-sm'>{row.timeAcc}</div>
               </div>
               <div className='collapse-content'>
-                <div className='grid grid-cols-4 justify-items-center items-center mt-2 border border-base-300 rounded-box p-2'>
+                <div className='grid grid-cols-5 justify-items-center items-center mt-2 border border-base-300 rounded-box p-2'>
                   <div className='text-md'>Plan Alt. (ft)</div>
                   <div className='text-md'>TAS (kt)</div>
                   <div className='text-md'>Wind (°)</div>
                   <div className='text-md'>Wind (kt)</div>
+                  <div className='text-md'>Extra time (min)</div>
                   <input
                     id={row.key}
                     value={row.planAlt}
                     name='planAlt'
+                    type='number'
                     onChange={(e) => handleChange(e)}
                     disabled={ofpLock}
-                    className='input input-xs text-base max-w-xs w-14 text-center m-2'
+                    className='input input-primary input-xs text-base max-w-xs w-14 text-center m-2'
                   />
                   <input
                     id={row.key}
                     value={row.tas}
                     name='tas'
+                    type='number'
                     onChange={(e) => handleChangeRecalculate(e)}
                     disabled={ofpLock}
-                    className='input input-xs text-base max-w-xs w-14 text-center m-2'
+                    className='input input-primary input-xs text-base max-w-xs w-14 text-center m-2'
                   />
                   <input
                     id={row.key}
                     value={Math.round(row.wind)}
                     name='wind'
+                    type='number'
                     onChange={(e) => handleChangeRecalculate(e)}
                     disabled={ofpLock}
-                    className='input input-xs text-base max-w-xs w-14 text-center m-2'
+                    className='input input-primary input-xs text-base max-w-xs w-14 text-center m-2'
                   />
                   <input
                     id={row.key}
                     value={Math.round(row.windSpeed)}
                     name='windSpeed'
+                    type='number'
                     onChange={(e) => handleChangeRecalculate(e)}
                     disabled={ofpLock}
-                    className='input input-xs text-base max-w-xs w-14 text-center m-2'
+                    className='input input-primary input-xs text-base max-w-xs w-14 text-center m-2'
+                  />
+                  <input
+                    id={row.key}
+                    value={row.timeAdd}
+                    type='number'
+                    name='timeAdd'
+                    onChange={(e) => handleChangeRecalculate(e)}
+                    className='input input-primary input-xs text-base max-w-xs w-14 text-center'
+                    disabled={ofpLock}
                   />
                 </div>
 

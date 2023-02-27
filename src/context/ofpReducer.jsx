@@ -30,6 +30,7 @@ let OfpRow = {
   gs: 0,
   timeInt: '',
   timeIntRaw: 0,
+  timeAdd: 0,
   timeAcc: '',
   timeAccRaw: 0,
   eto: '',
@@ -59,7 +60,7 @@ export const ofpReducer = (state, action) => {
       let sumNum = Number(0)
       return state.map((obj) => {
         if (obj.key === payload.id) {
-          // take wind ito account
+          // take wind into account
           const values = calculateOFP(
             obj.tc,
             obj.tas,
@@ -69,11 +70,12 @@ export const ofpReducer = (state, action) => {
             obj.declination
           )
 
-          sumNum += values.timeIntervalRaw
+          sumNum = sumNum + values.timeIntervalRaw + Number(obj.timeAdd) / 60
           return {
             ...obj,
             timeInt: values.timeIntervalDayjs.format('HH:mm'),
             timeAcc: dayjs.duration(sumNum, 'hours').format('HH:mm'),
+            timeAccRaw: sumNum,
             wca: values.windCorrectionAngle,
             gs: values.groundSpeed,
             th: values.trueHeading,
@@ -83,10 +85,11 @@ export const ofpReducer = (state, action) => {
           if (obj.tas === 0) {
             return { ...obj }
           } else {
-            sumNum += obj.distInt / obj.gs
+            sumNum = sumNum + obj.distInt / obj.gs + Number(obj.timeAdd) / 60
             return {
               ...obj,
               timeAcc: dayjs.duration(sumNum, 'hours').format('HH:mm'),
+              timeAccRaw: sumNum,
             }
           }
         }

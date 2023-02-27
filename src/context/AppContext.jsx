@@ -14,6 +14,9 @@ export const AppContextProvider = ({ children }) => {
     arrival: '',
     rules: 'vfr',
     defaultTas: 0,
+    rampFuel: 0,
+    tripFuel: 40,
+    taxiFuel: 5,
   })
 
   const [wnb, setWnb] = useState({

@@ -61,6 +61,10 @@ export default function OriginalTableStyleOFP(props) {
             <span className='text-[9px] lowercase'>(hh:mm)</span>
           </th>
           <th>
+            Add <br />
+            <span className='text-[9px] lowercase'>(min)</span>
+          </th>
+          <th>
             Time Acc <br />
             <span className='text-[9px] lowercase'>(hh:mm)</span>
           </th>
@@ -82,12 +86,13 @@ export default function OriginalTableStyleOFP(props) {
                   key={row.key}
                   value={row.minAlt}
                   name='minAlt'
+                  type='number'
                   onChange={
                     idx === 0
                       ? (e) => handleChangeAll(e)
                       : (e) => handleChange(e)
                   }
-                  className='input input-xs text-base max-w-xs w-14 text-center'
+                  className='input input-primary input-xs text-base max-w-xs w-14 text-center'
                   disabled={ofpLock}
                 />
               </td>
@@ -96,12 +101,13 @@ export default function OriginalTableStyleOFP(props) {
                   id={row.key}
                   value={row.planAlt}
                   name='planAlt'
+                  type='number'
                   onChange={
                     idx === 0
                       ? (e) => handleChangeAll(e)
                       : (e) => handleChange(e)
                   }
-                  className='input input-xs text-base max-w-xs w-14 text-center'
+                  className='input input-primary input-xs text-base max-w-xs w-14 text-center'
                   disabled={ofpLock}
                 />
               </td>
@@ -110,12 +116,13 @@ export default function OriginalTableStyleOFP(props) {
                   id={row.key}
                   value={row.tas}
                   name='tas'
+                  type='number'
                   onChange={
                     idx === 0
                       ? (e) => handleChangeAllRecalculate(e)
                       : (e) => handleChangeRecalculate(e)
                   }
-                  className='input input-xs text-base max-w-xs w-12 text-center'
+                  className='input input-primary input-xs text-base max-w-xs w-12 text-center'
                   disabled={ofpLock}
                 />
               </td>
@@ -125,12 +132,13 @@ export default function OriginalTableStyleOFP(props) {
                   key={row.key}
                   value={Math.round(row.wind)}
                   name='wind'
+                  type='number'
                   onChange={
                     idx === 0
                       ? (e) => handleChangeAllRecalculate(e)
                       : (e) => handleChangeRecalculate(e)
                   }
-                  className='input input-xs text-base max-w-xs w-12 text-center'
+                  className='input input-primary input-xs text-base max-w-xs w-12 text-center'
                   disabled={ofpLock}
                 />
               </td>
@@ -140,12 +148,13 @@ export default function OriginalTableStyleOFP(props) {
                   key={row.key}
                   value={Math.round(row.windSpeed)}
                   name='windSpeed'
+                  type='number'
                   onChange={
                     idx === 0
                       ? (e) => handleChangeAllRecalculate(e)
                       : (e) => handleChangeRecalculate(e)
                   }
-                  className='input input-xs text-base max-w-xs w-10 text-center'
+                  className='input input-primary input-xs text-base max-w-xs w-10 text-center'
                   disabled={ofpLock}
                 />
               </td>
@@ -162,6 +171,17 @@ export default function OriginalTableStyleOFP(props) {
               <td>{row.distAcc.toFixed(0)} NM</td>
               <td>{row.gs.toFixed(0)} kt</td>
               <td>{row.timeInt}</td>
+              <td>
+                <input
+                  id={row.key}
+                  value={row.timeAdd}
+                  type='number'
+                  name='timeAdd'
+                  onChange={(e) => handleChangeRecalculate(e)}
+                  className='input input-primary input-xs text-base max-w-xs w-10 text-center'
+                  disabled={ofpLock}
+                />
+              </td>
               <td>{row.timeAcc}</td>
               <td></td>
               <td></td>
