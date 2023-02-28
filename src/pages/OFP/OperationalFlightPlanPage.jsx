@@ -9,6 +9,7 @@ import MobileStyleOFP from './MobileStyleOFP'
 import OriginalTableStyleBasicData from './OriginalTableStyleBasicData'
 import RadioFrequencyTable from './RadioFrequencyTable'
 import OriginalTableStyleFuel from './OriginalTableStyleFuel'
+import OriginalPerfTable from './OriginalPerfTable'
 import FmiDataProviderV2 from '../../components/FmiDataProviderV2'
 import Drawer from '../../components/Drawer'
 import NoOfpCard from './NoOfpCard'
@@ -156,6 +157,14 @@ function OperationalFlightPlanPage() {
                 <div className='grow-0'>
                   <RadioFrequencyTable />
                 </div>
+                {/* <div id='perfTable' className='collapse collapse-arrow'> */}
+                {/* <input type='checkbox' /> */}
+                {/* <div className='collapse-title'>Airport Performance</div> */}
+                {/* <div className='collapse-content '> */}
+                <OriginalPerfTable />
+                {/* </div> */}
+                {/* </div> */}
+
                 <OriginalTableStyleFuel
                   ofp={ofp}
                   basicData={basicData}
@@ -175,16 +184,21 @@ function OperationalFlightPlanPage() {
               handleChange={handleChange}
               ofpLock={ofpLock}
             />
-            <div className='mt-4 flex grow-0 justify-center'>
-              <RadioFrequencyTable />
-            </div>
-            <div className='mt-4 flex justify-center'>
+
+            <div className='my-8 flex justify-center'>
               <OriginalTableStyleFuel
                 ofp={ofp}
                 basicData={basicData}
                 setBasicData={setBasicData}
                 dispatch={dispatch}
               />
+              <hr />
+            </div>
+            <div className='my-8  flex justify-center'>
+              <OriginalPerfTable />
+            </div>
+            <div className='my-8 pb-8 flex grow-0 justify-center'>
+              <RadioFrequencyTable />
             </div>
 
             <ProgressStepsMobile

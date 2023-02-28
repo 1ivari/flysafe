@@ -22,7 +22,8 @@ function OriginalTableStyleFuel(props) {
   const finalResHrs = 0.5
   const finalResFuel = Number(basicData.fuelConsumption * finalResHrs)
   const tripFuel = Number(lastOfpRow.timeAccRaw * basicData.fuelConsumption)
-  const toFuel = basicData.rampFuel > 5 ? basicData.rampFuel - taxiFuel : 0
+  const toFuel =
+    basicData.rampFuel > taxiFuel ? basicData.rampFuel - taxiFuel : 0
 
   const [contFuel, setContFuel] = useState(7)
   const [alt1Fuel, setAlt1Fuel] = useState(0)

@@ -76,6 +76,12 @@
     left: 0;
   }
 
+  #perfTable {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+  }
+
   td {
     border: 1px solid black;
   }
