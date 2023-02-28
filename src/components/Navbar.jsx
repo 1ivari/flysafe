@@ -28,7 +28,7 @@ function Navbar() {
           <input
             type='checkbox'
             checked={drawerOpen}
-            onClick={(e) => {
+            onChange={(e) => {
               setDrawerOpen(!drawerOpen)
             }}
           />
@@ -104,7 +104,7 @@ function Navbar() {
           <input
             type='checkbox'
             checked={drawerOpen}
-            onClick={() => {
+            onChange={() => {
               setDrawerOpen(!drawerOpen)
             }}
           />

@@ -7,7 +7,7 @@ import useUpdateEffect from '../hooks/useUpdateEffect'
 function FmiDataProviderV2() {
   const [fmiData, setFmiData] = useState({})
   const [loading, setLoading] = useState(false)
-  const { ofp, dispatch } = useContext(AppContext)
+  const { ofp, dispatch, basicData } = useContext(AppContext)
   // const [ofpSlice, setOfpSlice] = useState(ofp.slice(1))
 
   // See for query definitions
@@ -124,6 +124,14 @@ function FmiDataProviderV2() {
         },
       })
       dispatch({ type: 'RECALCULATE', payload: { id: fmiData.key } })
+      dispatch({
+        type: 'RECALCULATE_FUEL',
+        payload: {
+          rampFuel: basicData.rampFuel,
+          fuelConsumption: basicData.fuelConsumption,
+          taxiFuel: basicData.taxiFuel,
+        },
+      })
     }
   }, [fmiData.key])
 

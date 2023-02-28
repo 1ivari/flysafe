@@ -15,7 +15,7 @@ export const AppContextProvider = ({ children }) => {
     rules: 'vfr',
     defaultTas: 0,
     rampFuel: 0,
-    tripFuel: 40,
+    fuelConsumption: 40,
     taxiFuel: 5,
   })
 

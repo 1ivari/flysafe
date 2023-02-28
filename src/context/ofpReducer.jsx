@@ -35,7 +35,7 @@ let OfpRow = {
   timeAccRaw: 0,
   eto: '',
   ato: '',
-  fuelRem: '',
+  fuelRem: 0,
   remark: '',
 }
 
@@ -56,8 +56,28 @@ export const ofpReducer = (state, action) => {
           : item
       )
 
+    case 'RECALCULATE_FUEL':
+      let sumConsumption = Number(0)
+      console.log(
+        'recalcd fuel with consumption: ' +
+          payload.fuelConsumption +
+          ' taxifuel: ' +
+          payload.taxiFuel +
+          ' rampfuel: ' +
+          payload.rampFuel
+      )
+      return state.map((obj) => {
+        sumConsumption += payload.fuelConsumption * obj.timeIntRaw
+        return {
+          ...obj,
+          fuelRem: payload.rampFuel - payload.taxiFuel - sumConsumption,
+        }
+      })
+
     case 'RECALCULATE': {
-      let sumNum = Number(0)
+      let sumTime = Number(0)
+      let timeAdder = Number(0)
+
       return state.map((obj) => {
         if (obj.key === payload.id) {
           // take wind into account
@@ -69,13 +89,14 @@ export const ofpReducer = (state, action) => {
             obj.distInt,
             obj.declination
           )
-
-          sumNum = sumNum + values.timeIntervalRaw + Number(obj.timeAdd) / 60
+          timeAdder = values.timeIntervalRaw + Number(obj.timeAdd) / 60
+          sumTime += timeAdder
           return {
             ...obj,
             timeInt: values.timeIntervalDayjs.format('HH:mm'),
-            timeAcc: dayjs.duration(sumNum, 'hours').format('HH:mm'),
-            timeAccRaw: sumNum,
+            timeIntRaw: timeAdder,
+            timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
+            timeAccRaw: sumTime,
             wca: values.windCorrectionAngle,
             gs: values.groundSpeed,
             th: values.trueHeading,
@@ -85,11 +106,13 @@ export const ofpReducer = (state, action) => {
           if (obj.tas === 0) {
             return { ...obj }
           } else {
-            sumNum = sumNum + obj.distInt / obj.gs + Number(obj.timeAdd) / 60
+            timeAdder = obj.distInt / obj.gs + Number(obj.timeAdd) / 60
+            sumTime += timeAdder
+
             return {
               ...obj,
-              timeAcc: dayjs.duration(sumNum, 'hours').format('HH:mm'),
-              timeAccRaw: sumNum,
+              timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
+              timeAccRaw: sumTime,
             }
           }
         }
@@ -202,7 +225,9 @@ export const ofpReducer = (state, action) => {
               tc: trueCourse360,
               tas: tas,
               timeInt: values.timeIntervalDayjs.format('HH:mm'),
+              timeIntRaw: values.timeIntervalRaw,
               timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
+              timeAccRaw: sumTime,
               wind: wind,
               windSpeed: windSpeed,
               wca: values.windCorrectionAngle,

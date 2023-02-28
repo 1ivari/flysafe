@@ -185,7 +185,7 @@ export default function OriginalTableStyleOFP(props) {
               <td>{row.timeAcc}</td>
               <td></td>
               <td></td>
-              <td></td>
+              <td>{row.fuelRem.toFixed(0)}</td>
               <td></td>
               <td></td>
             </tr>

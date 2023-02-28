@@ -63,7 +63,8 @@ function DrawerContent() {
 
 // New imports after utils folder created
 function OperationalFlightPlanPage() {
-  const { ofp, dispatch, ofpLock } = useContext(AppContext)
+  const { ofp, dispatch, ofpLock, basicData, setBasicData } =
+    useContext(AppContext)
 
   const handleChange = (e) => {
     dispatch({
@@ -77,7 +78,18 @@ function OperationalFlightPlanPage() {
       type: 'CHANGE_ITEM',
       payload: { name: e.target.name, value: e.target.value, id: e.target.id },
     })
-    dispatch({ type: 'RECALCULATE', payload: { id: e.target.id } })
+    dispatch({
+      type: 'RECALCULATE',
+      payload: { id: e.target.id },
+    })
+    dispatch({
+      type: 'RECALCULATE_FUEL',
+      payload: {
+        rampFuel: basicData.rampFuel,
+        fuelConsumption: basicData.fuelConsumption,
+        taxiFuel: basicData.taxiFuel,
+      },
+    })
   }
 
   const handleChangeAll = (e) => {
@@ -101,7 +113,18 @@ function OperationalFlightPlanPage() {
         type: 'CHANGE_ITEM',
         payload: { name: e.target.name, value: e.target.value, id: key },
       })
-      dispatch({ type: 'RECALCULATE', payload: { id: key } })
+      dispatch({
+        type: 'RECALCULATE',
+        payload: { id: key },
+      })
+    })
+    dispatch({
+      type: 'RECALCULATE_FUEL',
+      payload: {
+        rampFuel: basicData.rampFuel,
+        fuelConsumption: basicData.fuelConsumption,
+        taxiFuel: basicData.taxiFuel,
+      },
     })
   }
 
@@ -133,7 +156,12 @@ function OperationalFlightPlanPage() {
                 <div className='grow-0'>
                   <RadioFrequencyTable />
                 </div>
-                <OriginalTableStyleFuel />
+                <OriginalTableStyleFuel
+                  ofp={ofp}
+                  basicData={basicData}
+                  setBasicData={setBasicData}
+                  dispatch={dispatch}
+                />
               </div>
             </div>
           </Drawer>
@@ -151,7 +179,12 @@ function OperationalFlightPlanPage() {
               <RadioFrequencyTable />
             </div>
             <div className='mt-4 flex justify-center'>
-              <OriginalTableStyleFuel />
+              <OriginalTableStyleFuel
+                ofp={ofp}
+                basicData={basicData}
+                setBasicData={setBasicData}
+                dispatch={dispatch}
+              />
             </div>
 
             <ProgressStepsMobile
