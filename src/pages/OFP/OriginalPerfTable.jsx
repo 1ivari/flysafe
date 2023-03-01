@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useRef } from 'react'
 import constants from '../../utils/constants'
 
 function OriginalPerfTable() {
@@ -6,6 +6,8 @@ function OriginalPerfTable() {
   const [alt, setAlt] = useState(0)
   const [toDist, setToDist] = useState(1390)
   const [ldgDist, setLdgDist] = useState(1215)
+  const pave = useRef()
+  const safe = useRef()
 
   const toPerf = [
     {
@@ -84,20 +86,6 @@ function OriginalPerfTable() {
       distance: [1410, 1450, 1480, 1520, 1555],
     },
   ]
-
-  // useEffect(() => {
-  //   setToDist(
-  //     toPerf.filter((obj) => obj.presAlt === Number(alt))[0].distance[temp]
-  //   )
-  //   setLdgDist(
-  //     ldgPerf.filter((obj) => obj.presAlt === Number(alt))[0].distance[temp]
-  //   )
-
-  //   console.log(toDist, ldgDist)
-  // }, [alt, temp])
-  const onChange = (e) => {
-    const res = toPerf.filter((obj) => obj.presAlt === 1000)
-  }
 
   return (
     <>
@@ -195,9 +183,15 @@ function OriginalPerfTable() {
               <td>
                 {(toDist * constants.FEET_TO_METERS).toFixed(0)}m ({toDist} ft)
               </td>
+
               <td>
-                {(toDist * 1.25 * constants.FEET_TO_METERS).toFixed(0)}m (
-                {(toDist * 1.25).toFixed(0)} ft)
+                <span
+                  className='tooltip tooltip-right'
+                  data-tip='With 1.25x multiplier to POH'
+                >
+                  {(toDist * 1.25 * constants.FEET_TO_METERS).toFixed(0)}m (
+                  {(toDist * 1.25).toFixed(0)} ft)
+                </span>
               </td>
             </tr>
             <tr>
@@ -207,8 +201,13 @@ function OriginalPerfTable() {
                 ft)
               </td>
               <td>
-                {(ldgDist * 1.45 * constants.FEET_TO_METERS).toFixed(0)}m (
-                {(ldgDist * 1.45).toFixed(0)} ft)
+                <span
+                  className='tooltip tooltip-right'
+                  data-tip='With 1.45x multiplier to POH.'
+                >
+                  {(ldgDist * 1.45 * constants.FEET_TO_METERS).toFixed(0)}m (
+                  {(ldgDist * 1.45).toFixed(0)} ft)
+                </span>
               </td>
             </tr>
             <tr>
@@ -229,7 +228,16 @@ function OriginalPerfTable() {
                     <span>IM SAFE</span>
                     <input
                       type='checkbox'
-                      className='checkbox checkbox-primary'
+                      ref={safe}
+                      className={'checkbox checkbox-primary'}
+                      // onClick is here only to show checkmark on print
+                      onClick={(e) => {
+                        if (e.target.checked) {
+                          e.target.classList.add('checked')
+                        } else {
+                          e.target.classList.remove('checked')
+                        }
+                      }}
                     />
                   </label>
                 </div>
@@ -240,8 +248,17 @@ function OriginalPerfTable() {
                   <label className='input-group'>
                     <span>PAVE</span>
                     <input
+                      ref={pave}
                       type='checkbox'
-                      className='checkbox checkbox-primary'
+                      className={'checkbox checkbox-primary'}
+                      // onClick is here only to show checkmark on print
+                      onClick={(e) => {
+                        if (e.target.checked) {
+                          e.target.classList.add('checked')
+                        } else {
+                          e.target.classList.remove('checked')
+                        }
+                      }}
                     />
                   </label>
                 </div>

@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function OriginalTableStyleOFP(props) {
+export default function LocalOFP(props) {
   const {
     ofp,
     handleChange,
@@ -13,7 +13,7 @@ export default function OriginalTableStyleOFP(props) {
     <table id='ofpTable' className='table tablestyleofp text-center'>
       <thead>
         <tr>
-          <th>Route</th>
+          <th>Routesss</th>
           <th>Min Alt</th>
           <th>Plan Alt</th>
           <th>
@@ -76,7 +76,7 @@ export default function OriginalTableStyleOFP(props) {
         </tr>
       </thead>
       <tbody>
-        {ofp.slice(1).map((row, idx) => {
+        {ofp.slice(0, 1).map((row, idx) => {
           return (
             <tr key={row.key} className='hover'>
               <td>{row.description}</td>

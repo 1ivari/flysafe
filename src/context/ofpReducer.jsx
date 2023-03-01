@@ -144,99 +144,153 @@ export const ofpReducer = (state, action) => {
       return state.filter((item) => item.key !== payload.id)
     }
 
-    case 'CONSTRUCT_FROM_ROUTE':
+    case 'CONSTRUCT_FROM_ROUTE': {
+      const route = payload.obj
+      let sumDistance = 0
+      let sumTime = 0
+      if (route.length > 0) {
+        return route.map((poi, i, arr) => {
+          const properties = poi.geoJSON.properties
+          const desc =
+            i > 0
+              ? arr[i - 1].geoJSON.properties.ident + ' -> ' + properties.ident
+              : 'DEP: ' + properties.ident
+
+          const dist =
+            i > 0
+              ? Number(
+                  distance(arr[i - 1].geoJSON, poi.geoJSON, {
+                    units: 'nauticalmiles',
+                  })
+                )
+              : Number(0)
+          sumDistance += dist
+          // take the starting point declination as in Marilyn
+          const loc =
+            i > 0
+              ? arr[i - 1].geoJSON.geometry.coordinates
+              : poi.geoJSON.geometry.coordinates
+          const magVar = geomag.field(loc[1], loc[0])
+
+          const startCoord =
+            i > 0
+              ? arr[i - 1].geoJSON.geometry.coordinates
+              : poi.geoJSON.geometry.coordinates
+          const midCoord =
+            i > 0
+              ? midpoint(
+                  arr[i - 1].geoJSON.geometry.coordinates,
+                  poi.geoJSON.geometry.coordinates
+                ).geometry.coordinates
+              : poi.geoJSON.geometry.coordinates
+          const endCoord = poi.geoJSON.geometry.coordinates
+
+          const trueCourse180 =
+            i > 0
+              ? Number(
+                  bearing(arr[i - 1].geoJSON.geometry, poi.geoJSON.geometry)
+                )
+              : Number(0)
+
+          const trueCourse360 =
+            trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
+
+          const tas = 90
+          const wind = 0
+          const windSpeed = 0
+
+          const values = calculateOFP(
+            trueCourse360,
+            tas,
+            wind,
+            windSpeed,
+            dist,
+            magVar.declination
+          )
+          sumTime += values.timeIntervalRaw
+
+          return {
+            ...OfpRow,
+            key: poi.key,
+            startCoord: startCoord,
+            midCoord: midCoord,
+            endCoord: endCoord,
+            description: desc,
+            distInt: dist,
+            distAcc: sumDistance,
+            declination: magVar.declination,
+            tc: trueCourse360,
+            tas: tas,
+            timeInt: values.timeIntervalDayjs.format('HH:mm'),
+            timeIntRaw: values.timeIntervalRaw,
+            timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
+            timeAccRaw: sumTime,
+            wind: wind,
+            windSpeed: windSpeed,
+            wca: values.windCorrectionAngle,
+            gs: values.groundSpeed,
+            th: values.trueHeading,
+            mh: values.magHeading,
+          }
+        })
+      } else return initialState
+    }
+
+    case 'CONSTRUCT_LOCAL_FROM_ROUTE':
       {
         const route = payload.obj
         let sumDistance = 0
         let sumTime = 0
-        if (route.length > 0) {
-          return route.map((poi, i, arr) => {
-            const properties = poi.geoJSON.properties
-            const desc =
-              i > 0
-                ? arr[i - 1].geoJSON.properties.ident +
-                  ' -> ' +
-                  properties.ident
-                : 'DEP: ' + properties.ident
+        const ofp = [OfpRow, OfpRow]
+        return ofp
+        // if (route.length === 1) {
+        //   return route.map((poi, i, arr) => {
+        //     const properties = poi.geoJSON.properties
+        //     const desc = 'DEPSSS: ' + properties.ident
 
-            const dist =
-              i > 0
-                ? Number(
-                    distance(arr[i - 1].geoJSON, poi.geoJSON, {
-                      units: 'nauticalmiles',
-                    })
-                  )
-                : Number(0)
-            sumDistance += dist
-            // take the starting point declination as in Marilyn
-            const loc =
-              i > 0
-                ? arr[i - 1].geoJSON.geometry.coordinates
-                : poi.geoJSON.geometry.coordinates
-            const magVar = geomag.field(loc[1], loc[0])
+        //     const dist = 0
+        //     // take the starting point declination as in Marilyn
+        //     const loc = poi.geoJSON.geometry.coordinates
+        //     const magVar = geomag.field(loc[1], loc[0])
 
-            const startCoord =
-              i > 0
-                ? arr[i - 1].geoJSON.geometry.coordinates
-                : poi.geoJSON.geometry.coordinates
-            const midCoord =
-              i > 0
-                ? midpoint(
-                    arr[i - 1].geoJSON.geometry.coordinates,
-                    poi.geoJSON.geometry.coordinates
-                  ).geometry.coordinates
-                : poi.geoJSON.geometry.coordinates
-            const endCoord = poi.geoJSON.geometry.coordinates
+        //     const startCoord = poi.geoJSON.geometry.coordinates
+        //     const midCoord = poi.geoJSON.geometry.coordinates
+        //     const endCoord = poi.geoJSON.geometry.coordinates
 
-            const trueCourse180 =
-              i > 0
-                ? Number(
-                    bearing(arr[i - 1].geoJSON.geometry, poi.geoJSON.geometry)
-                  )
-                : Number(0)
+        //     const trueCourse180 = 0
 
-            const trueCourse360 =
-              trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
+        //     const trueCourse360 =
+        //       trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
 
-            const tas = 90
-            const wind = 0
-            const windSpeed = 0
+        //     const tas = 90
+        //     const wind = 0
+        //     const windSpeed = 0
 
-            const values = calculateOFP(
-              trueCourse360,
-              tas,
-              wind,
-              windSpeed,
-              dist,
-              magVar.declination
-            )
-            sumTime += values.timeIntervalRaw
-
-            return {
-              ...OfpRow,
-              key: poi.key,
-              startCoord: startCoord,
-              midCoord: midCoord,
-              endCoord: endCoord,
-              description: desc,
-              distInt: dist,
-              distAcc: sumDistance,
-              declination: magVar.declination,
-              tc: trueCourse360,
-              tas: tas,
-              timeInt: values.timeIntervalDayjs.format('HH:mm'),
-              timeIntRaw: values.timeIntervalRaw,
-              timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
-              timeAccRaw: sumTime,
-              wind: wind,
-              windSpeed: windSpeed,
-              wca: values.windCorrectionAngle,
-              gs: values.groundSpeed,
-              th: values.trueHeading,
-              mh: values.magHeading,
-            }
-          })
-        } else return initialState
+        //     return {
+        //       ...OfpRow,
+        //       key: poi.key,
+        //       startCoord: startCoord,
+        //       midCoord: midCoord,
+        //       endCoord: endCoord,
+        //       description: desc,
+        //       distInt: dist,
+        //       distAcc: sumDistance,
+        //       declination: magVar.declination,
+        //       tc: trueCourse360,
+        //       tas: tas,
+        //       timeInt: 0,
+        //       timeIntRaw: 0,
+        //       timeAcc: 0,
+        //       timeAccRaw: 0,
+        //       wind: wind,
+        //       windSpeed: windSpeed,
+        //       wca: 0,
+        //       gs: 0,
+        //       th: 0,
+        //       mh: 0,
+        //     }
+        //   })
+        // } else return initialState
       }
 
       break

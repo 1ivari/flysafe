@@ -5,6 +5,7 @@ import ProgressSteps from '../../components/ProgressSteps'
 import ProgressStepsMobile from '../../components/ProgressStepsMobile'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import OriginalTableStyleOFP from './OriginalTableStyleOFP'
+import LocalOFP from './LocalOFP'
 import MobileStyleOFP from './MobileStyleOFP'
 import OriginalTableStyleBasicData from './OriginalTableStyleBasicData'
 import RadioFrequencyTable from './RadioFrequencyTable'
@@ -145,26 +146,31 @@ function OperationalFlightPlanPage() {
               <div className='flex justify-between my-4'>
                 <OriginalTableStyleBasicData />
               </div>
-              <OriginalTableStyleOFP
-                ofp={ofp}
-                handleChange={handleChange}
-                handleChangeRecalculate={handleChangeRecalculate}
-                handleChangeAll={handleChangeAll}
-                handleChangeAllRecalculate={handleChangeAllRecalculate}
-                ofpLock={ofpLock}
-              />
+              {basicData.type === 'route' ? (
+                <OriginalTableStyleOFP
+                  ofp={ofp}
+                  handleChange={handleChange}
+                  handleChangeRecalculate={handleChangeRecalculate}
+                  handleChangeAll={handleChangeAll}
+                  handleChangeAllRecalculate={handleChangeAllRecalculate}
+                  ofpLock={ofpLock}
+                />
+              ) : (
+                <LocalOFP
+                  ofp={ofp}
+                  handleChange={handleChange}
+                  handleChangeRecalculate={handleChangeRecalculate}
+                  handleChangeAll={handleChangeAll}
+                  handleChangeAllRecalculate={handleChangeAllRecalculate}
+                  ofpLock={ofpLock}
+                />
+              )}
+
               <div className='my-4 flex justify-evenly items-center'>
                 <div className='grow-0'>
                   <RadioFrequencyTable />
                 </div>
-                {/* <div id='perfTable' className='collapse collapse-arrow'> */}
-                {/* <input type='checkbox' /> */}
-                {/* <div className='collapse-title'>Airport Performance</div> */}
-                {/* <div className='collapse-content '> */}
                 <OriginalPerfTable />
-                {/* </div> */}
-                {/* </div> */}
-
                 <OriginalTableStyleFuel
                   ofp={ofp}
                   basicData={basicData}
@@ -178,12 +184,14 @@ function OperationalFlightPlanPage() {
       ) : (
         <>
           <Drawer drawerContent={<DrawerContent />}>
-            <MobileStyleOFP
-              ofp={ofp}
-              handleChangeRecalculate={handleChangeRecalculate}
-              handleChange={handleChange}
-              ofpLock={ofpLock}
-            />
+            {basicData.type === 'route' ? (
+              <MobileStyleOFP
+                ofp={ofp}
+                handleChangeRecalculate={handleChangeRecalculate}
+                handleChange={handleChange}
+                ofpLock={ofpLock}
+              />
+            ) : null}
 
             <div className='my-8 flex justify-center'>
               <OriginalTableStyleFuel

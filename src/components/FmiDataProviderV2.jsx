@@ -72,7 +72,15 @@ function FmiDataProviderV2() {
   }
 
   function sourceURLset(coord, planAlt, timeStep) {
-    let height = planAlt * constants.FEET_TO_METERS // meters
+    // Flight level is handled here
+    let value = planAlt.toUpperCase()
+    if (value.includes('FL')) {
+      const flightLevel = Number(value.substring(2))
+      if (!isNaN(flightLevel)) {
+        value = flightLevel * 100
+      }
+    }
+    let height = value * constants.FEET_TO_METERS // meters
     if (height < 20) {
       height = 20
     }

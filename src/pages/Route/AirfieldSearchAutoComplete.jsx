@@ -25,7 +25,8 @@ function AirfieldSearchAutoComplete() {
   const [metarUrl, setMetarUrl] = useState(null)
 
   // get route and setRoute from AppContext
-  const { route, setRoute, dispatch } = useContext(AppContext)
+  const { route, setRoute, dispatch, basicData, setBasicData } =
+    useContext(AppContext)
 
   // Runs every time query changes
   // Checks if query is valid ICAO ident and sets url for fetching data from airportdb and met.no
@@ -106,7 +107,13 @@ function AirfieldSearchAutoComplete() {
   // Construct OFP everytime route changes (except on first render)
   useUpdateEffect(() => {
     dispatch({ type: 'CLEAR' })
-    dispatch({ type: 'CONSTRUCT_FROM_ROUTE', payload: { obj: route } })
+    if (route.length > 1) {
+      dispatch({ type: 'CONSTRUCT_FROM_ROUTE', payload: { obj: route } })
+      setBasicData({ ...basicData, type: 'route' })
+    } else if (route.length === 1) {
+      dispatch({ type: 'CONSTRUCT_LOCAL_FROM_ROUTE', payload: { obj: route } })
+      setBasicData({ ...basicData, type: 'local' })
+    }
   }, [route])
 
   const handleOnSearch = (string, results) => {

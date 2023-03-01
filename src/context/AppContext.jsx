@@ -17,6 +17,7 @@ export const AppContextProvider = ({ children }) => {
     rampFuel: 0,
     fuelConsumption: 40,
     taxiFuel: 5,
+    type: 'route',
   })
 
   const [wnb, setWnb] = useState({
