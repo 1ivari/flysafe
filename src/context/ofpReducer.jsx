@@ -8,34 +8,34 @@ import * as geomag from 'geomag'
 dayjs.extend(duration)
 
 let OfpRow = {
-  key: 0,
-  startCoord: [0, 0],
-  midCoord: [0, 0],
-  endCoord: [0, 0],
-  description: '',
-  minAlt: '',
-  planAlt: '',
-  tas: 0,
-  wind: 0,
-  windSpeed: 0,
-  tc: 0,
-  wca: 0,
-  th: 0,
-  declination: 0,
-  mh: 0,
-  dev: 0,
-  ch: 0,
-  distInt: 0,
-  distAcc: 0,
-  gs: 0,
-  timeInt: '',
-  timeIntRaw: 0,
-  timeAdd: 0,
-  timeAcc: '',
-  timeAccRaw: 0,
+  key: 0, // uuid
+  startCoord: [0, 0], // latlon
+  midCoord: [0, 0], // latlon
+  endCoord: [0, 0], // latlon
+  description: '', // string
+  minAlt: '', //string, feet or FL
+  planAlt: '', // string, feet or FL
+  tas: Number(0), // num, kt
+  wind: Number(0), // num, deg
+  windSpeed: Number(0), // num, kt
+  tc: Number(0), // num, deg
+  wca: Number(0), // num, deg
+  th: Number(0), // num, deg
+  declination: Number(0), //num, deg
+  mh: Number(0), // num, deg
+  dev: Number(0), // num, deg
+  ch: Number(0), // num, deg
+  distInt: Number(0), // num, NM
+  distAcc: Number(0), // num, NM
+  gs: Number(0), // num, kt
+  timeInt: Number(0), // num, minutes
+  timeIntRaw: Number(0), // num, minutes
+  timeAdd: Number(0), // num, minutes
+  timeAcc: Number(0), // num, minutes
+  timeAccRaw: Number(0), // num, minutes
   eto: '',
   ato: '',
-  fuelRem: 0,
+  fuelRem: Number(0), // num,
   remark: '',
 }
 
@@ -58,19 +58,28 @@ export const ofpReducer = (state, action) => {
 
     case 'RECALCULATE_FUEL':
       let sumConsumption = Number(0)
-      console.log(
-        'recalcd fuel with consumption: ' +
-          payload.fuelConsumption +
-          ' taxifuel: ' +
-          payload.taxiFuel +
-          ' rampfuel: ' +
-          payload.rampFuel
-      )
       return state.map((obj) => {
-        sumConsumption += payload.fuelConsumption * obj.timeIntRaw
+        sumConsumption += (payload.fuelConsumption / 60) * obj.timeIntRaw
         return {
           ...obj,
           fuelRem: payload.rampFuel - payload.taxiFuel - sumConsumption,
+        }
+      })
+
+    case 'RECALCULATE_LOCAL':
+      return state.map((obj, idx) => {
+        if (idx === 0) {
+          return obj
+        } else {
+          return {
+            ...obj,
+            timeAcc: Number(obj.timeInt) + Number(obj.timeAdd),
+            fuelRem:
+              payload.rampFuel -
+              payload.taxiFuel -
+              (payload.fuelConsumption / 60) *
+                (Number(obj.timeInt) + Number(obj.timeAdd)),
+          }
         }
       })
 
@@ -89,13 +98,13 @@ export const ofpReducer = (state, action) => {
             obj.distInt,
             obj.declination
           )
-          timeAdder = values.timeIntervalRaw + Number(obj.timeAdd) / 60
+          timeAdder = values.timeIntervalRaw + Number(obj.timeAdd)
           sumTime += timeAdder
           return {
             ...obj,
             timeInt: values.timeIntervalDayjs.format('HH:mm'),
             timeIntRaw: timeAdder,
-            timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
+            timeAcc: dayjs.duration(sumTime, 'minutes').format('HH:mm'),
             timeAccRaw: sumTime,
             wca: values.windCorrectionAngle,
             gs: values.groundSpeed,
@@ -106,12 +115,12 @@ export const ofpReducer = (state, action) => {
           if (obj.tas === 0) {
             return { ...obj }
           } else {
-            timeAdder = obj.distInt / obj.gs + Number(obj.timeAdd) / 60
+            timeAdder = obj.distInt / (obj.gs / 60) + Number(obj.timeAdd)
             sumTime += timeAdder
 
             return {
               ...obj,
-              timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
+              timeAcc: dayjs.duration(sumTime, 'minutes').format('HH:mm'),
               timeAccRaw: sumTime,
             }
           }
@@ -193,7 +202,7 @@ export const ofpReducer = (state, action) => {
               : Number(0)
 
           const trueCourse360 =
-            trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
+            trueCourse180 < 0.5 ? trueCourse180 + 360 : trueCourse180
 
           const tas = 90
           const wind = 0
@@ -223,7 +232,7 @@ export const ofpReducer = (state, action) => {
             tas: tas,
             timeInt: values.timeIntervalDayjs.format('HH:mm'),
             timeIntRaw: values.timeIntervalRaw,
-            timeAcc: dayjs.duration(sumTime, 'hours').format('HH:mm'),
+            timeAcc: dayjs.duration(sumTime, 'minutes').format('HH:mm'),
             timeAccRaw: sumTime,
             wind: wind,
             windSpeed: windSpeed,
@@ -239,58 +248,37 @@ export const ofpReducer = (state, action) => {
     case 'CONSTRUCT_LOCAL_FROM_ROUTE':
       {
         const route = payload.obj
-        let sumDistance = 0
-        let sumTime = 0
-        const ofp = [OfpRow, OfpRow]
+        const poi = route[0] //takeoff point
+        const magVar = geomag.field(
+          poi.geoJSON.geometry.coordinates[1],
+          poi.geoJSON.geometry.coordinates[0]
+        )
+        const ofp = [
+          {
+            ...OfpRow,
+            key: poi.key,
+            startCoord: poi.geoJSON.geometry.coordinates,
+            midCoord: poi.geoJSON.geometry.coordinates,
+            endCoord: poi.geoJSON.geometry.coordinates,
+            description: poi.geoJSON.properties.ident,
+            declination: magVar.declination,
+            timeIntRaw: 0,
+            timeInt: 0,
+          },
+          {
+            ...OfpRow,
+            key: crypto.randomUUID(),
+            startCoord: poi.geoJSON.geometry.coordinates,
+            startCoord: poi.geoJSON.geometry.coordinates,
+            midCoord: poi.geoJSON.geometry.coordinates,
+            endCoord: poi.geoJSON.geometry.coordinates,
+            description: 'LOCAL',
+            declination: magVar.declination,
+            timeIntRaw: 60,
+            timeInt: 60,
+          },
+        ]
         return ofp
-        // if (route.length === 1) {
-        //   return route.map((poi, i, arr) => {
-        //     const properties = poi.geoJSON.properties
-        //     const desc = 'DEPSSS: ' + properties.ident
-
-        //     const dist = 0
-        //     // take the starting point declination as in Marilyn
-        //     const loc = poi.geoJSON.geometry.coordinates
-        //     const magVar = geomag.field(loc[1], loc[0])
-
-        //     const startCoord = poi.geoJSON.geometry.coordinates
-        //     const midCoord = poi.geoJSON.geometry.coordinates
-        //     const endCoord = poi.geoJSON.geometry.coordinates
-
-        //     const trueCourse180 = 0
-
-        //     const trueCourse360 =
-        //       trueCourse180 < 0 ? trueCourse180 + 360 : trueCourse180
-
-        //     const tas = 90
-        //     const wind = 0
-        //     const windSpeed = 0
-
-        //     return {
-        //       ...OfpRow,
-        //       key: poi.key,
-        //       startCoord: startCoord,
-        //       midCoord: midCoord,
-        //       endCoord: endCoord,
-        //       description: desc,
-        //       distInt: dist,
-        //       distAcc: sumDistance,
-        //       declination: magVar.declination,
-        //       tc: trueCourse360,
-        //       tas: tas,
-        //       timeInt: 0,
-        //       timeIntRaw: 0,
-        //       timeAcc: 0,
-        //       timeAccRaw: 0,
-        //       wind: wind,
-        //       windSpeed: windSpeed,
-        //       wca: 0,
-        //       gs: 0,
-        //       th: 0,
-        //       mh: 0,
-        //     }
-        //   })
-        // } else return initialState
       }
 
       break

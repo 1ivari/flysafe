@@ -19,9 +19,11 @@ function OriginalTableStyleFuel(props) {
   const { ofp, basicData, setBasicData, dispatch } = props
   const lastOfpRow = ofp[ofp.length - 1]
   const taxiFuel = basicData.taxiFuel
-  const finalResHrs = 0.5
-  const finalResFuel = Number(basicData.fuelConsumption * finalResHrs)
-  const tripFuel = Number(lastOfpRow.timeAccRaw * basicData.fuelConsumption)
+  const finalResMins = 30
+  const finalResFuel = Number((basicData.fuelConsumption / 60) * finalResMins)
+  const tripFuel = Number(
+    (lastOfpRow.timeAccRaw * basicData.fuelConsumption) / 60
+  )
   const toFuel =
     basicData.rampFuel > taxiFuel ? basicData.rampFuel - taxiFuel : 0
 
@@ -215,7 +217,7 @@ function OriginalTableStyleFuel(props) {
             Final Res
           </td>
           <td style={stylingObject.td}>
-            {dayjs.duration(finalResHrs, 'hours').format(timeFormat)}
+            {dayjs.duration(finalResMins, 'minutes').format(timeFormat)}
           </td>
           <td style={stylingObject.td}>{finalResFuel.toFixed(1)}</td>
           <td style={stylingObject.td}></td>

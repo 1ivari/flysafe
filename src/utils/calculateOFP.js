@@ -18,13 +18,25 @@ function calculateOFP(
     windDirection,
     windSpeed
   )
-  const timeIntervalRaw = Math.ceil(distanceInterval) / Math.floor(groundSpeed)
-  const timeIntervalDayjs = dayjs.duration(timeIntervalRaw, 'hours')
+  const timeIntervalRaw =
+    (Math.ceil(distanceInterval) / Math.floor(groundSpeed)) * 60 // timeinterval in minutes
+  const timeIntervalDayjs = dayjs.duration(timeIntervalRaw, 'minutes')
   // sumNum += int
   // const timeAccumulation = dayjs.duration(sumNum, 'hours')
 
-  const trueHeading = trueCourse + windCorrectionAngle
-  const magHeading = trueHeading - declination
+  let trueHeading = 0
+  if (trueCourse + windCorrectionAngle < 0.5) {
+    trueHeading = trueCourse + windCorrectionAngle + 360
+  } else {
+    trueHeading = trueCourse + windCorrectionAngle
+  }
+
+  let magHeading = 0
+  if (trueHeading - declination < 0.5) {
+    magHeading = trueHeading - declination + 360
+  } else {
+    magHeading = trueHeading - declination
+  }
 
   return {
     windCorrectionAngle,

@@ -6,6 +6,7 @@ import ProgressStepsMobile from '../../components/ProgressStepsMobile'
 import useMediaQuery from '../../hooks/useMediaQuery'
 import OriginalTableStyleOFP from './OriginalTableStyleOFP'
 import LocalOFP from './LocalOFP'
+import MobileLocalOFP from './MobileLocalOFP'
 import MobileStyleOFP from './MobileStyleOFP'
 import OriginalTableStyleBasicData from './OriginalTableStyleBasicData'
 import RadioFrequencyTable from './RadioFrequencyTable'
@@ -130,6 +131,21 @@ function OperationalFlightPlanPage() {
     })
   }
 
+  const handleRecalculateLocal = (e) => {
+    dispatch({
+      type: 'CHANGE_ITEM',
+      payload: { name: e.target.name, value: e.target.value, id: e.target.id },
+    })
+    dispatch({
+      type: 'RECALCULATE_LOCAL',
+      payload: {
+        rampFuel: basicData.rampFuel,
+        fuelConsumption: basicData.fuelConsumption,
+        taxiFuel: basicData.taxiFuel,
+      },
+    })
+  }
+
   const isLargeScreen = useMediaQuery('(min-width: 1024px)')
   return (
     <>
@@ -146,25 +162,25 @@ function OperationalFlightPlanPage() {
               <div className='flex justify-between my-4'>
                 <OriginalTableStyleBasicData />
               </div>
-              {basicData.type === 'route' ? (
-                <OriginalTableStyleOFP
-                  ofp={ofp}
-                  handleChange={handleChange}
-                  handleChangeRecalculate={handleChangeRecalculate}
-                  handleChangeAll={handleChangeAll}
-                  handleChangeAllRecalculate={handleChangeAllRecalculate}
-                  ofpLock={ofpLock}
-                />
-              ) : (
-                <LocalOFP
-                  ofp={ofp}
-                  handleChange={handleChange}
-                  handleChangeRecalculate={handleChangeRecalculate}
-                  handleChangeAll={handleChangeAll}
-                  handleChangeAllRecalculate={handleChangeAllRecalculate}
-                  ofpLock={ofpLock}
-                />
-              )}
+              <div className='flex justify-center my-4'>
+                {basicData.type === 'route' ? (
+                  <OriginalTableStyleOFP
+                    ofp={ofp}
+                    handleChange={handleChange}
+                    handleChangeRecalculate={handleChangeRecalculate}
+                    handleChangeAll={handleChangeAll}
+                    handleChangeAllRecalculate={handleChangeAllRecalculate}
+                    ofpLock={ofpLock}
+                  />
+                ) : (
+                  <LocalOFP
+                    ofp={ofp}
+                    handleChange={handleChange}
+                    handleRecalculateLocal={handleRecalculateLocal}
+                    ofpLock={ofpLock}
+                  />
+                )}
+              </div>
 
               <div className='my-4 flex justify-evenly items-center'>
                 <div className='grow-0'>
@@ -191,7 +207,13 @@ function OperationalFlightPlanPage() {
                 handleChange={handleChange}
                 ofpLock={ofpLock}
               />
-            ) : null}
+            ) : (
+              <MobileLocalOFP
+                ofp={ofp}
+                handleChange={handleChange}
+                handleRecalculateLocal={handleRecalculateLocal}
+              />
+            )}
 
             <div className='my-8 flex justify-center'>
               <OriginalTableStyleFuel
