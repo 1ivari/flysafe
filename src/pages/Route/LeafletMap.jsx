@@ -17,10 +17,6 @@ function LeafletMap() {
   const { route, setRoute } = useContext(AppContext)
   const mapRef = useRef()
 
-  useEffect(() => {
-    console.log(mapRef)
-  }, [mapRef])
-
   function MarkerForAirports(props) {
     const poi = props.poi
     const properties = poi.geoJSON.properties

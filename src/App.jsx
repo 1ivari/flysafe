@@ -10,6 +10,8 @@ import { AppContextProvider } from './context/AppContext'
 import BasicDataPage from './pages/BasicData/BasicDataPage'
 import WeatherPage from './pages/Weather/WeatherPage'
 import RoutePage from './pages/Route/RoutePage'
+import SignIn from './pages/Home/SignIn'
+import SignUp from './pages/Home/SignUp'
 
 function App() {
   // TODO:
@@ -23,6 +25,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route exact path='/' element={<HomePage />} />
+          <Route path='/signin' element={<SignIn />} />
+          <Route path='/signup' element={<SignUp />} />
           <Route path='/basicdata' element={<BasicDataPage />} />
           <Route path='/route' element={<RoutePage />} />
           <Route path='/weather' element={<WeatherPage />} />

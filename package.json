@@ -12,6 +12,7 @@
 		"@turf/midpoint": "^6.5.0",
 		"daisyui": "^2.15.0",
 		"dayjs": "^1.11.7",
+		"firebase": "^9.17.1",
 		"framer-motion": "^8.1.9",
 		"geomag": "^1.0.0",
 		"leaflet": "^1.9.3",
