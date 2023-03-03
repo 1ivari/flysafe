@@ -2,12 +2,14 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import Navbar from './components/Navbar'
+import PrivateRoute from './components/PrivateRoute'
 
 // Import pages
 import HomePage from './pages/Home/HomePage'
 import AboutPage from './pages/Home/AboutPage'
 import SignIn from './pages/Home/SignIn'
 import SignUp from './pages/Home/SignUp'
+import ForgotPassword from './pages/Home/ForgotPassword'
 import Profile from './pages/Home/Profile'
 import WeightAndBalancePage from './pages/wnb/WeightAndBalancePage'
 import OperationalFlightPlanPage from './pages/OFP/OperationalFlightPlanPage'
@@ -30,7 +32,10 @@ function App() {
           <Route exact path='/' element={<HomePage />} />
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/profile' element={<Profile />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/profile' element={<PrivateRoute />}>
+            <Route path='/profile' element={<Profile />} />
+          </Route>
           <Route path='/basicdata' element={<BasicDataPage />} />
           <Route path='/route' element={<RoutePage />} />
           <Route path='/weather' element={<WeatherPage />} />
