@@ -65,79 +65,74 @@ function Profile() {
   }
 
   // delete later
-  const onDataAdd = async () => {
-    const arr = Object.entries(ifr.points)
-    console.log(arr)
+  // const onDataAdd = async () => {
+  //   const arr = Object.entries(ifr.points)
+  //   console.log(arr)
 
-    const arr2 = []
-    arr.forEach((item) => {
-      let doc = item[1]
-      arr2.push({
-        geometry: {
-          coordinates: [doc.lng, doc.lat],
-          type: 'Point',
-        },
-        properties: {
-          name: doc.name,
-          routes: doc.routes,
-          ad: doc.ad,
-          entry: doc.entry ? doc.entry : null,
-          arrival: doc.arrival ? doc.arrival : null,
-          departure: doc.departure ? doc.departure : null,
-          intermediate: doc.intermediate ? doc.intermediate : null,
-          exit: doc.exit ? doc.exit : null,
-        },
-        type: 'Feature',
-      })
-    })
+  //   const arr2 = []
+  //   arr.forEach((item) => {
+  //     let doc = item[1]
+  //     arr2.push({
+  //       geometry: {
+  //         coordinates: [doc.lng, doc.lat],
+  //         type: 'Point',
+  //       },
+  //       properties: {
+  //         name: doc.name,
+  //         routes: doc.routes,
+  //         ad: doc.ad,
+  //         entry: doc.entry ? doc.entry : null,
+  //         arrival: doc.arrival ? doc.arrival : null,
+  //         departure: doc.departure ? doc.departure : null,
+  //         intermediate: doc.intermediate ? doc.intermediate : null,
+  //         exit: doc.exit ? doc.exit : null,
+  //       },
+  //       type: 'Feature',
+  //     })
+  //   })
 
-    console.log(arr2)
+  //   console.log(arr2)
 
-    const obj = {
-      type: 'FeatureCollection',
-      name: 'waypoints',
-      crs: {
-        type: 'name',
-        properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' },
-      },
-      features: arr2,
-    }
+  //   const obj = {
+  //     type: 'FeatureCollection',
+  //     name: 'waypoints',
+  //     crs: {
+  //       type: 'name',
+  //       properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' },
+  //     },
+  //     features: arr2,
+  //   }
 
-    const obj2 = airspaces
-    console.log(obj2)
+  //   const obj2 = airspaces
+  //   console.log(obj2)
 
-    const addData = async () => {
-      const docRef = await setDoc(doc(db, 'static-map-data', 'airspaces'), obj2)
-    }
+  //   const addData = async () => {
+  //     const docRef = await setDoc(doc(db, 'static-map-data', 'airspaces'), obj2)
+  //   }
 
-    addData()
-  }
+  //   addData()
+  // }
 
-  const getOnClick = async () => {
-    // const docSnap = await getDoc(doc(db, 'static-map-data', 'ifr-points'))
-    // console.log('here is the data:')
-    // console.log(docSnap.data())
-    // console.log('data end. ')
+  // const getOnClick = async () => {
+  //   const q = query(collection(db, 'airports'), where('ident', '==', 'EFHK'))
+  //   const qSnap = await getDocs(q)
+  //   qSnap.forEach((doc) => console.log(doc.data().type))
+  // }
 
-    const q = query(collection(db, 'airports'), where('ident', '==', 'EFHK'))
-    const qSnap = await getDocs(q)
-    qSnap.forEach((doc) => console.log(doc.data().type))
-  }
+  // const onDataAddAP = () => {
+  //   const fiAps = airports.filter((item) => item.iso_country === 'FI')
+  //   // console.log(fiAps)
 
-  const onDataAddAP = () => {
-    const fiAps = airports.filter((item) => item.iso_country === 'FI')
-    // console.log(fiAps)
+  //   fiAps.forEach((ap) => {
+  //     const ident = ap.ident
 
-    fiAps.forEach((ap) => {
-      const ident = ap.ident
+  //     const url = `${process.env.REACT_APP_AIRPORTDB_URL}${ident}?apiToken=${process.env.REACT_APP_AIRPORTDB_TOKEN}`
 
-      const url = `${process.env.REACT_APP_AIRPORTDB_URL}${ident}?apiToken=${process.env.REACT_APP_AIRPORTDB_TOKEN}`
-
-      fetch(url)
-        .then((res) => res.json())
-        .then(async (json) => await setDoc(doc(db, 'airports', ident), json))
-    })
-  }
+  //     fetch(url)
+  //       .then((res) => res.json())
+  //       .then(async (json) => await setDoc(doc(db, 'airports', ident), json))
+  //   })
+  // }
 
   return (
     <div className='flex h-screen justify-center items-center'>
@@ -187,17 +182,17 @@ function Profile() {
               Log Out
             </button>
             {/* // delete later */}
-            <button className='btn btn-primary' onClick={onDataAdd}>
+            {/* <button className='btn btn-primary' onClick={onDataAdd}>
               OnDataAdd
-            </button>
+            </button> */}
 
             {/* <button className='btn btn-primary' onClick={onDataAddAP}>
               Submit airport data
             </button> */}
-
+            {/* 
             <button className='btn btn-primary' onClick={getOnClick}>
               Get Data
-            </button>
+            </button> */}
 
             {/* Delete later */}
           </div>
