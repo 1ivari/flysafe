@@ -12,6 +12,7 @@ import {
 } from 'react-leaflet'
 import greatCircle from '@turf/great-circle'
 import L from 'leaflet'
+import airspaces from '../../data/airspaces.json'
 
 function LeafletMap() {
   const { route, setRoute } = useContext(AppContext)
@@ -174,41 +175,51 @@ function LeafletMap() {
     return pos ? <Marker position={pos} /> : null
   }
 
-  return (
-    <MapContainer
-      ref={mapRef}
-      style={{ height: '100%', width: '100%' }}
-      center={[61.76, 21.48]}
-      zoom={6}
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors. NOT FOR OPERATIONAL USE'
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-      />
+  const testOnClick = () => {
+    console.log(airspaces)
+  }
 
-      {route.map((poi, idx, arr) => {
-        const props = poi.geoJSON.properties
-        return (
-          <>
-            {props.type === 'medium_airport' ||
-            props.type === 'large_airport' ? (
-              <MarkerForAirports poi={poi} />
-            ) : props.type === 'custom' ? (
-              <MarkerForCustom poi={poi} idx={idx} />
-            ) : props.type === 'small_airport' ? (
-              <MarkerForSmallAirports poi={poi} />
-            ) : null}
-            {idx > 0 ? (
-              <GeoJSON
-                key={crypto.randomUUID()}
-                data={greatCircle(arr[idx - 1].geoJSON, arr[idx].geoJSON)}
-              />
-            ) : null}
-          </>
-        )
-      })}
-      <AddCustomMarkerOnClick />
-    </MapContainer>
+  return (
+    <>
+      <button className='btn btn-primary' onClick={testOnClick}>
+        test
+      </button>
+      <MapContainer
+        ref={mapRef}
+        style={{ height: '100%', width: '100%' }}
+        center={[61.76, 21.48]}
+        zoom={6}
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors. NOT FOR OPERATIONAL USE'
+          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        />
+
+        {route.map((poi, idx, arr) => {
+          const props = poi.geoJSON.properties
+          return (
+            <>
+              {props.type === 'medium_airport' ||
+              props.type === 'large_airport' ? (
+                <MarkerForAirports poi={poi} />
+              ) : props.type === 'custom' ? (
+                <MarkerForCustom poi={poi} idx={idx} />
+              ) : props.type === 'small_airport' ? (
+                <MarkerForSmallAirports poi={poi} />
+              ) : null}
+              {idx > 0 ? (
+                <GeoJSON
+                  key={crypto.randomUUID()}
+                  data={greatCircle(arr[idx - 1].geoJSON, arr[idx].geoJSON)}
+                />
+              ) : null}
+            </>
+          )
+        })}
+        <AddCustomMarkerOnClick />
+        <GeoJSON data={airspaces} />
+      </MapContainer>
+    </>
   )
 }
 

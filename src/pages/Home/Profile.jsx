@@ -2,11 +2,26 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 
 import { getAuth, updateAuth, updateProfile } from 'firebase/auth'
-import { updateDoc, doc } from 'firebase/firestore'
+import {
+  updateDoc,
+  doc,
+  addDoc,
+  collection,
+  setDoc,
+  getDoc,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore'
 import { db } from '../../firebase.config'
 
 import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
+
+// delete later
+import vfrRep from '../../data/vfrRep.json'
+import airports from '../../data/Airports.json'
+import ifr from '../../data/ifr.json'
 
 function Profile() {
   const auth = getAuth()
@@ -47,6 +62,81 @@ function Profile() {
       ...prevState,
       [e.target.id]: e.target.value,
     }))
+  }
+
+  // delete later
+  const onDataAdd = async () => {
+    const arr = Object.entries(ifr.points)
+    console.log(arr)
+
+    const arr2 = []
+    arr.forEach((item) => {
+      let doc = item[1]
+      arr2.push({
+        geometry: {
+          coordinates: [doc.lng, doc.lat],
+          type: 'Point',
+        },
+        properties: {
+          name: doc.name,
+          routes: doc.routes,
+          ad: doc.ad,
+          entry: doc.entry ? doc.entry : null,
+          arrival: doc.arrival ? doc.arrival : null,
+          departure: doc.departure ? doc.departure : null,
+          intermediate: doc.intermediate ? doc.intermediate : null,
+          exit: doc.exit ? doc.exit : null,
+        },
+        type: 'Feature',
+      })
+    })
+
+    console.log(arr2)
+
+    const obj = {
+      type: 'FeatureCollection',
+      name: 'waypoints',
+      crs: {
+        type: 'name',
+        properties: { name: 'urn:ogc:def:crs:OGC:1.3:CRS84' },
+      },
+      features: arr2,
+    }
+
+    const obj2 = airspaces
+    console.log(obj2)
+
+    const addData = async () => {
+      const docRef = await setDoc(doc(db, 'static-map-data', 'airspaces'), obj2)
+    }
+
+    addData()
+  }
+
+  const getOnClick = async () => {
+    // const docSnap = await getDoc(doc(db, 'static-map-data', 'ifr-points'))
+    // console.log('here is the data:')
+    // console.log(docSnap.data())
+    // console.log('data end. ')
+
+    const q = query(collection(db, 'airports'), where('ident', '==', 'EFHK'))
+    const qSnap = await getDocs(q)
+    qSnap.forEach((doc) => console.log(doc.data().type))
+  }
+
+  const onDataAddAP = () => {
+    const fiAps = airports.filter((item) => item.iso_country === 'FI')
+    // console.log(fiAps)
+
+    fiAps.forEach((ap) => {
+      const ident = ap.ident
+
+      const url = `${process.env.REACT_APP_AIRPORTDB_URL}${ident}?apiToken=${process.env.REACT_APP_AIRPORTDB_TOKEN}`
+
+      fetch(url)
+        .then((res) => res.json())
+        .then(async (json) => await setDoc(doc(db, 'airports', ident), json))
+    })
   }
 
   return (
@@ -96,6 +186,20 @@ function Profile() {
             <button className='btn btn-primary' onClick={onLogout}>
               Log Out
             </button>
+            {/* // delete later */}
+            <button className='btn btn-primary' onClick={onDataAdd}>
+              OnDataAdd
+            </button>
+
+            {/* <button className='btn btn-primary' onClick={onDataAddAP}>
+              Submit airport data
+            </button> */}
+
+            <button className='btn btn-primary' onClick={getOnClick}>
+              Get Data
+            </button>
+
+            {/* Delete later */}
           </div>
         </div>
       </div>

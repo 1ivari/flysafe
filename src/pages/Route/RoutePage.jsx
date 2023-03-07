@@ -28,7 +28,6 @@ function RoutePage() {
               <AirfieldSearchAutoComplete />
             </div>
           </div>
-
           <div className='map-container' id='map-container'>
             <LeafletMap />
           </div>

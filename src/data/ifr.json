@@ -1,0 +1,2699 @@
+{
+  "routes": [],
+  "points": {
+    "ABKEM": {
+      "name": "ABKEM",
+      "lat": 64.48194444444445,
+      "lng": 25.81138888888889,
+      "routes": [],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ABLOP": {
+      "name": "ABLOP",
+      "lat": 68.14888888888889,
+      "lng": 24.755,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ABMAX": {
+      "name": "ABMAX",
+      "lat": 61.72361111111111,
+      "lng": 28.688055555555557,
+      "routes": [],
+      "ad": ["EFSA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ABOXU": {
+      "name": "ABOXU",
+      "lat": 63.5825,
+      "lng": 25.391388888888887,
+      "routes": ["Y77", "Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ABSER": {
+      "name": "ABSER",
+      "lat": 59.89722222222222,
+      "lng": 22.996666666666666,
+      "routes": ["Y367"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ADEDO": {
+      "name": "ADEDO",
+      "lat": 62.77111111111111,
+      "lng": 25.060000000000002,
+      "routes": ["Y75"],
+      "ad": ["EFJY"],
+      "departure": true,
+      "intermediate": true
+    },
+    "ADEXU": {
+      "name": "ADEXU",
+      "lat": 68.77083333333333,
+      "lng": 27.619722222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ADIVO": {
+      "name": "ADIVO",
+      "lat": 60.2975,
+      "lng": 23.981388888888887,
+      "routes": ["Y365"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "ADOPO": {
+      "name": "ADOPO",
+      "lat": 61.42333333333333,
+      "lng": 26.830555555555556,
+      "routes": ["Y232"],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "ADSEB": {
+      "name": "ADSEB",
+      "lat": 60.90277777777778,
+      "lng": 28.26638888888889,
+      "routes": [],
+      "ad": ["EFLP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "AGAMO": {
+      "name": "AGAMO",
+      "lat": 63.14666666666667,
+      "lng": 31.265,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "AGIVU": {
+      "name": "AGIVU",
+      "lat": 62.64833333333333,
+      "lng": 29.83861111111111,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "intermediate": true,
+      "exit": true
+    },
+    "ALAMI": {
+      "name": "ALAMI",
+      "lat": 59.047777777777775,
+      "lng": 20.91583333333333,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "AMASU": {
+      "name": "AMASU",
+      "lat": 62.37861111111111,
+      "lng": 23.354166666666668,
+      "routes": [],
+      "ad": ["EFSI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "AMROT": {
+      "name": "AMROT",
+      "lat": 60.49388888888889,
+      "lng": 23.709166666666665,
+      "routes": ["Y349", "Y362"],
+      "ad": [],
+      "intermediate": true
+    },
+    "AMUBA": {
+      "name": "AMUBA",
+      "lat": 67.365,
+      "lng": 26.336666666666666,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "AMULU": {
+      "name": "AMULU",
+      "lat": 67.38027777777778,
+      "lng": 24.378333333333334,
+      "routes": [],
+      "ad": ["EFKT"],
+      "departure": true,
+      "intermediate": true
+    },
+    "AMUPO": {
+      "name": "AMUPO",
+      "lat": 61.16583333333333,
+      "lng": 22.638055555555557,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "APTEN": {
+      "name": "APTEN",
+      "lat": 66.40333333333334,
+      "lng": 25.072777777777777,
+      "routes": ["Y75"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ARBEV": {
+      "name": "ARBEV",
+      "lat": 61.62694444444445,
+      "lng": 24.494444444444447,
+      "routes": [],
+      "ad": ["EFHA", "EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ARFUT": {
+      "name": "ARFUT",
+      "lat": 66.31722222222221,
+      "lng": 26.36916666666667,
+      "routes": [],
+      "ad": ["EFRO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ARLOM": {
+      "name": "ARLOM",
+      "lat": 60.790277777777774,
+      "lng": 27.731388888888887,
+      "routes": ["Y359"],
+      "ad": ["EFHK", "EFLP", "EFUT"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ARVEP": {
+      "name": "ARVEP",
+      "lat": 60.24944444444444,
+      "lng": 26.399166666666666,
+      "routes": ["T82"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "ASLUP": {
+      "name": "ASLUP",
+      "lat": 65.39861111111112,
+      "lng": 25.128055555555555,
+      "routes": ["Y75"],
+      "ad": ["EFOU"],
+      "departure": true,
+      "intermediate": true
+    },
+    "ASPEM": {
+      "name": "ASPEM",
+      "lat": 62.197222222222216,
+      "lng": 29.100833333333334,
+      "routes": [],
+      "ad": ["EFSA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ASRIS": {
+      "name": "ASRIS",
+      "lat": 64.18972222222223,
+      "lng": 27.261111111111113,
+      "routes": ["M130", "T95"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ASTUX": {
+      "name": "ASTUX",
+      "lat": 62.55694444444444,
+      "lng": 27.454166666666666,
+      "routes": [],
+      "ad": ["EFKU"],
+      "departure": true,
+      "intermediate": true
+    },
+    "ASVUG": {
+      "name": "ASVUG",
+      "lat": 69.93111111111112,
+      "lng": 27.139166666666664,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ATLUL": {
+      "name": "ATLUL",
+      "lat": 62.56583333333333,
+      "lng": 27.77138888888889,
+      "routes": [],
+      "ad": ["EFKU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ATPEL": {
+      "name": "ATPEL",
+      "lat": 63.39944444444444,
+      "lng": 22.535555555555558,
+      "routes": ["T255"],
+      "ad": ["EFKK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ATSEN": {
+      "name": "ATSEN",
+      "lat": 62.07694444444445,
+      "lng": 25.316666666666666,
+      "routes": ["Y86"],
+      "ad": ["EFHA"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "AXUTI": {
+      "name": "AXUTI",
+      "lat": 62.88388888888889,
+      "lng": 21.07361111111111,
+      "routes": [],
+      "ad": ["EFVA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "BAKLA": {
+      "name": "BAKLA",
+      "lat": 61.362500000000004,
+      "lng": 19.41583333333333,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "BALTI": {
+      "name": "BALTI",
+      "lat": 59.90416666666667,
+      "lng": 25.251666666666665,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "BAPTU": {
+      "name": "BAPTU",
+      "lat": 63.28444444444444,
+      "lng": 22.96638888888889,
+      "routes": [],
+      "ad": ["EFKK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "BAVMO": {
+      "name": "BAVMO",
+      "lat": 63.94944444444444,
+      "lng": 26.55027777777778,
+      "routes": ["M130", "Y71", "Y77"],
+      "ad": [],
+      "intermediate": true
+    },
+    "BEDSO": {
+      "name": "BEDSO",
+      "lat": 65.37444444444444,
+      "lng": 24.941944444444445,
+      "routes": [],
+      "ad": ["EFKE", "EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "BEGSU": {
+      "name": "BEGSU",
+      "lat": 62.615833333333335,
+      "lng": 21.7825,
+      "routes": [],
+      "ad": ["EFVA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "BEPEM": {
+      "name": "BEPEM",
+      "lat": 61.97888888888889,
+      "lng": 25.311944444444446,
+      "routes": ["Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "BEVNA": {
+      "name": "BEVNA",
+      "lat": 65.95583333333333,
+      "lng": 28.38222222222222,
+      "routes": [],
+      "ad": ["EFKS"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "BEVOM": {
+      "name": "BEVOM",
+      "lat": 60.464444444444446,
+      "lng": 22.47694444444444,
+      "routes": ["Y368"],
+      "ad": [],
+      "intermediate": true
+    },
+    "BEXUL": {
+      "name": "BEXUL",
+      "lat": 65.59277777777777,
+      "lng": 24.153888888888886,
+      "routes": [],
+      "ad": ["EFKE"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "BIFIX": {
+      "name": "BIFIX",
+      "lat": 60.46277777777778,
+      "lng": 25.271944444444443,
+      "routes": [],
+      "ad": []
+    },
+    "BODRI": {
+      "name": "BODRI",
+      "lat": 62.415,
+      "lng": 19.824166666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "BUPEG": {
+      "name": "BUPEG",
+      "lat": 62.78638888888889,
+      "lng": 21.22611111111111,
+      "routes": [],
+      "ad": ["EFVA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "DEDIT": {
+      "name": "DEDIT",
+      "lat": 63.25833333333333,
+      "lng": 20.450555555555553,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "DEPUK": {
+      "name": "DEPUK",
+      "lat": 67.66805555555555,
+      "lng": 26.6275,
+      "routes": ["N156"],
+      "ad": [],
+      "intermediate": true
+    },
+    "DIPUM": {
+      "name": "DIPUM",
+      "lat": 61.21666666666667,
+      "lng": 24.91888888888889,
+      "routes": ["Y75"],
+      "ad": [],
+      "intermediate": true
+    },
+    "DISIB": {
+      "name": "DISIB",
+      "lat": 60.968611111111116,
+      "lng": 22.237222222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "DIVAM": {
+      "name": "DIVAM",
+      "lat": 59.848333333333336,
+      "lng": 23.59361111111111,
+      "routes": ["Y370"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "DIVEG": {
+      "name": "DIVEG",
+      "lat": 62.91222222222222,
+      "lng": 21.72138888888889,
+      "routes": ["T255", "Y71"],
+      "ad": [],
+      "intermediate": true
+    },
+    "DOBAN": {
+      "name": "DOBAN",
+      "lat": 59.79944444444444,
+      "lng": 24.4525,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "DODAM": {
+      "name": "DODAM",
+      "lat": 60.044444444444444,
+      "lng": 19.301666666666666,
+      "routes": [],
+      "ad": ["EFMA"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "DODEP": {
+      "name": "DODEP",
+      "lat": 63.723333333333336,
+      "lng": 25.398888888888887,
+      "routes": ["Y71", "Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "DOPUD": {
+      "name": "DOPUD",
+      "lat": 68.1413888888889,
+      "lng": 23.321666666666665,
+      "routes": [],
+      "ad": ["EFET"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "EBEBU": {
+      "name": "EBEBU",
+      "lat": 60.095,
+      "lng": 20.454444444444444,
+      "routes": [],
+      "ad": ["EFMA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "EBIXO": {
+      "name": "EBIXO",
+      "lat": 62.9125,
+      "lng": 28.243055555555557,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "EKMIK": {
+      "name": "EKMIK",
+      "lat": 65.25166666666667,
+      "lng": 23.7275,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "EKNID": {
+      "name": "EKNID",
+      "lat": 59.71666666666667,
+      "lng": 22.162499999999998,
+      "routes": ["Y367"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ELKUN": {
+      "name": "ELKUN",
+      "lat": 60.45638888888889,
+      "lng": 24.834444444444443,
+      "routes": [],
+      "ad": []
+    },
+    "ELPOP": {
+      "name": "ELPOP",
+      "lat": 63.7725,
+      "lng": 25.100833333333334,
+      "routes": ["Y75"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ELSOV": {
+      "name": "ELSOV",
+      "lat": 62.80416666666667,
+      "lng": 25.351944444444445,
+      "routes": ["Y86"],
+      "ad": ["EFJY"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "EMDUR": {
+      "name": "EMDUR",
+      "lat": 63.99277777777778,
+      "lng": 23.575277777777778,
+      "routes": [],
+      "ad": ["EFKK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "EMPOM": {
+      "name": "EMPOM",
+      "lat": 60.214444444444446,
+      "lng": 21.711111111111112,
+      "routes": [],
+      "ad": ["EFTU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ENETI": {
+      "name": "ENETI",
+      "lat": 61.07472222222223,
+      "lng": 23.572222222222223,
+      "routes": ["Y362"],
+      "ad": ["EFHK", "EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ENEXI": {
+      "name": "ENEXI",
+      "lat": 69.33083333333333,
+      "lng": 25.752777777777776,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ERAKO": {
+      "name": "ERAKO",
+      "lat": 61.01416666666667,
+      "lng": 22.090555555555554,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ERKOM": {
+      "name": "ERKOM",
+      "lat": 61.22638888888889,
+      "lng": 27.71472222222222,
+      "routes": [],
+      "ad": ["EFLP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ERNUT": {
+      "name": "ERNUT",
+      "lat": 61.28611111111111,
+      "lng": 25.279722222222222,
+      "routes": ["Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "EROKU": {
+      "name": "EROKU",
+      "lat": 62.026666666666664,
+      "lng": 26.28222222222222,
+      "routes": [],
+      "ad": ["EFJY"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ERTOP": {
+      "name": "ERTOP",
+      "lat": 62.02722222222222,
+      "lng": 25.42638888888889,
+      "routes": [],
+      "ad": ["EFHA", "EFJY"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ETENA": {
+      "name": "ETENA",
+      "lat": 62.82888888888889,
+      "lng": 28.76388888888889,
+      "routes": [],
+      "ad": ["EFJO", "EFKU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ETOBA": {
+      "name": "ETOBA",
+      "lat": 62.18888888888888,
+      "lng": 29.67777777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ETROD": {
+      "name": "ETROD",
+      "lat": 63.95138888888889,
+      "lng": 27.80527777777778,
+      "routes": ["T95"],
+      "ad": ["EFKI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "EVADI": {
+      "name": "EVADI",
+      "lat": 59.33972222222222,
+      "lng": 21.857222222222223,
+      "routes": ["Y370"],
+      "ad": ["EFHK"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "EVIMI": {
+      "name": "EVIMI",
+      "lat": 67.25166666666667,
+      "lng": 24.91722222222222,
+      "routes": ["Y75"],
+      "ad": ["EFKT"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "EVIRO": {
+      "name": "EVIRO",
+      "lat": 60.375,
+      "lng": 24.798333333333336,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "EVLAK": {
+      "name": "EVLAK",
+      "lat": 69.36388888888888,
+      "lng": 28.715555555555554,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "EVLAN": {
+      "name": "EVLAN",
+      "lat": 60.25222222222222,
+      "lng": 19.111944444444447,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "EVLIT": {
+      "name": "EVLIT",
+      "lat": 61.046388888888885,
+      "lng": 23.07472222222222,
+      "routes": ["Y357"],
+      "ad": ["EFHK", "EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "EVOLA": {
+      "name": "EVOLA",
+      "lat": 68.5111111111111,
+      "lng": 24.976666666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "EVRIG": {
+      "name": "EVRIG",
+      "lat": 64.56027777777777,
+      "lng": 28.191944444444445,
+      "routes": [],
+      "ad": ["EFKI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "EVSET": {
+      "name": "EVSET",
+      "lat": 64.9875,
+      "lng": 25.467777777777776,
+      "routes": ["T95", "Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "EXIKU": {
+      "name": "EXIKU",
+      "lat": 62.86805555555556,
+      "lng": 27.520555555555553,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "EXUPA": {
+      "name": "EXUPA",
+      "lat": 60.386944444444445,
+      "lng": 23.110555555555557,
+      "routes": [],
+      "ad": ["EFTU"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "EXUTI": {
+      "name": "EXUTI",
+      "lat": 68.11055555555555,
+      "lng": 24.349722222222223,
+      "routes": [],
+      "ad": ["EFET", "EFKT"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "GALPI": {
+      "name": "GALPI",
+      "lat": 62.846944444444446,
+      "lng": 20.140277777777776,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "GAPRO": {
+      "name": "GAPRO",
+      "lat": 69.1725,
+      "lng": 21.796111111111113,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "GATRI": {
+      "name": "GATRI",
+      "lat": 64.93333333333334,
+      "lng": 29.616666666666667,
+      "routes": ["M130"],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "GEMKU": {
+      "name": "GEMKU",
+      "lat": 61.65083333333333,
+      "lng": 23.430833333333336,
+      "routes": [],
+      "ad": ["EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "GIDKI": {
+      "name": "GIDKI",
+      "lat": 63.288333333333334,
+      "lng": 23.251944444444444,
+      "routes": [],
+      "ad": ["EFKK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "GIGOV": {
+      "name": "GIGOV",
+      "lat": 69.22305555555556,
+      "lng": 21.02472222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "GIKIT": {
+      "name": "GIKIT",
+      "lat": 60.57416666666667,
+      "lng": 21.980833333333333,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "GISUX": {
+      "name": "GISUX",
+      "lat": 63.03666666666666,
+      "lng": 22.810000000000002,
+      "routes": [],
+      "ad": ["EFSI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "GITEV": {
+      "name": "GITEV",
+      "lat": 67.61333333333333,
+      "lng": 24.83833333333333,
+      "routes": ["Y75", "Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "GODOB": {
+      "name": "GODOB",
+      "lat": 64.70361111111112,
+      "lng": 23.559444444444445,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "GOMAV": {
+      "name": "GOMAV",
+      "lat": 68.66611111111112,
+      "lng": 23.315,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "GONAP": {
+      "name": "GONAP",
+      "lat": 60.168055555555554,
+      "lng": 24.623333333333335,
+      "routes": [],
+      "ad": []
+    },
+    "GOSVA": {
+      "name": "GOSVA",
+      "lat": 62.52444444444444,
+      "lng": 25.338055555555556,
+      "routes": ["Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "GUBTU": {
+      "name": "GUBTU",
+      "lat": 62.64861111111111,
+      "lng": 22.199166666666667,
+      "routes": [],
+      "ad": ["EFVA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "GULDU": {
+      "name": "GULDU",
+      "lat": 65.11611111111111,
+      "lng": 25.474999999999998,
+      "routes": ["Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "IBEVU": {
+      "name": "IBEVU",
+      "lat": 65.69277777777778,
+      "lng": 28.961666666666666,
+      "routes": [],
+      "ad": ["EFKS"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "IBOSU": {
+      "name": "IBOSU",
+      "lat": 61.62,
+      "lng": 25.29527777777778,
+      "routes": ["Y86"],
+      "ad": ["EFHA", "EFHK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "IBSAN": {
+      "name": "IBSAN",
+      "lat": 66.70833333333334,
+      "lng": 25.018055555555556,
+      "routes": ["Y75"],
+      "ad": ["EFRO"],
+      "departure": true,
+      "intermediate": true
+    },
+    "IBVAR": {
+      "name": "IBVAR",
+      "lat": 60.73583333333333,
+      "lng": 20.816111111111113,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "IBVUT": {
+      "name": "IBVUT",
+      "lat": 60.359722222222224,
+      "lng": 21.344444444444445,
+      "routes": ["Y363"],
+      "ad": ["EFHK"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "IDEPI": {
+      "name": "IDEPI",
+      "lat": 60.71083333333333,
+      "lng": 25.79416666666667,
+      "routes": ["Y232"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "IDNIS": {
+      "name": "IDNIS",
+      "lat": 61.090833333333336,
+      "lng": 22.076666666666668,
+      "routes": [],
+      "ad": ["EFPO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "INLOG": {
+      "name": "INLOG",
+      "lat": 60.17166666666667,
+      "lng": 26.94638888888889,
+      "routes": [],
+      "ad": [],
+      "exit": true
+    },
+    "INSOB": {
+      "name": "INSOB",
+      "lat": 60.855000000000004,
+      "lng": 21.001944444444444,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "INTOR": {
+      "name": "INTOR",
+      "lat": 59.82777777777778,
+      "lng": 25.186666666666667,
+      "routes": [],
+      "ad": []
+    },
+    "IPDUR": {
+      "name": "IPDUR",
+      "lat": 60.6375,
+      "lng": 22.029166666666665,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "IPMOT": {
+      "name": "IPMOT",
+      "lat": 60.45305555555556,
+      "lng": 23.17638888888889,
+      "routes": ["Y368"],
+      "ad": ["EFTU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "IRGAL": {
+      "name": "IRGAL",
+      "lat": 62.830555555555556,
+      "lng": 20.010833333333334,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "IRLOT": {
+      "name": "IRLOT",
+      "lat": 60.14972222222222,
+      "lng": 25.747222222222224,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "IXONO": {
+      "name": "IXONO",
+      "lat": 64.59166666666667,
+      "lng": 24.685277777777777,
+      "routes": ["T255"],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "IXUBI": {
+      "name": "IXUBI",
+      "lat": 64.47611111111111,
+      "lng": 28.139166666666664,
+      "routes": ["M130"],
+      "ad": [],
+      "intermediate": true
+    },
+    "KEFFA": {
+      "name": "KEFFA",
+      "lat": 61.301944444444445,
+      "lng": 21.1925,
+      "routes": [],
+      "ad": ["EFPO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "KELAS": {
+      "name": "KELAS",
+      "lat": 60.468611111111116,
+      "lng": 19.175833333333333,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "KELEK": {
+      "name": "KELEK",
+      "lat": 68.50333333333333,
+      "lng": 28.458333333333332,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "KETOL": {
+      "name": "KETOL",
+      "lat": 61.8,
+      "lng": 30.083333333333332,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "KOFUT": {
+      "name": "KOFUT",
+      "lat": 61.717777777777776,
+      "lng": 23.352500000000003,
+      "routes": ["M130"],
+      "ad": [],
+      "intermediate": true
+    },
+    "KOIVU": {
+      "name": "KOIVU",
+      "lat": 59.844722222222224,
+      "lng": 24.665277777777778,
+      "routes": [],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "KOKAT": {
+      "name": "KOKAT",
+      "lat": 62.666666666666664,
+      "lng": 31.37527777777778,
+      "routes": [],
+      "ad": [],
+      "exit": true
+    },
+    "KOMEK": {
+      "name": "KOMEK",
+      "lat": 62.42166666666667,
+      "lng": 31.108333333333334,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "KOSKA": {
+      "name": "KOSKA",
+      "lat": 59.18277777777777,
+      "lng": 20.676111111111112,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "KOTOS": {
+      "name": "KOTOS",
+      "lat": 62.87888888888889,
+      "lng": 20.39472222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "KUVEM": {
+      "name": "KUVEM",
+      "lat": 60.190555555555555,
+      "lng": 23.93722222222222,
+      "routes": ["Y366"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "LAKUT": {
+      "name": "LAKUT",
+      "lat": 60.43805555555555,
+      "lng": 23.87638888888889,
+      "routes": ["Y362", "Y363", "Y364", "Y368"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "LAMPI": {
+      "name": "LAMPI",
+      "lat": 63.53861111111111,
+      "lng": 21.03666666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "LAPMU": {
+      "name": "LAPMU",
+      "lat": 69.41250000000001,
+      "lng": 28.53222222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "LEDUN": {
+      "name": "LEDUN",
+      "lat": 59.975,
+      "lng": 26.111666666666668,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "LIKSO": {
+      "name": "LIKSO",
+      "lat": 62.44833333333333,
+      "lng": 22.449166666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "LIVLU": {
+      "name": "LIVLU",
+      "lat": 60.34305555555556,
+      "lng": 21.46388888888889,
+      "routes": [],
+      "ad": ["EFTU"],
+      "departure": true,
+      "intermediate": true
+    },
+    "LOBGA": {
+      "name": "LOBGA",
+      "lat": 64.6575,
+      "lng": 24.81138888888889,
+      "routes": ["T255"],
+      "ad": [],
+      "intermediate": true
+    },
+    "LOFAD": {
+      "name": "LOFAD",
+      "lat": 62.585,
+      "lng": 23.912777777777777,
+      "routes": ["Y81"],
+      "ad": [],
+      "intermediate": true
+    },
+    "LUMME": {
+      "name": "LUMME",
+      "lat": 62.64361111111111,
+      "lng": 24.8325,
+      "routes": [],
+      "ad": ["EFJY"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "LUPET": {
+      "name": "LUPET",
+      "lat": 59.640277777777776,
+      "lng": 19.87638888888889,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "LUSAG": {
+      "name": "LUSAG",
+      "lat": 68.34416666666667,
+      "lng": 26.360277777777778,
+      "routes": [],
+      "ad": ["EFIV"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "LUSEP": {
+      "name": "LUSEP",
+      "lat": 60.952222222222225,
+      "lng": 25.264722222222222,
+      "routes": ["T83", "Y86"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "MAMOP": {
+      "name": "MAMOP",
+      "lat": 60.575,
+      "lng": 25.984444444444446,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "MAROM": {
+      "name": "MAROM",
+      "lat": 60.44777777777777,
+      "lng": 24.04361111111111,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "MARXO": {
+      "name": "MARXO",
+      "lat": 66.60472222222222,
+      "lng": 26.74888888888889,
+      "routes": [],
+      "ad": ["EFRO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "MEHAK": {
+      "name": "MEHAK",
+      "lat": 60.42611111111111,
+      "lng": 25.153888888888886,
+      "routes": [],
+      "ad": []
+    },
+    "MIKNU": {
+      "name": "MIKNU",
+      "lat": 64.44416666666667,
+      "lng": 25.43722222222222,
+      "routes": ["Y86"],
+      "ad": ["EFOU"],
+      "departure": true,
+      "intermediate": true
+    },
+    "MIMRU": {
+      "name": "MIMRU",
+      "lat": 63.29944444444444,
+      "lng": 25.08138888888889,
+      "routes": ["Y75"],
+      "ad": [],
+      "intermediate": true
+    },
+    "MISMO": {
+      "name": "MISMO",
+      "lat": 66.17472222222223,
+      "lng": 23.819444444444443,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "MOHNI": {
+      "name": "MOHNI",
+      "lat": 59.89694444444444,
+      "lng": 25.584999999999997,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "NANIP": {
+      "name": "NANIP",
+      "lat": 63.36277777777778,
+      "lng": 27.326666666666668,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "NAPRU": {
+      "name": "NAPRU",
+      "lat": 61.58444444444444,
+      "lng": 26.094444444444445,
+      "routes": ["T83"],
+      "ad": ["EFHK"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "NAPUN": {
+      "name": "NAPUN",
+      "lat": 60.82805555555556,
+      "lng": 25.272777777777776,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "NAXEP": {
+      "name": "NAXEP",
+      "lat": 60.986111111111114,
+      "lng": 26.541666666666668,
+      "routes": [],
+      "ad": ["EFUT"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NEBAB": {
+      "name": "NEBAB",
+      "lat": 61.10944444444445,
+      "lng": 22.846666666666664,
+      "routes": [],
+      "ad": ["EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NEBET": {
+      "name": "NEBET",
+      "lat": 67.03472222222221,
+      "lng": 23.716944444444444,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "NEKUX": {
+      "name": "NEKUX",
+      "lat": 68.97611111111111,
+      "lng": 27.78888888888889,
+      "routes": [],
+      "ad": ["EFIV"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NEMGU": {
+      "name": "NEMGU",
+      "lat": 66.33999999999999,
+      "lng": 24.694166666666668,
+      "routes": [],
+      "ad": ["EFRO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NEPEK": {
+      "name": "NEPEK",
+      "lat": 60.7425,
+      "lng": 24.485555555555557,
+      "routes": ["Y357", "Y361", "Y375"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "NEPIX": {
+      "name": "NEPIX",
+      "lat": 66.10833333333333,
+      "lng": 25.124166666666667,
+      "routes": ["Y75"],
+      "ad": ["EFKE", "EFRO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NESUK": {
+      "name": "NESUK",
+      "lat": 63.74027777777778,
+      "lng": 22.541666666666668,
+      "routes": [],
+      "ad": ["EFKK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NIFOT": {
+      "name": "NIFOT",
+      "lat": 61.14388888888889,
+      "lng": 21.651944444444442,
+      "routes": [],
+      "ad": ["EFPO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NIPIB": {
+      "name": "NIPIB",
+      "lat": 59.6825,
+      "lng": 23.013333333333332,
+      "routes": ["Y370"],
+      "ad": [],
+      "intermediate": true
+    },
+    "NIRPU": {
+      "name": "NIRPU",
+      "lat": 60.774166666666666,
+      "lng": 22.13361111111111,
+      "routes": [],
+      "ad": ["EFTU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NISIX": {
+      "name": "NISIX",
+      "lat": 59.31861111111112,
+      "lng": 20.43166666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "NISPO": {
+      "name": "NISPO",
+      "lat": 62.715,
+      "lng": 27.12388888888889,
+      "routes": [],
+      "ad": ["EFKU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NISVI": {
+      "name": "NISVI",
+      "lat": 61.126111111111115,
+      "lng": 24.048611111111114,
+      "routes": ["Y361"],
+      "ad": ["EFHK", "EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NITAS": {
+      "name": "NITAS",
+      "lat": 60.17583333333333,
+      "lng": 25.97472222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "NOELA": {
+      "name": "NOELA",
+      "lat": 67.93222222222222,
+      "lng": 26.88722222222222,
+      "routes": ["Y351"],
+      "ad": [],
+      "intermediate": true
+    },
+    "NOPNI": {
+      "name": "NOPNI",
+      "lat": 64.96138888888889,
+      "lng": 24.97861111111111,
+      "routes": ["T255"],
+      "ad": [],
+      "intermediate": true
+    },
+    "NUBVU": {
+      "name": "NUBVU",
+      "lat": 65.20111111111112,
+      "lng": 25.753055555555555,
+      "routes": [],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "NUNTO": {
+      "name": "NUNTO",
+      "lat": 60.08361111111111,
+      "lng": 23.89361111111111,
+      "routes": ["Y367", "Y369"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "OBEVI": {
+      "name": "OBEVI",
+      "lat": 59.43555555555555,
+      "lng": 20.923055555555557,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OBISO": {
+      "name": "OBISO",
+      "lat": 66.35027777777778,
+      "lng": 28.654166666666665,
+      "routes": [],
+      "ad": ["EFKS"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "OBONU": {
+      "name": "OBONU",
+      "lat": 60.15888888888889,
+      "lng": 25.139444444444443,
+      "routes": [],
+      "ad": []
+    },
+    "ODESO": {
+      "name": "ODESO",
+      "lat": 60.32611111111112,
+      "lng": 22.650555555555552,
+      "routes": ["Y364"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ODRUB": {
+      "name": "ODRUB",
+      "lat": 64.07055555555556,
+      "lng": 26.90611111111111,
+      "routes": ["M130"],
+      "ad": ["EFKI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ODUSA": {
+      "name": "ODUSA",
+      "lat": 61.51694444444444,
+      "lng": 22.849166666666665,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OGLAV": {
+      "name": "OGLAV",
+      "lat": 68.83305555555555,
+      "lng": 21.172777777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OGLOB": {
+      "name": "OGLOB",
+      "lat": 59.933055555555555,
+      "lng": 19.46222222222222,
+      "routes": [],
+      "ad": ["EFMA"],
+      "departure": true,
+      "intermediate": true
+    },
+    "OGTUD": {
+      "name": "OGTUD",
+      "lat": 63.659444444444446,
+      "lng": 23.208333333333332,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OKEVU": {
+      "name": "OKEVU",
+      "lat": 59.23861111111111,
+      "lng": 21.526666666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OLEMA": {
+      "name": "OLEMA",
+      "lat": 60.233333333333334,
+      "lng": 27.474999999999998,
+      "routes": [],
+      "ad": [],
+      "exit": true
+    },
+    "OLGUB": {
+      "name": "OLGUB",
+      "lat": 62.08222222222223,
+      "lng": 27.363611111111112,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OLNOP": {
+      "name": "OLNOP",
+      "lat": 66.18861111111111,
+      "lng": 24.705277777777777,
+      "routes": [],
+      "ad": ["EFRO"],
+      "departure": true,
+      "intermediate": true
+    },
+    "OLPED": {
+      "name": "OLPED",
+      "lat": 59.58305555555556,
+      "lng": 21.560833333333335,
+      "routes": ["Y367"],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "OSDIL": {
+      "name": "OSDIL",
+      "lat": 61.71416666666667,
+      "lng": 21.960277777777776,
+      "routes": [],
+      "ad": ["EFPO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "OSKEK": {
+      "name": "OSKEK",
+      "lat": 62.66861111111111,
+      "lng": 25.05611111111111,
+      "routes": ["Y75"],
+      "ad": [],
+      "intermediate": true
+    },
+    "OSLIT": {
+      "name": "OSLIT",
+      "lat": 66.8625,
+      "lng": 25.406388888888888,
+      "routes": ["Y86"],
+      "ad": ["EFRO"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "OSTOT": {
+      "name": "OSTOT",
+      "lat": 59.2875,
+      "lng": 22.178611111111113,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OTBAR": {
+      "name": "OTBAR",
+      "lat": 63.83388888888889,
+      "lng": 25.404444444444444,
+      "routes": ["Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "OTKAP": {
+      "name": "OTKAP",
+      "lat": 61.07944444444445,
+      "lng": 27.389722222222222,
+      "routes": [],
+      "ad": ["EFUT"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "OTKIL": {
+      "name": "OTKIL",
+      "lat": 60.475,
+      "lng": 21.36777777777778,
+      "routes": ["Y368"],
+      "ad": ["EFHK", "EFTU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "OTLUD": {
+      "name": "OTLUD",
+      "lat": 62.16083333333333,
+      "lng": 25.03638888888889,
+      "routes": ["Y75"],
+      "ad": ["EFHA"],
+      "departure": true,
+      "intermediate": true
+    },
+    "OTPAL": {
+      "name": "OTPAL",
+      "lat": 61.26888888888889,
+      "lng": 25.675555555555558,
+      "routes": ["T83"],
+      "ad": [],
+      "intermediate": true
+    },
+    "OTVEG": {
+      "name": "OTVEG",
+      "lat": 62.28722222222222,
+      "lng": 22.6475,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "OTVEM": {
+      "name": "OTVEM",
+      "lat": 65.13861111111112,
+      "lng": 24.222777777777775,
+      "routes": [],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "PEKUX": {
+      "name": "PEKUX",
+      "lat": 60.405277777777776,
+      "lng": 22.625555555555557,
+      "routes": ["Y363"],
+      "ad": [],
+      "intermediate": true
+    },
+    "PENIV": {
+      "name": "PENIV",
+      "lat": 61.47972222222222,
+      "lng": 22.004722222222224,
+      "routes": ["Y81"],
+      "ad": [],
+      "intermediate": true
+    },
+    "PEPIG": {
+      "name": "PEPIG",
+      "lat": 60.14138888888889,
+      "lng": 22.599722222222223,
+      "routes": ["Y365"],
+      "ad": [],
+      "intermediate": true
+    },
+    "PERHO": {
+      "name": "PERHO",
+      "lat": 60.499722222222225,
+      "lng": 25.31833333333333,
+      "routes": [],
+      "ad": []
+    },
+    "PERKE": {
+      "name": "PERKE",
+      "lat": 66.73527777777778,
+      "lng": 23.892222222222223,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "PETOT": {
+      "name": "PETOT",
+      "lat": 59.51111111111111,
+      "lng": 23.141944444444444,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "PEXEN": {
+      "name": "PEXEN",
+      "lat": 59.91305555555555,
+      "lng": 23.824444444444445,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "PIDOP": {
+      "name": "PIDOP",
+      "lat": 61.586111111111116,
+      "lng": 28.145833333333332,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "PIRUX": {
+      "name": "PIRUX",
+      "lat": 59.05,
+      "lng": 21.166666666666668,
+      "routes": [],
+      "ad": []
+    },
+    "PISIM": {
+      "name": "PISIM",
+      "lat": 59.55,
+      "lng": 23.166666666666668,
+      "routes": [],
+      "ad": []
+    },
+    "PISOX": {
+      "name": "PISOX",
+      "lat": 59.778055555555554,
+      "lng": 22.75111111111111,
+      "routes": ["Y369"],
+      "ad": [],
+      "intermediate": true
+    },
+    "POGOK": {
+      "name": "POGOK",
+      "lat": 59.99111111111111,
+      "lng": 21.387777777777778,
+      "routes": ["Y365"],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "POKAS": {
+      "name": "POKAS",
+      "lat": 59.981388888888894,
+      "lng": 19.3925,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "RASRU": {
+      "name": "RASRU",
+      "lat": 63.23361111111111,
+      "lng": 21.000555555555554,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "RATLA": {
+      "name": "RATLA",
+      "lat": 60.858333333333334,
+      "lng": 28.33833333333333,
+      "routes": [],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "RATMU": {
+      "name": "RATMU",
+      "lat": 60.23777777777778,
+      "lng": 26.535833333333336,
+      "routes": ["T82"],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "REBGO": {
+      "name": "REBGO",
+      "lat": 61.8525,
+      "lng": 27.175,
+      "routes": [],
+      "ad": ["EFMI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "REKDO": {
+      "name": "REKDO",
+      "lat": 59.44305555555555,
+      "lng": 21.561111111111114,
+      "routes": ["Y369"],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "RENKU": {
+      "name": "RENKU",
+      "lat": 59.88583333333333,
+      "lng": 24.896666666666665,
+      "routes": [],
+      "ad": ["EFHK"],
+      "departure": true
+    },
+    "RENVI": {
+      "name": "RENVI",
+      "lat": 66.0761111111111,
+      "lng": 25.531666666666666,
+      "routes": ["Y86"],
+      "ad": ["EFRO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "RERBU": {
+      "name": "RERBU",
+      "lat": 63.23222222222223,
+      "lng": 22.253611111111113,
+      "routes": ["T255"],
+      "ad": ["EFVA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "RERGA": {
+      "name": "RERGA",
+      "lat": 62.45388888888889,
+      "lng": 26.46472222222222,
+      "routes": [],
+      "ad": ["EFJY"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "RERLO": {
+      "name": "RERLO",
+      "lat": 61.28138888888889,
+      "lng": 22.963055555555556,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "RIBVU": {
+      "name": "RIBVU",
+      "lat": 65.14722222222223,
+      "lng": 25.129166666666666,
+      "routes": ["T255", "Y75"],
+      "ad": [],
+      "intermediate": true
+    },
+    "RIDVI": {
+      "name": "RIDVI",
+      "lat": 69.38972222222223,
+      "lng": 28.600833333333334,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "RIKUM": {
+      "name": "RIKUM",
+      "lat": 59.97083333333334,
+      "lng": 19.408055555555553,
+      "routes": [],
+      "ad": ["EFMA"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "RIRIP": {
+      "name": "RIRIP",
+      "lat": 60.20277777777778,
+      "lng": 21.434166666666666,
+      "routes": ["Y364"],
+      "ad": ["EFHK"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "RISEV": {
+      "name": "RISEV",
+      "lat": 62.53138888888889,
+      "lng": 30.503888888888888,
+      "routes": [],
+      "ad": ["EFJO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "RIVUM": {
+      "name": "RIVUM",
+      "lat": 61.6675,
+      "lng": 28.85138888888889,
+      "routes": [],
+      "ad": ["EFSA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ROGTU": {
+      "name": "ROGTU",
+      "lat": 61.49194444444444,
+      "lng": 20.96972222222222,
+      "routes": [],
+      "ad": ["EFPO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ROKVI": {
+      "name": "ROKVI",
+      "lat": 60.86083333333333,
+      "lng": 27.023055555555555,
+      "routes": ["Y358"],
+      "ad": ["EFHK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ROMOP": {
+      "name": "ROMOP",
+      "lat": 61.85666666666667,
+      "lng": 25.02472222222222,
+      "routes": ["Y75"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ROPAM": {
+      "name": "ROPAM",
+      "lat": 60.13305555555556,
+      "lng": 25.601666666666667,
+      "routes": [],
+      "ad": ["EFHK"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "ROTKO": {
+      "name": "ROTKO",
+      "lat": 66.96055555555556,
+      "lng": 25.961111111111112,
+      "routes": [],
+      "ad": ["EFRO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ROVAN": {
+      "name": "ROVAN",
+      "lat": 69.79722222222222,
+      "lng": 28.530833333333334,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ROVTI": {
+      "name": "ROVTI",
+      "lat": 61.783055555555556,
+      "lng": 26.36388888888889,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "RUBSI": {
+      "name": "RUBSI",
+      "lat": 65.6975,
+      "lng": 24.647222222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "RUDAM": {
+      "name": "RUDAM",
+      "lat": 67.2038888888889,
+      "lng": 29.40111111111111,
+      "routes": ["N156", "Y351"],
+      "ad": [],
+      "entry": true,
+      "exit": true
+    },
+    "RULLI": {
+      "name": "RULLI",
+      "lat": 60.138333333333335,
+      "lng": 24.523055555555555,
+      "routes": [],
+      "ad": []
+    },
+    "RUMEP": {
+      "name": "RUMEP",
+      "lat": 59.5125,
+      "lng": 22.432222222222222,
+      "routes": ["Y370"],
+      "ad": [],
+      "intermediate": true
+    },
+    "RUNES": {
+      "name": "RUNES",
+      "lat": 69.66083333333334,
+      "lng": 28.3775,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "RUNGA": {
+      "name": "RUNGA",
+      "lat": 59.749722222222225,
+      "lng": 19.724166666666665,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "SAFEK": {
+      "name": "SAFEK",
+      "lat": 62.047777777777775,
+      "lng": 22.961666666666666,
+      "routes": ["Y81"],
+      "ad": [],
+      "intermediate": true
+    },
+    "SIGGE": {
+      "name": "SIGGE",
+      "lat": 61.3725,
+      "lng": 28.424722222222222,
+      "routes": [],
+      "ad": ["EFLP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "SIVNU": {
+      "name": "SIVNU",
+      "lat": 69.57444444444444,
+      "lng": 29.23777777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "SOPEB": {
+      "name": "SOPEB",
+      "lat": 62.4675,
+      "lng": 24.243055555555557,
+      "routes": ["M130"],
+      "ad": [],
+      "intermediate": true
+    },
+    "SOSIP": {
+      "name": "SOSIP",
+      "lat": 62.436388888888885,
+      "lng": 27.660833333333333,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "SOTIT": {
+      "name": "SOTIT",
+      "lat": 68.2363888888889,
+      "lng": 27.194444444444446,
+      "routes": [],
+      "ad": ["EFIV"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "SOTUP": {
+      "name": "SOTUP",
+      "lat": 60.288888888888884,
+      "lng": 20.62388888888889,
+      "routes": [],
+      "ad": ["EFMA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "SUBUG": {
+      "name": "SUBUG",
+      "lat": 62.69138888888889,
+      "lng": 21.37472222222222,
+      "routes": [],
+      "ad": ["EFVA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "SUDAT": {
+      "name": "SUDAT",
+      "lat": 59.90833333333333,
+      "lng": 25.33111111111111,
+      "routes": [],
+      "ad": []
+    },
+    "SUTEV": {
+      "name": "SUTEV",
+      "lat": 64.55388888888889,
+      "lng": 22.73777777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "SUVIB": {
+      "name": "SUVIB",
+      "lat": 64.43194444444445,
+      "lng": 25.128888888888888,
+      "routes": ["Y75"],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "intermediate": true
+    },
+    "TADOX": {
+      "name": "TADOX",
+      "lat": 62.530833333333334,
+      "lng": 22.342777777777776,
+      "routes": ["Y77"],
+      "ad": [],
+      "intermediate": true
+    },
+    "TEVRU": {
+      "name": "TEVRU",
+      "lat": 60.821111111111115,
+      "lng": 24.82472222222222,
+      "routes": ["Y75"],
+      "ad": ["EFHK"],
+      "intermediate": true
+    },
+    "TINOS": {
+      "name": "TINOS",
+      "lat": 69.79166666666667,
+      "lng": 26.227777777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "TITIV": {
+      "name": "TITIV",
+      "lat": 62.69277777777778,
+      "lng": 27.752222222222223,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "TOGMI": {
+      "name": "TOGMI",
+      "lat": 61.761944444444445,
+      "lng": 19.540277777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "TOHAT": {
+      "name": "TOHAT",
+      "lat": 61.32888888888889,
+      "lng": 22.91111111111111,
+      "routes": ["M130"],
+      "ad": [],
+      "intermediate": true
+    },
+    "TUGPU": {
+      "name": "TUGPU",
+      "lat": 67.29055555555556,
+      "lng": 25.334444444444443,
+      "routes": ["Y86"],
+      "ad": ["EFKT"],
+      "departure": true,
+      "intermediate": true
+    },
+    "TUNOV": {
+      "name": "TUNOV",
+      "lat": 62.275555555555556,
+      "lng": 27.049722222222226,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "TUSBI": {
+      "name": "TUSBI",
+      "lat": 61.06805555555556,
+      "lng": 26.30638888888889,
+      "routes": ["Y232"],
+      "ad": [],
+      "intermediate": true
+    },
+    "TUVLU": {
+      "name": "TUVLU",
+      "lat": 67.69055555555556,
+      "lng": 23.49527777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "UBIGA": {
+      "name": "UBIGA",
+      "lat": 64.38472222222222,
+      "lng": 26.805,
+      "routes": ["T95"],
+      "ad": ["EFKI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UDVIM": {
+      "name": "UDVIM",
+      "lat": 61.92833333333333,
+      "lng": 27.236944444444447,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "UGLUM": {
+      "name": "UGLUM",
+      "lat": 63.415277777777774,
+      "lng": 27.640833333333333,
+      "routes": ["T95"],
+      "ad": ["EFKU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UGMOR": {
+      "name": "UGMOR",
+      "lat": 64.66111111111111,
+      "lng": 26.141666666666666,
+      "routes": ["T95"],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "ULGEG": {
+      "name": "ULGEG",
+      "lat": 63.862500000000004,
+      "lng": 23.341944444444444,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ULROM": {
+      "name": "ULROM",
+      "lat": 66.46833333333333,
+      "lng": 25.470277777777778,
+      "routes": ["Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "ULTIR": {
+      "name": "ULTIR",
+      "lat": 60.25388888888889,
+      "lng": 25.203611111111112,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ULTSI": {
+      "name": "ULTSI",
+      "lat": 60.54972222222222,
+      "lng": 25.290833333333335,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "ULVED": {
+      "name": "ULVED",
+      "lat": 61.93138888888889,
+      "lng": 28.679722222222225,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "UMSES": {
+      "name": "UMSES",
+      "lat": 61.103611111111114,
+      "lng": 22.153055555555554,
+      "routes": [],
+      "ad": ["EFPO"],
+      "departure": true,
+      "intermediate": true
+    },
+    "UMUGI": {
+      "name": "UMUGI",
+      "lat": 60.03722222222222,
+      "lng": 22.69472222222222,
+      "routes": ["Y366"],
+      "ad": [],
+      "intermediate": true
+    },
+    "UPAPU": {
+      "name": "UPAPU",
+      "lat": 60.184999999999995,
+      "lng": 22.559444444444445,
+      "routes": [],
+      "ad": ["EFTU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UPEDU": {
+      "name": "UPEDU",
+      "lat": 65.29805555555555,
+      "lng": 25.485555555555557,
+      "routes": ["Y86"],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "USITU": {
+      "name": "USITU",
+      "lat": 59.85861111111111,
+      "lng": 21.365833333333335,
+      "routes": ["Y366"],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "USUPO": {
+      "name": "USUPO",
+      "lat": 61.612500000000004,
+      "lng": 25.015555555555554,
+      "routes": ["Y75"],
+      "ad": ["EFHA", "EFHK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UVATI": {
+      "name": "UVATI",
+      "lat": 63.39138888888889,
+      "lng": 21.20111111111111,
+      "routes": [],
+      "ad": ["EFVA"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UVEMO": {
+      "name": "UVEMO",
+      "lat": 61.0925,
+      "lng": 23.849444444444444,
+      "routes": [],
+      "ad": ["EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UVMOK": {
+      "name": "UVMOK",
+      "lat": 68.80277777777778,
+      "lng": 25.16472222222222,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "UVOPA": {
+      "name": "UVOPA",
+      "lat": 60.77361111111111,
+      "lng": 22.43638888888889,
+      "routes": [],
+      "ad": ["EFTU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UVOVO": {
+      "name": "UVOVO",
+      "lat": 62.3825,
+      "lng": 29.400277777777777,
+      "routes": [],
+      "ad": ["EFJO"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UXADA": {
+      "name": "UXADA",
+      "lat": 60.85,
+      "lng": 22.613333333333333,
+      "routes": ["Y349", "Y375"],
+      "ad": ["EFHK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UXEGA": {
+      "name": "UXEGA",
+      "lat": 61.4675,
+      "lng": 26.9425,
+      "routes": [],
+      "ad": ["EFMI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "UXETI": {
+      "name": "UXETI",
+      "lat": 60.14111111111111,
+      "lng": 19.91444444444444,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "VABUB": {
+      "name": "VABUB",
+      "lat": 62.60583333333334,
+      "lng": 22.544444444444448,
+      "routes": [],
+      "ad": ["EFSI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "VADLA": {
+      "name": "VADLA",
+      "lat": 69.75166666666667,
+      "lng": 28.79527777777778,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "VALAK": {
+      "name": "VALAK",
+      "lat": 63.41861111111111,
+      "lng": 20.574166666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "VALOX": {
+      "name": "VALOX",
+      "lat": 59.73166666666667,
+      "lng": 24.13888888888889,
+      "routes": [],
+      "ad": ["EFHK"],
+      "departure": true,
+      "intermediate": true
+    },
+    "VAVED": {
+      "name": "VAVED",
+      "lat": 61.84444444444445,
+      "lng": 26.7275,
+      "routes": [],
+      "ad": ["EFMI"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "VAXUN": {
+      "name": "VAXUN",
+      "lat": 63.98416666666667,
+      "lng": 23.705,
+      "routes": ["T255"],
+      "ad": ["EFKK"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "VEHUF": {
+      "name": "VEHUF",
+      "lat": 60.769999999999996,
+      "lng": 26.104722222222225,
+      "routes": [],
+      "ad": ["EFUT"],
+      "arrival": true
+    },
+    "VEKUV": {
+      "name": "VEKUV",
+      "lat": 62.97972222222222,
+      "lng": 27.81388888888889,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "VEPIN": {
+      "name": "VEPIN",
+      "lat": 60.63138888888889,
+      "lng": 26.333055555555557,
+      "routes": ["Y358", "Y359"],
+      "ad": ["EFHK", "EFUT"],
+      "departure": true,
+      "intermediate": true
+    },
+    "XELMA": {
+      "name": "XELMA",
+      "lat": 61.93472222222222,
+      "lng": 25.629444444444445,
+      "routes": [],
+      "ad": ["EFJY"],
+      "departure": true,
+      "intermediate": true
+    },
+    "XETMU": {
+      "name": "XETMU",
+      "lat": 67.87333333333332,
+      "lng": 25.36527777777778,
+      "routes": [],
+      "ad": ["EFKT"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "XETNI": {
+      "name": "XETNI",
+      "lat": 60.68888888888888,
+      "lng": 22.241666666666667,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "XEVAP": {
+      "name": "XEVAP",
+      "lat": 64.83694444444444,
+      "lng": 24.310000000000002,
+      "routes": [],
+      "ad": ["EFOU"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    },
+    "XEVLO": {
+      "name": "XEVLO",
+      "lat": 63.365833333333335,
+      "lng": 25.380277777777778,
+      "routes": ["M130", "Y81", "Y86"],
+      "ad": [],
+      "intermediate": true
+    },
+    "XONTU": {
+      "name": "XONTU",
+      "lat": 65.94055555555556,
+      "lng": 24.076666666666668,
+      "routes": [],
+      "ad": [],
+      "intermediate": true
+    },
+    "XORMU": {
+      "name": "XORMU",
+      "lat": 61.324444444444445,
+      "lng": 22.648333333333333,
+      "routes": [],
+      "ad": ["EFPO", "EFTP"],
+      "arrival": true,
+      "departure": true,
+      "intermediate": true
+    }
+  },
+  "ad": {
+    "EFOU": [
+      "ABKEM",
+      "ASLUP",
+      "BEDSO",
+      "IXONO",
+      "MIKNU",
+      "NUBVU",
+      "OTVEM",
+      "SUVIB",
+      "UGMOR",
+      "UPEDU",
+      "XEVAP"
+    ],
+    "EFSA": ["ABMAX", "ASPEM", "RIVUM"],
+    "EFJY": ["ADEDO", "ELSOV", "EROKU", "ERTOP", "LUMME", "RERGA", "XELMA"],
+    "EFHK": [
+      "ADIVO",
+      "ADOPO",
+      "ARLOM",
+      "ARVEP",
+      "DIVAM",
+      "ENETI",
+      "EVADI",
+      "EVLIT",
+      "IBOSU",
+      "IBVUT",
+      "IDEPI",
+      "KOIVU",
+      "KUVEM",
+      "LAKUT",
+      "LUSEP",
+      "NAPRU",
+      "NEPEK",
+      "NISVI",
+      "NUNTO",
+      "OLPED",
+      "OTKIL",
+      "POGOK",
+      "RATMU",
+      "REKDO",
+      "RENKU",
+      "RIRIP",
+      "ROKVI",
+      "ROPAM",
+      "TEVRU",
+      "USITU",
+      "USUPO",
+      "UXADA",
+      "VALOX",
+      "VEPIN"
+    ],
+    "EFLP": ["ADSEB", "ARLOM", "ERKOM", "SIGGE"],
+    "EFSI": ["AMASU", "GISUX", "VABUB"],
+    "EFKT": ["AMULU", "EVIMI", "EXUTI", "TUGPU", "XETMU"],
+    "EFHA": ["ARBEV", "ATSEN", "ERTOP", "IBOSU", "OTLUD", "USUPO"],
+    "EFTP": [
+      "ARBEV",
+      "ENETI",
+      "EVLIT",
+      "GEMKU",
+      "NEBAB",
+      "NISVI",
+      "UVEMO",
+      "XORMU"
+    ],
+    "EFRO": [
+      "ARFUT",
+      "IBSAN",
+      "MARXO",
+      "NEMGU",
+      "NEPIX",
+      "OLNOP",
+      "OSLIT",
+      "RENVI",
+      "ROTKO"
+    ],
+    "EFUT": ["ARLOM", "NAXEP", "OTKAP", "VEHUF", "VEPIN"],
+    "EFKU": ["ASTUX", "ATLUL", "ETENA", "NISPO", "UGLUM"],
+    "EFKK": ["ATPEL", "BAPTU", "EMDUR", "GIDKI", "NESUK", "VAXUN"],
+    "EFVA": ["AXUTI", "BEGSU", "BUPEG", "GUBTU", "RERBU", "SUBUG", "UVATI"],
+    "EFKE": ["BEDSO", "BEXUL", "NEPIX"],
+    "EFKS": ["BEVNA", "IBEVU", "OBISO"],
+    "EFMA": ["DODAM", "EBEBU", "OGLOB", "RIKUM", "SOTUP"],
+    "EFET": ["DOPUD", "EXUTI"],
+    "EFTU": [
+      "EMPOM",
+      "EXUPA",
+      "IPMOT",
+      "LIVLU",
+      "NIRPU",
+      "OTKIL",
+      "UPAPU",
+      "UVOPA"
+    ],
+    "EFJO": ["ETENA", "RISEV", "UVOVO"],
+    "EFKI": ["ETROD", "EVRIG", "ODRUB", "UBIGA"],
+    "EFPO": ["IDNIS", "KEFFA", "NIFOT", "OSDIL", "ROGTU", "UMSES", "XORMU"],
+    "EFIV": ["LUSAG", "NEKUX", "SOTIT"],
+    "EFMI": ["REBGO", "UXEGA", "VAVED"]
+  }
+}
