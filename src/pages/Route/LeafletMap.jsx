@@ -175,15 +175,85 @@ function LeafletMap() {
     return pos ? <Marker position={pos} /> : null
   }
 
+  const alwaysActiveFilter = (obj) => {
+    return obj.properties.alwaysActive === true
+  }
+  const classCFilter = (obj) => {
+    return (
+      obj.properties.alwaysActive === true &&
+      obj.properties.airspaceclass === 'C'
+    )
+  }
+  const classCOptions = { color: '#FF6F00', fillcolor: '#FFD54F', weight: 1 }
+
+  const classDFilter = (obj) => {
+    return (
+      obj.properties.alwaysActive === true &&
+      obj.properties.airspaceclass === 'D'
+    )
+  }
+  const classDOptions = { color: '#827717', fillcolor: '#DCE775', weight: 1 }
+
+  const classGFilter = (obj) => {
+    return (
+      obj.properties.alwaysActive === true &&
+      obj.properties.airspaceclass === 'G'
+    )
+  }
+  const classGOptions = { color: '#006064', fillcolor: '#4DD0E1', weight: 1 }
+
+  const prohibitedFilter = (obj) => {
+    return (
+      obj.properties.alwaysActive === true &&
+      (obj.properties.airspaceclass === 'Prohibited') |
+        (obj.properties.airspaceclass === 'Restricted')
+    )
+  }
+  const prohibitedOptions = {
+    color: '#B71C1C',
+    fillcolor: '#EF9A9A',
+    weight: 1,
+  }
+
+  const rmzFilter = (obj) => {
+    return (
+      obj.properties.alwaysActive === true &&
+      obj.properties.airspaceclass === 'RMZ'
+    )
+  }
+
+  const rmzOptions = {
+    color: '#0D47A1',
+    fillcolor: '#90CAF9',
+    weight: 1,
+  }
+
+  const otherFilter = (obj) => {
+    return (
+      obj.properties.alwaysActive === true &&
+      obj.properties.airspaceclass === 'Other'
+    )
+  }
+
+  const otherOptions = {
+    color: '#263238',
+    fillcolor: '#B0BEC5',
+    weight: 1,
+  }
+
   const testOnClick = () => {
-    console.log(airspaces)
+    console.log(
+      airspaces.features
+        .filter(alwaysActiveFilter)
+        .map((item) => item.properties.airspaceclass)
+    )
   }
 
   return (
     <>
-      <button className='btn btn-primary' onClick={testOnClick}>
+      {/* <button className='btn btn-primary' onClick={testOnClick}>
         test
-      </button>
+      </button> */}
       <MapContainer
         ref={mapRef}
         style={{ height: '100%', width: '100%' }}
@@ -217,7 +287,30 @@ function LeafletMap() {
           )
         })}
         <AddCustomMarkerOnClick />
-        <GeoJSON data={airspaces} />
+        <GeoJSON
+          data={airspaces.features.filter(classCFilter)}
+          pathOptions={classCOptions}
+        />
+        <GeoJSON
+          data={airspaces.features.filter(classDFilter)}
+          pathOptions={classDOptions}
+        />
+        <GeoJSON
+          data={airspaces.features.filter(classGFilter)}
+          pathOptions={classGOptions}
+        />
+        <GeoJSON
+          data={airspaces.features.filter(prohibitedFilter)}
+          pathOptions={prohibitedOptions}
+        />
+        <GeoJSON
+          data={airspaces.features.filter(rmzFilter)}
+          pathOptions={rmzOptions}
+        />
+        <GeoJSON
+          data={airspaces.features.filter(otherFilter)}
+          pathOptions={otherOptions}
+        />
       </MapContainer>
     </>
   )
