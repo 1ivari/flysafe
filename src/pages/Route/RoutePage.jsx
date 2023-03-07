@@ -3,6 +3,7 @@ import AirfieldSearchAutoComplete from './AirfieldSearchAutoComplete'
 import LeafletMap from './LeafletMap'
 import ProgressStepsMobile from '../../components/ProgressStepsMobile'
 import Drawer from '../../components/Drawer'
+import useMediaQuery from '../../hooks/useMediaQuery'
 
 // TODO:
 // 1. Add margin to bottom of map so that bottom nav bar does not overlap map
@@ -18,6 +19,7 @@ function DrawerContent() {
 }
 
 function RoutePage() {
+  const isLargeScreen = useMediaQuery('(min-width: 1024px)')
   return (
     <>
       <Drawer drawerContent={<DrawerContent />}>
@@ -28,9 +30,15 @@ function RoutePage() {
               <AirfieldSearchAutoComplete />
             </div>
           </div>
-          <div className='map-container' id='map-container'>
-            <LeafletMap />
-          </div>
+          {isLargeScreen ? (
+            <div className='map-container' id='map-container'>
+              <LeafletMap />
+            </div>
+          ) : (
+            <div className='map-container-mobile' id='map-container-mobile'>
+              <LeafletMap />
+            </div>
+          )}
         </div>
 
         <ProgressStepsMobile

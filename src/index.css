@@ -17,6 +17,11 @@
   height: 80vh;
 }
 
+.map-container-mobile {
+  width: 100vw;
+  height: 65vh;
+}
+
 .drawer-height {
   height: calc(100vh - 64px);
 }
