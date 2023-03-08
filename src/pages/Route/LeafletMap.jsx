@@ -9,6 +9,7 @@ import {
   Polyline,
   useMapEvents,
   useMap,
+  Tooltip,
 } from 'react-leaflet'
 import greatCircle from '@turf/great-circle'
 import L from 'leaflet'
@@ -192,7 +193,6 @@ function LeafletMap() {
       obj.properties.airspaceclass === 'D'
     )
   }
-  const classDOptions = { color: '#827717', fillcolor: '#DCE775', weight: 1 }
 
   const classGFilter = (obj) => {
     return (
@@ -200,7 +200,6 @@ function LeafletMap() {
       obj.properties.airspaceclass === 'G'
     )
   }
-  const classGOptions = { color: '#006064', fillcolor: '#4DD0E1', weight: 1 }
 
   const prohibitedFilter = (obj) => {
     return (
@@ -208,11 +207,6 @@ function LeafletMap() {
       (obj.properties.airspaceclass === 'Prohibited') |
         (obj.properties.airspaceclass === 'Restricted')
     )
-  }
-  const prohibitedOptions = {
-    color: '#B71C1C',
-    fillcolor: '#EF9A9A',
-    weight: 1,
   }
 
   const rmzFilter = (obj) => {
@@ -222,12 +216,6 @@ function LeafletMap() {
     )
   }
 
-  const rmzOptions = {
-    color: '#0D47A1',
-    fillcolor: '#90CAF9',
-    weight: 1,
-  }
-
   const otherFilter = (obj) => {
     return (
       obj.properties.alwaysActive === true &&
@@ -235,10 +223,133 @@ function LeafletMap() {
     )
   }
 
-  const otherOptions = {
-    color: '#263238',
-    fillcolor: '#B0BEC5',
-    weight: 1,
+  function PolygonForAirspace(props) {
+    const classCOptions = { color: '#FF6F00', fillcolor: '#FFD54F', weight: 1 }
+    const classDOptions = { color: '#827717', fillcolor: '#DCE775', weight: 1 }
+    const classGOptions = {
+      color: '#006064',
+      fillcolor: '#4DD0E1',
+      weight: 1,
+    }
+    const prohibitedOptions = {
+      color: '#B71C1C',
+      fillcolor: '#EF9A9A',
+      weight: 1,
+    }
+    const rmzOptions = {
+      color: '#0D47A1',
+      fillcolor: '#90CAF9',
+      weight: 1,
+    }
+
+    const otherOptions = {
+      color: '#263238',
+      fillcolor: '#B0BEC5',
+      weight: 1,
+    }
+
+    const dangerOptions = {
+      color: '#F57F17',
+      fillcolor: '#FFF176',
+      weight: 1,
+    }
+
+    const { airspace, showToolTip } = props
+
+    const info = airspace.properties
+    const geometry = airspace.geometry
+
+    function AirspaceToolTip(props) {
+      const { info } = props
+      return (
+        <Tooltip sticky className='tooltip tooltip-primary'>
+          <h1>
+            <strong>{info.name}</strong>
+          </h1>
+          <ul>
+            <li>Airspace class: {info.airspaceclass}</li>
+            <li>Upper Limit: {info.upper}</li>
+            <li>Lower Limit: {info.lower}</li>
+            <li>Frequency: {info.freq}</li>
+            <li>Always active: {info.alwaysActive ? 'Yes' : 'No'}</li>
+          </ul>
+        </Tooltip>
+      )
+    }
+
+    switch (info.airspaceclass) {
+      case 'C':
+        return (
+          <GeoJSON data={geometry} pathOptions={classCOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      case 'D':
+        return (
+          <GeoJSON data={geometry} pathOptions={classDOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      case 'G':
+        return (
+          <GeoJSON data={geometry} pathOptions={classGOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      case 'Prohibited':
+        return (
+          <GeoJSON data={geometry} pathOptions={prohibitedOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      case 'RMZ':
+        return (
+          <GeoJSON data={geometry} pathOptions={rmzOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      case 'Other':
+        return (
+          <GeoJSON data={geometry} pathOptions={otherOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      case 'Danger':
+        return (
+          <GeoJSON data={geometry} pathOptions={dangerOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      case 'Restricted':
+        return (
+          <GeoJSON data={geometry} pathOptions={dangerOptions}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+
+      default:
+        return (
+          <GeoJSON data={geometry}>
+            {showToolTip && <AirspaceToolTip info={info} />}
+          </GeoJSON>
+        )
+        break
+    }
   }
 
   const testOnClick = () => {
@@ -287,30 +398,11 @@ function LeafletMap() {
           )
         })}
         <AddCustomMarkerOnClick />
-        <GeoJSON
-          data={airspaces.features.filter(classCFilter)}
-          pathOptions={classCOptions}
-        />
-        <GeoJSON
-          data={airspaces.features.filter(classDFilter)}
-          pathOptions={classDOptions}
-        />
-        <GeoJSON
-          data={airspaces.features.filter(classGFilter)}
-          pathOptions={classGOptions}
-        />
-        <GeoJSON
-          data={airspaces.features.filter(prohibitedFilter)}
-          pathOptions={prohibitedOptions}
-        />
-        <GeoJSON
-          data={airspaces.features.filter(rmzFilter)}
-          pathOptions={rmzOptions}
-        />
-        <GeoJSON
-          data={airspaces.features.filter(otherFilter)}
-          pathOptions={otherOptions}
-        />
+        {airspaces.features
+          .filter((obj) => obj.properties.alwaysActive === true)
+          .map((airspace) => {
+            return <PolygonForAirspace airspace={airspace} showToolTip={true} />
+          })}
       </MapContainer>
     </>
   )
