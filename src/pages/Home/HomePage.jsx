@@ -17,10 +17,10 @@ function HomePage() {
     <>
       <Drawer drawerContent={<DrawerContent />}>
         <div className='relative pt-32 mx-auto max-w-7xl px-6 '>
-          <h1 className='text-slate-900 font-extrabold text-4xl lg:text-6xl tracking-tight text-center dark:text-white'>
+          <h1 className='text-white font-extrabold text-4xl lg:text-6xl tracking-tight text-center'>
             Navigating the skies with ease.
           </h1>
-          <p className='mt-6 text-lg text-slate-600 text-center max-w-3xl mx-auto dark:text-slate-400'>
+          <p className='mt-6 text-lg text-slate-400 text-center max-w-3xl mx-auto'>
             Fly with confidence using Magenta. Generate efficient routes with
             up-to-date weather conditions using our powerful and easy-to-use
             interface. Magenta streamlines the flight planning process for
@@ -35,9 +35,9 @@ function HomePage() {
             </button>
           </div>
 
-          <div className='mt-32 text-center max-w-3xl mx-auto text-slate-900 dark:text-white'>
-            <h1 className='font-bold dark:text-white'>Terms and Conditions</h1>
-            <p className='mt-4 text-lg text-slate-600 dark:text-slate-400'>
+          <div className='mt-32 text-center max-w-3xl mx-auto text-white'>
+            <h1 className='font-bold text-white'>Terms and Conditions</h1>
+            <p className='mt-4 text-lg text-slate-400 '>
               By using this website/application, you agree to our terms and
               conditions.
               <strong> Use website/application at your own risk.</strong>{' '}
